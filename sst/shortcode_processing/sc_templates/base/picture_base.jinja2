@@ -1,0 +1,15 @@
+<div class="{{ photo.css_class }} {{ photo.alignment }} {{ do_rotation }}">
+    {% if photo.title %}
+        <figcaption class="figure-caption has-text-black {{ photo.photo_title_class }}">{{ photo.title }}</figcaption>
+    {% endif %}
+        <div class="figure">
+            <img class="{{ photo.image_class }} figure-img img-fluid rounded"
+                    {% if photo.wordpress %}
+                        src="{{ photo.wp_url }}"
+                    {% else %}
+                        src="{{ photo.url }}"
+                    {% endif %}
+                    />
+            <div class="figure-caption ">{{ photo.caption }}</div>
+        </div>
+</div>
