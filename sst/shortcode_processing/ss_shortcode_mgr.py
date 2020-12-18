@@ -96,10 +96,11 @@ class ReplaceShortcodes(object):
                         not fname.startswith('veteran') and \
                         not dirpath.endswith('-notes'):
                     file_path = os.path.join(dirpath, fname)
+                    self.content_dict['file_path'] = file_path
                     # print(file_path)
                     with open(file_path, 'r') as infile:
                         self.shortcode_string = ''.join(infile.readlines())
-                        current_string = self.shortcode_string
+                        current_string = self.parse_a_tag(self.shortcode_string)
                         result_string = ''
                         while current_string:
                             res = self.parse_shortcode(current_string)
@@ -111,8 +112,8 @@ class ReplaceShortcodes(object):
                                     # if start is not at front of string, add start of string to result
                                     result_string += current_string[:res['start']]
                                 current_string = current_string[res['end']:]
-                                self.content_dict['count_slash'] = file_path.count('/')  # get path depth for relative reference
-                                self.content_dict['file_path'] = file_path
+                                self.content_dict['count_slash'] = file_path.count(
+                                    '/')  # get path depth for relative reference
                                 tmp = self._process_shortcode(res)
                                 if tmp:
                                     result_string += tmp
@@ -313,6 +314,39 @@ class ReplaceShortcodes(object):
         except KeyError as e:
             print("Singlepic Key Error in dict content: {}".format(pic_content))
             raise e
+
+    def parse_a_tag(self, file_string):
+        """Parse 'a' tags updating href's."""
+        # <a href="%5Burl%5D/wp-content/downloads/TandT%20Archive/201806.pdf" target="_blank">June2018</a>
+        re_finder = re.compile(r'(<a.+href=\"(.+?)\".*</a>)')
+        a_tags = re.finditer(re_finder, file_string)
+        string_start = 0
+        string_res = ''
+        tag_count = 0
+        for a_count, a_tag in enumerate(a_tags):
+            tag_count = a_count
+            begin_a_ref = a_tag.start(2)
+            string_res += file_string[string_start:begin_a_ref]
+            end_a_ref = a_tag.end(2)
+            a_ref = a_tag.group(2)
+            has_download = a_ref.find('ownloads')
+            if has_download != -1:
+                has_download -= 1
+                a_ref = a_ref[has_download:]
+                source_file_parts = self.content_dict['file_path'].split('/')
+                nbr_double_period = len(source_file_parts)
+                # lead = '../' * nbr_double_period
+                lead = ''
+                a_ref = '/' + lead + a_ref
+            else:
+                pass
+            string_res += a_ref
+            string_start = end_a_ref
+        if tag_count:
+            string_res += file_string[string_start:]
+            return string_res
+        return file_string
+
 
 # class Shortcode(object):
 #     """Handler for a single shortcode.
