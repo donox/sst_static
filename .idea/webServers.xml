@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="8c9e859e-8b85-4241-9098-02f968b5122f" name="access835068234.webspace-data.io" url="https://sunnyside-times.us">
+        <fileTransfer accessType="SFTP" host="access835068234.webspace-data.io" port="22" sshConfigId="600d892b-ff04-4edf-a5be-ba97f3f5b511" sshConfig="u101519407@access835068234.webspace-data.io:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

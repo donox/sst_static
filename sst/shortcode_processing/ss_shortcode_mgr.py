@@ -1,16 +1,17 @@
 import re
 import os
 from urllib.parse import urlparse
-from conf import *
+from sst.conf import *
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from .ss_pics import HandlePictureImports
 import shutil
+from sst import THIS_PATH
 
 
 def run_jinja_template(template, context):
     try:
         env = Environment(
-            loader=FileSystemLoader('/home/don/PycharmProjects/nikola/sst/shortcode_processing/sc_templates'),
+            loader=FileSystemLoader(THIS_PATH + 'sst_static/sst/shortcode_processing/sc_templates'),
             autoescape=(['html']))
         template = env.get_template(template)
         results = template.render(context)
@@ -62,7 +63,7 @@ class ReplaceShortcodes(object):
 
     def _build_inverse(self):
         # file '.md' is the top level file.  Rename to page-one.md
-        page_path = '/home/don/PycharmProjects/nikola/sst/pages/'
+        page_path = THIS_PATH + 'nikola/sst/pages/'
         try:
             os.rename(page_path + '.md', page_path + 'page-one.md')
             os.rename(page_path + '.meta', page_path + 'page-one.meta')

@@ -23,6 +23,7 @@ import nikola.plugin_categories
 # this is a reference to another package at the same level
 from sst.shortcode_processing.ss_shortcode_mgr import ReplaceShortcodes
 from nikola.utils import get_logger, STDERR_HANDLER
+from sst import THIS_PATH
 
 converter = ReplaceShortcodes()
 
