@@ -21,11 +21,13 @@
 
 import nikola.plugin_categories
 # this is a reference to another package at the same level
-from sst.shortcode_processing.ss_shortcode_mgr import ReplaceShortcodes
+import importlib
+ss_mfr = importlib.import_module('shortcode_processing.ss_shortcode_mgr')
+# from sst.shortcode_processing.ss_shortcode_mgr import ReplaceShortcodes
 from nikola.utils import get_logger, STDERR_HANDLER
 from sst import THIS_PATH
 
-converter = ReplaceShortcodes()
+converter = ss_mfr.ReplaceShortcodes()
 
 
 class Code(nikola.plugin_categories.Command):
