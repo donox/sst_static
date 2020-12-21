@@ -111,6 +111,8 @@ class ReplaceShortcodes(object):
         for dirpath, _, fileList in os.walk(self.web_source):
             # print('Process directory: %s' % dirpath)
             for fname in fileList:
+                if fname == 'page-one.md':
+                    foo = 3
                 if fname not in self.dead_files and \
                         fname.endswith('.md') and \
                         not fname.startswith('veteran') and \
@@ -164,11 +166,11 @@ class ReplaceShortcodes(object):
             if not n:  # detecting first group which is the shortcode identifier
                 res['shortcode'] = match_group.lower()
                 res['full code'] = shortcode_string[matches.start():matches.end()]
-                if res['shortcode'] not in ReplaceShortcodes.available_shortcodes:
-                    return
-            if match_group:
                 res['start'] = matches.start()
                 res['end'] = matches.end()
+                if res['shortcode'] not in ReplaceShortcodes.available_shortcodes:
+                    return res
+            if match_group:
                 try:
                     # print("n: {}, {}".format(n, match))
                     if n > 0:
