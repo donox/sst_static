@@ -9,15 +9,18 @@ import os
 from urllib.parse import urlparse
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import shutil
+from functools import reduce
+from operator import mul
 
 import platform
+
 OXLEY_PATH = '/home/don/PycharmProjects'
 OXLEY_PATH = '../../'
 # IONOS_PATH = '~/homepages/11/d835068234/htdocs/'
 IONOS_PATH = '../../'
-PATTERSON_PATH = '../../'
+PATTERSON_PATH = '..\\..\\'
 
-os.environ['OPENBLAS_NUM_THREADS'] = '1'     # SOME ISSUE SPAWNING PROCESSES - Bad fix????
+os.environ['OPENBLAS_NUM_THREADS'] = '1'  # SOME ISSUE SPAWNING PROCESSES - Bad fix????
 
 node = platform.node()
 PARENT_PATH = IONOS_PATH
@@ -30,7 +33,7 @@ WEBSITE_PATH = PARENT_PATH + 'sst_static/sst/'
 def run_jinja_template(template, context):
     try:
         env = Environment(
-            loader=FileSystemLoader(WEBSITE_PATH + '/sc_templates'),
+            loader=FileSystemLoader(WEBSITE_PATH + 'sc_templates'),
             autoescape=(['html']))
         template = env.get_template(template)
         results = template.render(context)
@@ -41,8 +44,8 @@ def run_jinja_template(template, context):
 
 
 class ReplaceShortcodes(object):
-    # available_shortcodes = ['maxbutton', 'singlepic', 'src_singlepic', 'includeme', 'ngg_images']
-    available_shortcodes = ['maxbutton', 'singlepic', 'src_singlepic', ]
+    # available_shortcodes = ['maxbutton', 'singlepic', 'src_singlepic', 'includeme', 'ngg_images', 'src_slideshow']
+    available_shortcodes = ['maxbutton', 'singlepic', 'src_singlepic', 'ngg_images', 'src_slideshow', ]
     # We support two flavors of argument list:
     # (1) The value of an individual argument is surrounded by quotes (' or ")
     # (2) The value of an argument is a single character string [a-zA-Z_]
@@ -60,10 +63,12 @@ class ReplaceShortcodes(object):
         self.button = False
         self.shortcode_string = ''
         self.pic_manager = HandlePictureImports()
+        self.pics = self.pic_manager.get_all_pics()
         self.inverse = {}
         self.files = set()
         self._build_inverse()
         self.content_dict['bad'] = open(PROJECT_PATH + '/support/bad_urls.txt', 'w')
+        self.content_dict['issues'] = open(PROJECT_PATH + '/support/issues.txt', 'w')
         self.dead_files = set()
         with open(PROJECT_PATH + '/support/marked_bad_urls.txt', 'r') as bads:
             not_done = True
@@ -79,6 +84,7 @@ class ReplaceShortcodes(object):
         if self.content_dict['bad']:
             self.content_dict['bad'].close()
             self.content_dict['bad'] = None
+        self.content_dict['issues'].close()
 
     def _build_inverse(self):
         # file '.md' is the top level file.  Rename to page-one.md
@@ -101,7 +107,7 @@ class ReplaceShortcodes(object):
                         dir_parts = sub_path.split('/')
                         self.inverse[file] = dir_parts
                     else:
-                        print(f'Duplicate file: {file}')
+                        self.content_dict['issues'].writelines(f'Duplicate file: {file}\n')
 
     def clean_image_directories(self):
         """remove wp directories from image folders"""
@@ -111,16 +117,15 @@ class ReplaceShortcodes(object):
         for dirpath, _, fileList in os.walk(self.web_source):
             # print('Process directory: %s' % dirpath)
             for fname in fileList:
-                if fname == 'page-one.md':
-                    foo = 3
                 if fname not in self.dead_files and \
                         fname.endswith('.md') and \
                         not fname.startswith('veteran') and \
-                        not dirpath.endswith('-notes'):
+                        not dirpath.endswith('-notes') and \
+                        fname == 'please-have-a-seat-chairs-at-sunnyside.md':
                     file_path = os.path.join(dirpath, fname)
                     self.content_dict['file_path'] = file_path
                     # print(file_path)
-                    with open(file_path, 'r') as infile:
+                    with open(file_path, 'r', encoding='utf-8') as infile:
                         self.shortcode_string = ''.join(infile.readlines())
                         current_string = self.parse_a_tag(self.shortcode_string)
                         result_string = ''
@@ -128,16 +133,19 @@ class ReplaceShortcodes(object):
                             res = self.parse_shortcode(current_string)
                             if res == 'SHORTCODE ARG FAILURE':
                                 print(f'Shortcode failure in: {file_path}')
+                                self.content_dict['issues'].writelines(f'Shortcode failure in: {file_path}\n')
                                 current_string = ''
                             elif res:
                                 if res['start']:
                                     # if start is not at front of string, add start of string to result
                                     result_string += current_string[:res['start']]
                                 current_string = current_string[res['end']:]
-                                self.content_dict['count_slash'] = file_path.count(
-                                    '/')  # get path depth for relative reference
+                                self.content_dict['count_slash'] = file_path.count('/')  # path depth for relative refs
                                 tmp = self._process_shortcode(res)
-                                if tmp:
+                                if tmp == 'PARSE FAILURE':
+                                    result_string += 'SHORTCODE NOT YET HANDLED: ' + current_string
+                                    self.content_dict['issues'].writelines(f"UNHANDLED SHORTCODE: {file_path}\n")
+                                elif tmp:
                                     result_string += tmp
                             else:
                                 result_string += current_string
@@ -161,8 +169,6 @@ class ReplaceShortcodes(object):
             return
         res = dict()
         for n, match_group in enumerate(matches.groups()):
-            if match_group == 'singlepic':
-                foo = 3
             if not n:  # detecting first group which is the shortcode identifier
                 res['shortcode'] = match_group.lower()
                 res['full code'] = shortcode_string[matches.start():matches.end()]
@@ -223,10 +229,75 @@ class ReplaceShortcodes(object):
         elif sc == 'singlepic' or sc == 'src_singlepic':
             res = self._process_singlepic(shortcode_content)
             return res
+        elif sc == 'src_slideshow' or sc == 'ngg_images':
+            res = self._process_slideshow(shortcode_content)
+            return res
         else:
             if sc not in self.unhandled:
                 self.unhandled.append(sc)
             return shortcode_content['full code']
+
+    def _process_slideshow(self, show_content):
+        all_keys = show_content.keys()
+        if 'ids' in all_keys:
+            key = 'ids'
+        elif 'image_ids' in all_keys:
+            key = 'image_ids'
+        else:
+            return 'PARSE FAILURE'
+            # raise ValueError(f'No id key found in {show_content}')
+        try:
+            pic_ids = [int(x.strip()) for x in show_content[key].split(',') if x != '']
+        except ValueError as e:
+            fn = self.content_dict['file_path']
+            self.content_dict['issues'].writelines(f"Non-digit ID in list: {show_content[key]} for file: {fn}")
+            return 'PARSE FAILURE'
+        # Make a (probably) unique gallery id by multiplying the pic ids modulo 10K
+        gallery_name = f'Gal{reduce(mul, pic_ids) % 10000}'
+        gal_path = WEBSITE_PATH + 'galleries/' + gallery_name
+        if os.path.exists(gal_path):
+            return  # Presume if it exists, that it is the same as we are creating
+        else:
+            os.mkdir(gal_path)
+            x_pic_ids = list(set(pic_ids))  # Eliminate duplicates in list (may lose order)
+            for pic_id in x_pic_ids:
+                ws = WEBSITE_PATH[:-1]
+                pick_path = self.pic_manager.get_path_for_pic_id(pic_id)
+                if not pick_path:
+                    fn = self.content_dict['file_path']
+                    self.content_dict['issues'].writelines(f"No Path found for picture id: {pic_id} in file: {fn}\n")
+                    return 'PARSE FAILURE'
+                else:
+                    pick_path = ws + pick_path
+                if not os.path.exists(pick_path):
+                    self.content_dict['issues'].writelines(
+                        f"PICTURE: {pick_path} IS MISSING IN FILE: {self.content_dict['file_path']}\n")
+                    pick_path = ''
+                    pic_ids = [x for x in pic_ids if x != pic_id]
+                else:
+                    shutil.copy(pick_path, gal_path)
+            if pic_ids:
+                with open(gal_path + '/metadata.yml', 'w') as yml:
+                    for n, pic_id in enumerate(x_pic_ids):
+                        # names=['pid', 'filename', 'alttext', 'imagedate', 'caption', 'path'])
+                        caption = self.pics.caption.loc[pic_id]
+                        if isinstance(caption, float):  # some captions show up as nan
+                            caption = ''
+                        if caption.find(':') != -1:
+                            caption = caption.replace(':', ',')     # Can't have ':' or ';' in captions apparently
+                        file_name = self.pics.filename.loc[pic_id]
+                        yml.writelines('---\n')
+                        yml.writelines(f"name: {file_name}\n")
+                        if caption:
+                            yml.writelines(f"caption: {caption}\n")
+                        yml.writelines(f"order: {n}\n")
+                        if not n:  # Can't have separate section that is not tied to an image :-(
+                            yml.writelines(
+                                f"Gallery source page: '{self.content_dict['file_path']} with gallery name - {gallery_name}'\n")
+                    yml.writelines('---\n')
+                    yml.close()
+            shortcode = '{{% gallery ' + gallery_name + ' %}}'
+        return shortcode
 
     def _process_maxbutton(self, button_content):
         try:
@@ -301,7 +372,8 @@ class ReplaceShortcodes(object):
                     pic_path = self.pic_manager.get_path_for_pic_id(int(pic_id))
                 else:
                     pic_path = ''
-                    print(f'INVALID PICTURE ID: {pic_id} with shortcode: {self.shortcode_string}')
+                    self.content_dict['issues'].writelines(
+                        f'INVALID PICTURE ID: {pic_id} with shortcode: {self.shortcode_string}\n')
             else:
                 raise ValueError(f'Missing pic ID in {pic_content["shortcode"]}')
             if 'w' in pic_content.keys():
@@ -369,7 +441,9 @@ class ReplaceShortcodes(object):
             return string_res
         return file_string
 
+
 import pandas as pd
+
 
 # TO CREATE DATA for self.pics DataFrame:
 #   (1) Download WP database and fix default dates
@@ -403,7 +477,11 @@ class HandlePictureImports(object):
         if pic_id in self.pics.index:
             return '/images/' + self.pics.path.loc[pic_id] + self.pics.filename.loc[pic_id]
         else:
-            return None         # TODO: Create valid file path indicating non-existent pic
+            return None  # TODO: Create valid file path indicating non-existent pic
+
+    def get_all_pics(self):
+        return self.pics
+
 
 converter = ReplaceShortcodes()
 
