@@ -120,8 +120,8 @@ class ReplaceShortcodes(object):
                 if fname not in self.dead_files and \
                         fname.endswith('.md') and \
                         not fname.startswith('veteran') and \
-                        not dirpath.endswith('-notes') and \
-                        fname == 'please-have-a-seat-chairs-at-sunnyside.md':
+                        not dirpath.endswith('-notes'): # and \
+                        # fname == 'please-have-a-seat-chairs-at-sunnyside.md':
                     file_path = os.path.join(dirpath, fname)
                     self.content_dict['file_path'] = file_path
                     # print(file_path)
@@ -475,7 +475,12 @@ class HandlePictureImports(object):
 
     def get_path_for_pic_id(self, pic_id):
         if pic_id in self.pics.index:
-            return '/images/' + self.pics.path.loc[pic_id] + self.pics.filename.loc[pic_id]
+            path_dir = self.pics.path.loc[pic_id]
+            if not path_dir:
+                raise ValueError(f'No directory for picture {pic_id}')
+            elif path_dir[-1] != '/':
+                path_dir += '/'
+            return '/images/' + path_dir + self.pics.filename.loc[pic_id]
         else:
             return None  # TODO: Create valid file path indicating non-existent pic
 
