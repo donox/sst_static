@@ -17,7 +17,7 @@ import platform
 OXLEY_PATH = '/home/don/PycharmProjects'
 OXLEY_PATH = '../../../'
 # IONOS_PATH = '~/homepages/11/d835068234/htdocs/'
-IONOS_PATH = '../../../'
+IONOS_PATH = '../../'
 PATTERSON_PATH = '../../../'
 
 os.environ['OPENBLAS_NUM_THREADS'] = '1'  # SOME ISSUE SPAWNING PROCESSES - Bad fix????
@@ -51,7 +51,7 @@ class ReplaceShortcodes(object):
     # -- the argument types may not be mixed.
 
     # Note that the "^]]" below defends against a left bracket immediatelyfollowing a shortcode
-    sc_re = re.compile(r'\[(\w+) *(\w+=[^\]]+)* *\]', re.I)
+    sc_re = re.compile(r'\[([a-zA-Z0-9\-]+) *(\w+=[^\]]+)* *\]', re.I)
     sc_re_arg = re.compile(r'( *([A-Za-z0-9_]+) *= *"(.*)")+?')
     sc_re_arg_no_quotes = re.compile(r'( *([A-Za-z0-9_]+) *= *(.[a-zA-Z_]+))+?')
 
@@ -66,10 +66,10 @@ class ReplaceShortcodes(object):
         self.inverse = {}
         self.files = set()
         self._build_inverse()
-        self.content_dict['bad'] = open(PROJECT_PATH + '/support/bad_urls.txt', 'w')
-        self.content_dict['issues'] = open(PROJECT_PATH + '/support/issues.txt', 'w')
+        self.content_dict['bad'] = open(PROJECT_PATH + 'support/bad_urls.txt', 'w')
+        self.content_dict['issues'] = open(PROJECT_PATH + 'support/issues.txt', 'w')
         self.dead_files = set()
-        with open(PROJECT_PATH + '/support/marked_bad_urls.txt', 'r') as bads:
+        with open(PROJECT_PATH + 'support/marked_bad_urls.txt', 'r') as bads:
             not_done = True
             while not_done:
                 ln = bads.readline()
@@ -119,8 +119,8 @@ class ReplaceShortcodes(object):
                 if fname not in self.dead_files and \
                         fname.endswith('.md') and \
                         not fname.startswith('veteran') and \
-                        not dirpath.endswith('-notes'):      # and \
-                        # fname == 'please-have-a-seat-chairs-at-sunnyside.md':
+                        not dirpath.endswith('-notes') and \
+                        fname == 'resident-told-stories.md':
                     file_path = os.path.join(dirpath, fname)
                     self.content_dict['file_path'] = file_path
                     # print(file_path)

@@ -12,7 +12,7 @@ import datetime as dt
 OXLEY_PATH = '/home/don/PycharmProjects'
 OXLEY_PATH = '../../../'
 # IONOS_PATH = '~/homepages/11/d835068234/htdocs/'
-IONOS_PATH = '../../../'
+IONOS_PATH = '../../'
 PATTERSON_PATH = '../../..\\'
 
 os.environ['OPENBLAS_NUM_THREADS'] = '1'  # SOME ISSUE SPAWNING PROCESSES - Bad fix????
