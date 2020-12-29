@@ -8,14 +8,21 @@
 {% if photo_array %}
 <div class="row">
 {% for image in photo_array %}
-    <div class="col-xs-6 col-md-3">
-        <a href="{{image['url']}}" class="thumbnail image-reference" title="{{image['title']|e}}">
-            <img src="{{image['url_thumb']}}" alt="{{image['title']|e}}" />
-        </a>
+    <div class="col-xs-6 col-md-3 imgBorder" style="display:{% if loop.first %}block{% else %}none{% endif%}">
+        <div class="">
+            <a href="{{image['url']}}" class="thumbnail image-reference" title="{{image['title']|e}}">
+                <img src="{{image['url_thumb']}}" alt="{{image['title']|e}}" />
+            </a>
+        </div>
+        {% set wd = image['width'] %}
+        <div class="imgClickHere" style="max-width:{{ wd }}px">Click Image</div>
+        <div class="imgThumbTitle"  style="max-width=:{{ wd }}px"> {{ image['title'] }}</div>
     </div>
   {% endfor %}
 </div>
 
+<!--
 <ul class="thumbnails"><li>
 </ul>
+-->
 {% endif %}

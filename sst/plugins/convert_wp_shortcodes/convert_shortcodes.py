@@ -45,13 +45,19 @@ def run_jinja_template(template, context):
 
 class ReplaceShortcodes(object):
     available_shortcodes = ['maxbutton', 'singlepic', 'src_singlepic', 'ngg_images', 'src_slideshow', 'child-pages']
+    unhandled_shortcodes = ['ultimatemember', 'ultimatemember_account', 'wp_google_search', 'srcp_wellness_center',
+                            'srcp_wellness_individual', 'srcp_wellness_statistics', 'src_lists_membership',
+                            'src_lists_admin_functions', 'catlist', 'sustainability', 'includeme',
+                            'thermometer', 'ninja_forms', 'src_manage_opportunity', 'src_record_registration',
+                            'src_sign_up_for_opportunity', 'src_list_opportunities', 'src_register_opportunity',
+                            'src_create_opportunity', 'src_fwf_notify', 'nggallery', 'ngg', 'srcp_club_membership']
     # We support two flavors of argument list:
     # (1) The value of an individual argument is surrounded by quotes (' or ")
     # (2) The value of an argument is a single character string [a-zA-Z_]
     # -- the argument types may not be mixed.
 
-    # Note that the "^]]" below defends against a left bracket immediatelyfollowing a shortcode
-    sc_re = re.compile(r'\[([a-zA-Z0-9\-]+) *(\w+=[^\]]+)* *\]', re.I)
+    # Note that the "^]]" below defends against a left bracket immediately following a shortcode
+    sc_re = re.compile(r'\[([a-zA-Z0-9\-_]+) *(\w+=[^\]]+)* *\]', re.I)
     sc_re_arg = re.compile(r'( *([A-Za-z0-9_]+) *= *"(.*)")+?')
     sc_re_arg_no_quotes = re.compile(r'( *([A-Za-z0-9_]+) *= *(.[a-zA-Z_]+))+?')
 
@@ -106,7 +112,7 @@ class ReplaceShortcodes(object):
                         dir_parts = sub_path.split('/')
                         self.inverse[file] = dir_parts
                     else:
-                        self.content_dict['issues'].writelines(f'Duplicate file: {file}\n')
+                        self.content_dict['issues'].writelines(f'Duplicate file: {file}\n\n')
 
     def clean_image_directories(self):
         """remove wp directories from image folders"""
@@ -116,11 +122,17 @@ class ReplaceShortcodes(object):
         for dirpath, _, fileList in os.walk(self.web_source):
             # print('Process directory: %s' % dirpath)
             for fname in fileList:
+                if fname in self.dead_files:
+                    try:
+                        self.content_dict['issues'].writelines(
+                            f"DEAD FILE: (???): {self.content_dict['file_path']} \n\n")
+                    except Exception as e:
+                        foo = 3
                 if fname not in self.dead_files and \
                         fname.endswith('.md') and \
                         not fname.startswith('veteran') and \
-                        not dirpath.endswith('-notes') and \
-                        fname == 'resident-told-stories.md':
+                        not dirpath.endswith('-notes')   and \
+                        fname == 'page-one.md':
                     file_path = os.path.join(dirpath, fname)
                     self.content_dict['file_path'] = file_path
                     # print(file_path)
@@ -131,8 +143,8 @@ class ReplaceShortcodes(object):
                         while current_string:
                             res = self.parse_shortcode(current_string)
                             if res == 'SHORTCODE ARG FAILURE':
-                                print(f'Shortcode failure in: {file_path}')
-                                self.content_dict['issues'].writelines(f'Shortcode failure in: {file_path}\n')
+                                # print(f'Shortcode failure in: {file_path}')
+                                self.content_dict['issues'].writelines(f'SHORTCODE FAILURE: in: {file_path}\n\n')
                                 current_string = ''
                             elif res:
                                 if res['start']:
@@ -143,7 +155,7 @@ class ReplaceShortcodes(object):
                                 tmp = self._process_shortcode(res)
                                 if tmp == 'PARSE FAILURE':
                                     result_string += 'SHORTCODE NOT YET HANDLED: ' + current_string
-                                    self.content_dict['issues'].writelines(f"UNHANDLED SHORTCODE: {file_path}\n")
+                                    self.content_dict['issues'].writelines(f"UNHANDLED SHORTCODE: {file_path}\n\n")
                                 elif tmp:
                                     result_string += tmp
                             else:
@@ -173,7 +185,13 @@ class ReplaceShortcodes(object):
                 res['full code'] = shortcode_string[matches.start():matches.end()]
                 res['start'] = matches.start()
                 res['end'] = matches.end()
+                if res['shortcode'] in ReplaceShortcodes.unhandled_shortcodes:
+                    self.content_dict['issues'].writelines(
+                        f"UNHANDLED SHORTCODE: in: {self.content_dict['file_path']} is: {self.shortcode_string[:100]}++\n\n")
+                    return res
                 if res['shortcode'] not in ReplaceShortcodes.available_shortcodes:
+                    self.content_dict['issues'].writelines(
+                        f"UNRECOGNIZED SHORTCODE: in: {self.content_dict['file_path']} is: {self.shortcode_string[:100]}++\n\n")
                     return res
             if match_group:
                 try:
@@ -269,13 +287,13 @@ class ReplaceShortcodes(object):
                 pick_path = self.pic_manager.get_path_for_pic_id(pic_id)
                 if not pick_path:
                     fn = self.content_dict['file_path']
-                    self.content_dict['issues'].writelines(f"No Path found for picture id: {pic_id} in file: {fn}\n")
+                    self.content_dict['issues'].writelines(f"No Path found for picture id: {pic_id} in file: {fn}\n\n")
                     return 'PARSE FAILURE'
                 else:
                     pick_path = ws + pick_path
                 if not os.path.exists(pick_path):
                     self.content_dict['issues'].writelines(
-                        f"PICTURE: {pick_path} IS MISSING IN FILE: {self.content_dict['file_path']}\n")
+                        f"PICTURE: {pick_path} IS MISSING IN FILE: {self.content_dict['file_path']}\n\n")
                     pick_path = ''
                     pic_ids = [x for x in pic_ids if x != pic_id]
                 else:
@@ -324,7 +342,7 @@ class ReplaceShortcodes(object):
                 return res
             # TODO:  Does this handle a url that is a download properly???????????????????????????//
         except Exception as e:  # some urls seem to be bad
-            self.content_dict['bad'].writelines(f'URL: {url_content}\n\tFILE: {self.content_dict["file_path"]}\n')
+            self.content_dict['bad'].writelines(f'URL: {url_content}\n\tFILE: {self.content_dict["file_path"]}\n\n')
             return None
         button_type = "is-link"
         context_dict = {'button_type': button_type,
@@ -362,7 +380,7 @@ class ReplaceShortcodes(object):
         try:
             file_parts = self.inverse[file_name]
         except Exception as e:
-            self.content_dict['bad'].writelines(f'Unrecognized URL: {url} in {self.content_dict["file_path"]}\n')
+            self.content_dict['bad'].writelines(f'Unrecognized URL: {url} in {self.content_dict["file_path"]}\n\n')
         nbr_double_period = len(source_file_parts) - source_file_parts.index('pages')
         lead = '../' * nbr_double_period
         res = lead + '/'.join(file_parts) + '/' + url_parts[-1]
@@ -377,7 +395,7 @@ class ReplaceShortcodes(object):
                 else:
                     pic_path = ''
                     self.content_dict['issues'].writelines(
-                        f'INVALID PICTURE ID: {pic_id} with shortcode: {self.shortcode_string}\n')
+                        f'INVALID PICTURE ID: {pic_id} with shortcode: {self.shortcode_string[:100]}++\n\n')
             else:
                 raise ValueError(f'Missing pic ID in {pic_content["shortcode"]}')
             if 'w' in pic_content.keys():
