@@ -1,0 +1,41 @@
+{#  -*- coding: utf-8 -*- #}
+{# context['rows'][0]['cols'][0]['entries'][0] #}
+<div class="container">
+    {% for row in rows %}
+        <div class="row">
+            {% set cols = row.cols %}
+            {% for col in cols %}
+                <div class="col">
+                    {% set entries = col.entries %}
+                    {% for entry in entries %}
+                        <div class="ENTRY">
+                            {% set entrytype = entry.entry_type %}
+                            {% set story = entry.content %}
+
+                            {% if entrytype == 'story_snippet' %}
+                                <div class="{{ story.display_classes }}">
+                                    {{ story }}
+                                </div>
+                            {% endif %}
+
+                            {% if entrytype == 'simple_story' %}
+                                <div class="col-sm-7">
+                                    <div id="rotatingTopStories" class="src-flex-container">
+                                        <div class="src-flex-item src-grow-3" style="display: none;">
+                                            INVISIBLE ROTATING LEAD
+                                        </div>
+
+                                        <div class="src-flex-item src-grow-3">
+                                            {#  VISIBLE ROTATING LEAD #}
+                                        </div>
+                                        <!-- end container (and containing item) for rotating story - right 2/3 of top section -->
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>

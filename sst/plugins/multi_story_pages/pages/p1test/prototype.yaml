@@ -1,0 +1,12 @@
+---
+Entry:
+  entry_type: story_snippet
+  story:
+    title: The Article Title for Display
+    byline: Colleen Cahill-Landis
+    photos: Anita Brechtel, Beverly Silver and Colleen Cahill-Landis
+    file_path: pages/cool-stories-index/resident-told-stories/the-delights-of-autumn.md
+    make_snippet: true    # Construct snippet from actual file (not provided by editors)
+    starting_text: The leaves are changing to delightful   # First few words of Text in Snippet
+    stopping_text: Further fun was had with the            # First words NOT in Snippet
+...

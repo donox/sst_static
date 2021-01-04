@@ -1,0 +1,161 @@
+URL: Technology
+	FILE: ../sst/pages/news-index.md
+URL: puzzles-and-games
+	FILE: ../sst/pages/news-index.md
+URL: faith/
+	FILE: ../sst/pages/campus-life.md
+???: tartan-grillmarketplace-grill/
+	FILE: ../sst/pages/campus-life.md
+???:: ../clubmittee/jmu-lifelong-learning-institute/
+	FILE: ../sst/pages/campus-life.md
+???:: ../clubmittee/choral-society/
+	FILE: ../sst/pages/campus-life.md
+URL: ../committee/resident-council/
+	FILE: ../sst/pages/campus-life.md
+???:: fish-committee/
+	FILE: ../sst/pages/campus-life.md
+???:: ../clubmittee/jmu-lifelong-learning-institute/
+	FILE: ../sst/pages/off-campus-activities.md
+???:: ../clubmittee/choral-society/
+	FILE: ../sst/pages/off-campus-activities.md
+URL: sunnyside-living-index
+	FILE: ../sst/pages/administration-index.md
+???:: https://sunnyside-times.com/future-sunny-treasures-events/
+	FILE: ../sst/pages/notices.md
+???:: https://www.sunnyside-times.us/1736448-2/
+	FILE: ../sst/pages/resident-communications-survey.md
+URL: techforum
+	FILE: ../sst/pages/digital-world.md
+???:: sunny-side
+	FILE: ../sst/pages/social.md
+???:: ../classifieds
+	FILE: ../sst/pages/social.md
+???:: xxxx
+	FILE: ../sst/pages/sunnyside.md
+???:: xxxx
+	FILE: ../sst/pages/sunnyside.md
+???:: xxxx
+	FILE: ../sst/pages/sunnyside.md
+???:: xxxx
+	FILE: ../sst/pages/sunnyside.md
+???:: xxxx
+	FILE: ../sst/pages/sunnyside.md
+???:: xxxx
+	FILE: ../sst/pages/sunnyside.md
+???:: ../don-picture-test
+	FILE: ../sst/pages/sunnyside.md
+???:: xxxx
+	FILE: ../sst/pages/sunnyside.md
+???:: ../temp-menu-content
+	FILE: ../sst/pages/sunnyside.md
+???:: xxxx
+	FILE: ../sst/pages/sunnyside.md
+???:: xxxx
+	FILE: ../sst/pages/sunnyside.md
+???:: ../woodside-drive-residents
+	FILE: ../sst/pages/sunnyside.md
+???:: ../campus-life/tartan-grillmarketplace-grill
+	FILE: ../sst/pages/sunnyside.md
+???:: xxx
+	FILE: ../sst/pages/events-activities.md
+URL: John and Kate Seaton
+	FILE: ../sst/pages/cool-stories-index/resident-profiles-index.md
+URL: https://www.sunnyside-times.com/cool-stories-index/resident-told-stories/ww-freestyle-wellness-that-works/
+	FILE: ../sst/pages/cool-stories-index/resident-told-stories.md
+???:: https://www.sunnyside-times.com
+	FILE: ../sst/pages/administration-index/facilities-and-services-index.md
+???:: https://www.sunnyside-times.com
+	FILE: ../sst/pages/administration-index/facilities-and-services-index.md
+???:: https://www.sunnyside-times.com
+	FILE: ../sst/pages/administration-index/facilities-and-services-index.md
+???:: https://www.sunnyside-times.com
+	FILE: ../sst/pages/administration-index/administrative-departments-index.md
+???:: https://www.sunnyside-times.com
+	FILE: ../sst/pages/administration-index/administrative-departments-index.md
+???:: https://www.sunnyside-times.com
+	FILE: ../sst/pages/administration-index/administrative-departments-index.md
+???:: https://www.sunnyside-times.com
+	FILE: ../sst/pages/administration-index/administrative-departments-index.md
+???:: https://www.sunnyside-times.com
+	FILE: ../sst/pages/administration-index/administrative-departments-index.md
+???:: ../wp-content/downloads/Wellness/BLOOM.pdf
+	FILE: ../sst/pages/administration-index/facilities-and-services-index/wellness-facilities/wellness-2.md
+???:: Wellness-Facilities
+	FILE: ../sst/pages/administration-index/facilities-and-services-index/wellness-facilities/wellness-2.md
+URL: adult-coloring
+	FILE: ../sst/pages/activities-index/resident-led-activities-index.md
+URL: resident-council-committee
+	FILE: ../sst/pages/activities-index/resident-council-and-committees/resident-council-3.md
+URL: ../../wp-content/downloads/VillageAssn/Minutes3.6.20.pdf
+	FILE: ../sst/pages/activities-index/resident-council-and-committees/resident-council-index/village-association-2.md
+URL: ../../wp-content/downloads/VillageAssn/Minutes12.6.19.pdf
+	FILE: ../sst/pages/activities-index/resident-council-and-committees/resident-council-index/village-association-2.md
+URL: ../../wp-content/downloads/VillageAssn/Minutes9.6.19.pdf
+	FILE: ../sst/pages/activities-index/resident-council-and-committees/resident-council-index/village-association-2.md
+URL: ../../wp-content/downloads/VillageAssn/Attachment1.pdf
+	FILE: ../sst/pages/activities-index/resident-council-and-committees/resident-council-index/village-association-2.md
+URL: ../../wp-content/downloads/VillageAssn/Attachment2.pdf
+	FILE: ../sst/pages/activities-index/resident-council-and-committees/resident-council-index/village-association-2.md
+URL: ../../gpd-Woodside
+	FILE: ../sst/pages/activities-index/resident-council-and-committees/resident-council-index/village-association-2.md
+URL: ../../gpd-Locust
+	FILE: ../sst/pages/activities-index/resident-council-and-committees/resident-council-index/village-association-2.md
+URL: ../../gpd-Hickory
+	FILE: ../sst/pages/activities-index/resident-council-and-committees/resident-council-index/village-association-2.md
+URL: ../../gpd-Glen1
+	FILE: ../sst/pages/activities-index/resident-council-and-committees/resident-council-index/village-association-2.md
+URL: ../../gpd-Glen2
+	FILE: ../sst/pages/activities-index/resident-council-and-committees/resident-council-index/village-association-2.md
+URL: https://sunnyside-times.com/wp-content/downloads/green/JMUSustainabilityPresentation.pptx
+	FILE: ../sst/pages/activities-index/resident-council-and-committees/committees/green-committee.md
+URL: https://sunnyside-times.com/wp-content/downloads/green/TreeLocations.pdf
+	FILE: ../sst/pages/activities-index/resident-council-and-committees/committees/green-committee.md
+URL: https://sunnyside-times.com/wp-content/downloads/green/TreeSpecies.pdf
+	FILE: ../sst/pages/activities-index/resident-council-and-committees/committees/green-committee.md
+URL: ../../../../wp-content/downloads/RC/082120_Resident_Council_Minutes.pdf
+	FILE: ../sst/pages/activities-index/resident-council-and-committees/resident-council-3/resident-council-minutes.md
+URL: ../../../../wp-content/downloads/RC/051520_Resident_Council_Minutes.pdf
+	FILE: ../sst/pages/activities-index/resident-council-and-committees/resident-council-3/resident-council-minutes.md
+URL: https://www.sunnyside-times.com/activities-index/off-campus-opportunities/lifelong-learning-institute/jmu-lli
+	FILE: ../sst/pages/activities-index/off-campus-opportunities/lifelong-learning-institute.md
+URL: https://www.sunnyside-times.com/activities-index/off-campus-opportunities/lifelong-learning-institute/lifelong-learning-institute-classes-are-coming-again/
+	FILE: ../sst/pages/activities-index/off-campus-opportunities/lifelong-learning-institute.md
+URL: https://www.sunnyside-times.com/activities-index/off-campus-opportunities/lifelong-learning-institute/lli-comes-to-sunnyside
+	FILE: ../sst/pages/activities-index/off-campus-opportunities/lifelong-learning-institute.md
+URL: dominos
+	FILE: ../sst/pages/activities-index/resident-led-activities-index/indoor-games.md
+URL: ../../../../wp-content/downloads/Birthdays/Feb_2020.pdf
+	FILE: ../sst/pages/social/members/birthdays/february-2020-birthdays.md
+URL: ../../../../wp-content/downloads/Birthdays/Dec_2020.pdf
+	FILE: ../sst/pages/social/members/birthdays/december-2020-birthdays.md
+URL: ../../../../wp-content/downloads/Birthdays/Sep_2020.pdf
+	FILE: ../sst/pages/social/members/birthdays/september-2020-birthdays.md
+URL: ../../../../wp-content/downloads/Birthdays/Jan_2020.pdf
+	FILE: ../sst/pages/social/members/birthdays/january-2020-birthdays.md
+URL: ../../../../wp-content/downloads/Birthdays/Apr_2020.pdf
+	FILE: ../sst/pages/social/members/birthdays/april-2020-birthdays.md
+URL: ../../../../wp-content/downloads/Birthdays/July_2020.pdf
+	FILE: ../sst/pages/social/members/birthdays/july-2020-birthdays.md
+URL: ../../../../wp-content/downloads/Birthdays/August_2020.pdf
+	FILE: ../sst/pages/social/members/birthdays/august-2020-birthdays.md
+URL: ../../../../wp-content/downloads/Birthdays/Mar_2020.pdf
+	FILE: ../sst/pages/social/members/birthdays/march-2020-birthdays.md
+URL: ../../../../wp-content/downloads/Birthdays/Nov_2020.pdf
+	FILE: ../sst/pages/social/members/birthdays/november-2020-birthdays.md
+URL: ../../../../wp-content/downloads/Birthdays/Oct_2020.pdf
+	FILE: ../sst/pages/social/members/birthdays/october-2020-birthdays.md
+URL: ../../../../wp-content/downloads/Birthdays/June_2020.pdf
+	FILE: ../sst/pages/social/members/birthdays/june-2020-birthdays.md
+URL: ../../../../wp-content/downloads/Birthdays/May_2020.pdf
+	FILE: ../sst/pages/social/members/birthdays/may-2020-birthdays.md
+???:: /events/category/events
+	FILE: ../sst/pages/calendar/calendar-revision.md
+???:: /events/category/wellness
+	FILE: ../sst/pages/calendar/calendar-revision.md
+???:: /events/category/clubs
+	FILE: ../sst/pages/calendar/calendar-revision.md
+???:: /events/category/religion
+	FILE: ../sst/pages/calendar/calendar-revision.md
+???:: /events/category/AL
+	FILE: ../sst/pages/calendar/calendar-revision.md
+DONE

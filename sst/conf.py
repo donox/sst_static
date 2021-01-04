@@ -1,10 +1,26 @@
 # -*- coding: utf-8 -*-
 
 import time
+import os
+import sys
+import platform
 
-# !! This is the configuration of Nikola. !! #
-# !!  You should edit it to your liking.  !! #
+OXLEY_PATH = '/home/don/PycharmProjects'
+OXLEY_PATH = '../../../'
+# IONOS_PATH = '~/homepages/11/d835068234/htdocs/'
+IONOS_PATH = '../../'
+PATTERSON_PATH = '../../../'
 
+os.environ['OPENBLAS_NUM_THREADS'] = '1'  # SOME ISSUE SPAWNING PROCESSES - Bad fix????
+
+node = platform.node()
+PARENT_PATH = IONOS_PATH  # Is this still right after moving convert_shortcodes??????????????????????
+if node == 'Descartes':
+    PARENT_PATH = OXLEY_PATH + 'PycharmProjects/'
+elif node == 'SAMsMachine':
+    PARENT_PATH = PATTERSON_PATH + 'PycharmProjects'
+PROJECT_PATH = PARENT_PATH + 'sst_static/'
+WEBSITE_PATH = PARENT_PATH + 'sst_static/sst/'
 
 # ! Some settings can be different in different languages.
 # ! A comment stating (translatable) is used to denote those.
@@ -27,71 +43,6 @@ SITE_URL = "http://localhost:8000/sst/"
 BLOG_EMAIL = "info@sunnyside-times.com"
 BLOG_DESCRIPTION = "Out and about at Sunnyside"  # (translatable)
 
-# Nikola is multilingual!
-#
-# Currently supported languages are:
-#
-# en        English
-# af        Afrikaans
-# ar        Arabic
-# az        Azerbaijani
-# bg        Bulgarian
-# bs        Bosnian
-# ca        Catalan
-# cs        Czech [ALTERNATIVELY cz]
-# da        Danish
-# de        German
-# el        Greek [NOT gr]
-# eo        Esperanto
-# es        Spanish
-# et        Estonian
-# eu        Basque
-# fa        Persian
-# fi        Finnish
-# fr        French
-# fur       Friulian
-# gl        Galician
-# he        Hebrew
-# hi        Hindi
-# hr        Croatian
-# hu        Hungarian
-# ia        Interlingua
-# id        Indonesian
-# it        Italian
-# ja        Japanese [NOT jp]
-# ko        Korean
-# lt        Lithuanian
-# ml        Malayalam
-# mr        Marathi
-# nb        Norwegian (Bokmål)
-# nl        Dutch
-# pa        Punjabi
-# pl        Polish
-# pt        Portuguese
-# pt_br     Portuguese (Brazil)
-# ru        Russian
-# sk        Slovak
-# sl        Slovene
-# sq        Albanian
-# sr        Serbian (Cyrillic)
-# sr_latin  Serbian (Latin)
-# sv        Swedish
-# te        Telugu
-# th        Thai
-# tr        Turkish [NOT tr_TR]
-# uk        Ukrainian
-# ur        Urdu
-# vi        Vietnamese
-# zh_cn     Chinese (Simplified)
-# zh_tw     Chinese (Traditional)
-#
-# If you want to use Nikola with a non-supported language you have to provide
-# a module containing the necessary translations
-# (cf. the modules at nikola/data/themes/base/messages/).
-# If a specific post is not translated to a language, then the version
-# in the default language will be shown instead.
-
-# What is the default language?
 DEFAULT_LANG = "en"
 
 # What other languages do you have?
@@ -140,6 +91,7 @@ TRANSLATIONS_PATTERN = '{path}.{lang}.{ext}'
 
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
+        ("/pages/p1test/index.html", "Test"),
         ("/pages/page-one/index.html", "Page One"),
         ("/pages/page-two/index.html", "Page Two"),
         ("/pages/activities-index/index.html", "Activities"),

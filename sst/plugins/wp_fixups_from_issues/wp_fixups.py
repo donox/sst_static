@@ -13,21 +13,7 @@ from functools import reduce
 from operator import mul
 
 import platform
-
-OXLEY_PATH = '/home/don/PycharmProjects'
-OXLEY_PATH = '../../../'
-# IONOS_PATH = '~/homepages/11/d835068234/htdocs/'
-IONOS_PATH = '../../'
-PATTERSON_PATH = '../../../'
-
-os.environ['OPENBLAS_NUM_THREADS'] = '1'  # SOME ISSUE SPAWNING PROCESSES - Bad fix????
-
-node = platform.node()
-PARENT_PATH = IONOS_PATH                # Is this still right after moving convert_shortcodes??????????????????????
-if node == 'Descartes':
-    PARENT_PATH = OXLEY_PATH + 'PycharmProjects/'
-PROJECT_PATH = PARENT_PATH + 'sst_static/'
-WEBSITE_PATH = PARENT_PATH + 'sst_static/sst/'
+from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH
 
 
 # def run_jinja_template(template, context):

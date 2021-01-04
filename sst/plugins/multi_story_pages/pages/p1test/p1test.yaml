@@ -1,0 +1,22 @@
+---
+Rows:
+  - Row:
+      - Column:
+        - Entry: DelightOfAutumn
+      - Column:
+ #       - Entry: BaardCars
+        - Entry: SunnybearAdventures
+      - Column:
+        - Entry: TownHall
+  - Row:
+      - Column:
+ #       - Entry: Challenging2020
+      - Column:
+   #     - Entry: SunnysideDoesItRight
+  - Row:
+      - Column:
+ #       - Entry: TownHall
+  #      - Entry: NewResidents
+      - Column:
+  #      - Entry: ChristmasSale
+...

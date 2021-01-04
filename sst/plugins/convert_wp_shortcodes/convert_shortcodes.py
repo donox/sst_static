@@ -11,24 +11,9 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 import shutil
 from functools import reduce
 from operator import mul
+from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH
 
 import platform
-
-OXLEY_PATH = '/home/don/PycharmProjects'
-OXLEY_PATH = '../../../'
-# IONOS_PATH = '~/homepages/11/d835068234/htdocs/'
-IONOS_PATH = '../../'
-PATTERSON_PATH = '../../../'
-
-os.environ['OPENBLAS_NUM_THREADS'] = '1'  # SOME ISSUE SPAWNING PROCESSES - Bad fix????
-
-node = platform.node()
-PARENT_PATH = IONOS_PATH                # Is this still right after moving convert_shortcodes??????????????????????
-if node == 'Descartes':
-    PARENT_PATH = OXLEY_PATH + 'PycharmProjects/'
-PROJECT_PATH = PARENT_PATH + 'sst_static/'
-WEBSITE_PATH = PARENT_PATH + 'sst_static/sst/'
-
 
 def run_jinja_template(template, context):
     try:
@@ -131,7 +116,7 @@ class ReplaceShortcodes(object):
                 if fname not in self.dead_files and \
                         fname.endswith('.md') and \
                         not fname.startswith('veteran') and \
-                        not dirpath.endswith('-notes')   and \
+                        not dirpath.endswith('-notes')  and \
                         fname == 'page-one.md':
                     file_path = os.path.join(dirpath, fname)
                     self.content_dict['file_path'] = file_path
@@ -416,15 +401,18 @@ class ReplaceShortcodes(object):
                     caption = ''
             else:
                 caption = ''
-            photo = {'url': pic_path,
-                     'width': width,
-                     'height': height,
-                     'alignment': float_pic,
-                     'caption': caption
-                     }
-            context = {'photo': photo}
-            res = run_jinja_template('/base/picture_base.jinja2', context=context)
-            res = " ".join(res.split())
+            res = '{{% singlepic image="' + pic_path + '" width="' + width + '" height="' + height + '" '
+            res += 'alignment="' + float_pic + '" caption="' + caption + '"'
+            res += ' %}}'
+            # photo = {'url': pic_path,
+            #          'width': width,
+            #          'height': height,
+            #          'alignment': float_pic,
+            #          'caption': caption
+            #          }
+            # context = {'photo': photo}
+            # res = run_jinja_template('/base/picture_base.jinja2', context=context)
+            # res = " ".join(res.split())
             return res
 
         except KeyError as e:
@@ -513,13 +501,13 @@ class HandlePictureImports(object):
 converter = ReplaceShortcodes()
 
 
-class Code(nikola.plugin_categories.Command):
+class ShortcodeConverter(nikola.plugin_categories.Command):
     name = 'convert_shortcodes'
     # compiler_name = 'wordpress'
     logger = None
 
     def __init__(self):
-        super(Code, self).__init__()
+        super(ShortcodeConverter, self).__init__()
 
     def _execute(self, command, args):
         self.logger = get_logger('ping', STDERR_HANDLER)

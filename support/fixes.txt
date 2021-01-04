@@ -1,0 +1,12 @@
+UNHANDLED SHORTCODE: in: ../../../PycharmProjects/sst_static/sst//pages/sunnyside-blogs.md is: <html><body><p>We are working to create a space for persons to share some of their thoughts and inte++
+
+DEAD FILE: (???): ../../../PycharmProjects/sst_static/sst//pages/activities-index.md
+
+UNHANDLED SHORTCODE: in: ../../../PycharmProjects/sst_static/sst//pages/calendar-2020.md is: <html><body><p>[includeme file="wp-content/gen-pages/monthly_calendar_2020_6.html"]</p></body></html++
+
+UNHANDLED SHORTCODE: in: ../../../PycharmProjects/sst_static/sst//pages/login.md is: <html><body><p>[ultimatemember form_id=154]</p></body></html>++
+
+DEAD FILE: (???): ../../../PycharmProjects/sst_static/sst//pages/sst-org-import.md
+
+UNHANDLED SHORTCODE: in: ../../../PycharmProjects/sst_static/sst//pages/page-two.md is: <html><body><div id="topStories"> </div>
+<div class="src-flex-container" style="display: none;"><di++

@@ -1,0 +1,15 @@
+Structure and definitions used in creating Page One and the like:
+
+Class definitions:
+    display_classes:  Bootstrap class list to set colums, sizes, etc. - e.g., col-sm-7
+
+
+
+
+Context:
+    rows
+        row
+            col
+                entry_type
+                story
+                    make_snippet - indicate if the snippet is specified by the story (false) or must be constructed (true)
