@@ -47,7 +47,7 @@ class ReplaceShortcodes(object):
     sc_re_arg_no_quotes = re.compile(r'( *([A-Za-z0-9_]+) *= *(.[a-zA-Z_]+))+?')
 
     def __init__(self):
-        self.web_source = WEBSITE_PATH + '/pages'
+        self.web_source = WEBSITE_PATH + 'pages'
         self.content_dict = {}
         self.unhandled = []
         self.button = False
@@ -56,7 +56,6 @@ class ReplaceShortcodes(object):
         self.pics = self.pic_manager.get_all_pics()
         self.inverse = {}
         self.files = set()
-        self._build_inverse()
         self.content_dict['bad'] = open(PROJECT_PATH + 'support/bad_urls.txt', 'w')
         self.content_dict['issues'] = open(PROJECT_PATH + 'support/issues.txt', 'w')
         self.dead_files = set()
@@ -69,6 +68,7 @@ class ReplaceShortcodes(object):
                     self.dead_files.add(file[:-1])  # Remove trailing \n
                 elif ln.startswith('DONE'):
                     not_done = False
+        self._build_inverse()
 
     def close(self):
         if self.content_dict['bad']:
@@ -116,8 +116,8 @@ class ReplaceShortcodes(object):
                 if fname not in self.dead_files and \
                         fname.endswith('.md') and \
                         not fname.startswith('veteran') and \
-                        not dirpath.endswith('-notes')  and \
-                        fname == 'page-one.md':
+                        not dirpath.endswith('-notes'):  # and \
+                        # fname == 'page-one.md':
                     file_path = os.path.join(dirpath, fname)
                     self.content_dict['file_path'] = file_path
                     # print(file_path)
@@ -314,7 +314,11 @@ class ReplaceShortcodes(object):
                 if text_content.startswith('Read'):
                     foo = 3
             else:
-                text_content = button_content['window']
+                # TODO: WHere does 'window' come from?  What is going on here?
+                if 'window' in list(button_content.keys()):
+                    text_content = button_content['window']
+                else:
+                    text_content = "No Button Text"
             url_content = button_content['url']
         except KeyError as e:
             print("Maxbutton Key Error in dict: {}".format(button_content))
@@ -377,6 +381,10 @@ class ReplaceShortcodes(object):
                 pic_id = pic_content['id']
                 if pic_id.isdigit():
                     pic_path = self.pic_manager.get_path_for_pic_id(int(pic_id))
+                    if not pic_path:
+                        self.content_dict['issues'].writelines(
+                            f'NO PATH FOUND FOR:  {pic_id} with shortcode: {self.shortcode_string[:100]}++\n\n')
+                        pic_path = ''
                 else:
                     pic_path = ''
                     self.content_dict['issues'].writelines(
@@ -401,9 +409,12 @@ class ReplaceShortcodes(object):
                     caption = ''
             else:
                 caption = ''
-            res = '{{% singlepic image="' + pic_path + '" width="' + width + '" height="' + height + '" '
-            res += 'alignment="' + float_pic + '" caption="' + caption + '"'
-            res += ' %}}'
+            try:
+                res = '{{% singlepic image="' + pic_path + '" width="' + width + '" height="' + height + '" '
+                res += 'alignment="' + float_pic + '" caption="' + caption + '"'
+                res += ' %}}'
+            except Exception as e:
+                raise ValueError(f"Error: {e} generating singlepic shortcode with content: {pic_content} ")
             # photo = {'url': pic_path,
             #          'width': width,
             #          'height': height,
@@ -466,7 +477,7 @@ import pandas as pd
 class HandlePictureImports(object):
     def __init__(self):
         self.run_jinja_template = None
-        self.web_source = WEBSITE_PATH + '/images'
+        self.web_source = WEBSITE_PATH + 'images'
         self.pics = pd.read_csv(''.join([os.getcwd(), '/files/pics.csv']),
                                 names=['pid', 'filename', 'alttext', 'imagedate', 'caption', 'path'])
         self.pics.path = self.pics.path.apply(lambda x: x.replace('/wp-content/gallery/', ''))

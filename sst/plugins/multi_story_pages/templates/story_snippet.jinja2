@@ -10,7 +10,7 @@
         {% if photos is defined %}
             <div class="sstByline"> Photos By: {{ photos }}</div>
         {% endif %}
-        <div class="col-sm-7">
+        <div class="{{ col_width }}">
             <div class="src-flex-item src-grow-3">
                 {{ content }}
             </div>

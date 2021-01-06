@@ -45,12 +45,7 @@ def process_story_snippet(entry, position, site, env):
         context['entry_type'] = entry['entry_type']
         context['content'] = snippet_content
         fp = entry['story']['file_path']
-        context['read_more'] = '/' + fp[:-3] + '/'
-        # output = site.template_system.render_template(
-        #     'story_snippet.jinja2',
-        #     None,
-        #     context
-        # )
+        context['read_more'] = '/' + fp[:-3] + '/'         # remove ".md"
         template = env.get_template('story_snippet.jinja2')
         output = template.render(**context)
         return output

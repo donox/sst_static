@@ -6,6 +6,7 @@ Roadside cleanup problem:
 Delete Fun with Friends and supporting pages
 Delete Gini's Garden story in Resident Profiles (not reachable on .com)
 Delete Wellness Tracking from Living at Sunnyside
+Resident-led activities missing 'adult coloring', etc
 
 
 Needs Help:
@@ -27,10 +28,10 @@ ToDo:
 (4) Proper display of "&amp;" (see New Residents)
 (5) Add "back to top" at bottom of page (shortcode?)
 (6) Breadcrumbs??
-(7) Photo headers on P1/P2?
+(7) --Photo headers on P1/P2?
 (8) Links pointing to .com vers (e.g, on P2)
 (9) Shortcode of inserting quotes
-(10) Resident-led activities missing 'adult coloring'
+(10)
 (11) Possible to remove '<' or '>' in slide show when it is not operative (end of run), add 'end' button
 (12) Veterans at Sunnyside not expanding MaxButtons
 (13) ngg_images not expanding image_ids, gallery_ids

@@ -8,21 +8,7 @@ import re
 import os
 import platform
 import datetime as dt
-
-OXLEY_PATH = '/home/don/PycharmProjects'
-OXLEY_PATH = '../../../'
-# IONOS_PATH = '~/homepages/11/d835068234/htdocs/'
-IONOS_PATH = '../../'
-PATTERSON_PATH = '../../..\\'
-
-os.environ['OPENBLAS_NUM_THREADS'] = '1'  # SOME ISSUE SPAWNING PROCESSES - Bad fix????
-
-node = platform.node()
-PARENT_PATH = IONOS_PATH
-if node == 'Descartes':
-    PARENT_PATH = OXLEY_PATH
-PROJECT_PATH = PARENT_PATH + 'sst_static/'
-WEBSITE_PATH = PARENT_PATH + 'sst_static/sst/'
+from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH
 
 # NEED TO INSTALL PYTHON SUPPORT FOR IPTC and pull caption, etc from pics
 # Also need to do it for gallery - Can we push WP data into pics in prepass?
@@ -61,7 +47,7 @@ class Singlepic(ShortcodePlugin):
             context['alignment'] = kwargs['align']
         context['image_path'] = ''
         if 'image in keys':
-            context['image_path'] = '/images/' + kwargs['image']
+            context['image_path'] = kwargs['image']
         context['caption'] = 'CAPTION'
         context['title'] = 'TITLE'
         context['photographer'] = 'Photographer'

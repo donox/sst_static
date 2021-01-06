@@ -37,6 +37,11 @@ class MultiPage(object):
         template_loader = FileSystemLoader(searchpath=search_path)
         self.template_environment = Environment(loader=template_loader)
 
+    def _make_column_width_classes(self, width):
+        sizes = ['col-', 'col-sm-', 'col-md-', 'col-lg-', 'col-xl-' ]
+        width_str = str(width)
+        return ' '.join([x + width_str for x in sizes])
+
     def set_site(self, site):
         self.site = site
         # self.inject_dependency('render_posts', 'render_galleries')
@@ -53,10 +58,16 @@ class MultiPage(object):
                     if row['Row']:
                         for colnum, col in enumerate(row['Row']):
                             col_context = {}
+                            col_keys = list(col.keys())
                             row_context['cols'].append(col_context)
                             col_context['entries'] = []
-                            if col['Column']:
-                                for entrynum, entry in enumerate(col['Column']):
+                            if 'Width' in col_keys:
+                                wd = col['Width']
+                            else:
+                                wd = 4
+                            col_context['col_width'] = self._make_column_width_classes(wd)
+                            if col['Entries']:
+                                for entrynum, entry in enumerate(col['Entries']):
                                     entry_context = {}
                                     col_context['entries'].append(entry_context)
                                     yield rownum, colnum, entrynum, entry_context, entry['Entry']
@@ -110,7 +121,7 @@ class MultiPage(object):
 
                 local_context['content'] = res
                 local_context['entry_type'] = entry_type
-                local_context['css_class'] = ''
+                local_context['width_class'] = ''
                 local_context['title_class'] = ''
                 local_context['caption_class'] = ''
                 local_context['image_class'] = ''

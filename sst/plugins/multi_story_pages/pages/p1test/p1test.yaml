@@ -2,21 +2,35 @@
 Rows:
   - Row:
       - Column:
-        - Entry: DelightOfAutumn
+        Width: 5
+        Entries:
+          - Entry: DelightOfAutumn
       - Column:
- #       - Entry: BaardCars
-        - Entry: SunnybearAdventures
+        Width: 4
+        Entries:
+#         - Entry: BaardCars
+          - Entry: SunnybearAdventures
       - Column:
-        - Entry: TownHall
+        Width: 3
+        Entries:
+          - Entry: TownHall
   - Row:
       - Column:
- #       - Entry: Challenging2020
+        Width: 3
+        Entries:
+#         - Entry: Challenging2020
       - Column:
-   #     - Entry: SunnysideDoesItRight
+        Width: 3
+        Entries:
+#         - Entry: SunnysideDoesItRight
   - Row:
       - Column:
- #       - Entry: TownHall
-  #      - Entry: NewResidents
+        Width: 3
+        Entries:
+#         - Entry: TownHall
+#         - Entry: NewResidents
       - Column:
-  #      - Entry: ChristmasSale
+        Width: 3
+        Entries:
+#         - Entry: ChristmasSale
 ...
