@@ -35,7 +35,7 @@ ToDo:
 (11) Possible to remove '<' or '>' in slide show when it is not operative (end of run), add 'end' button
 (12) Veterans at Sunnyside not expanding MaxButtons
 (13) ngg_images not expanding image_ids, gallery_ids
-(14) child_pages not expanding on cool-stories-index/sunnybear-adventures
+(14) --child_pages not expanding on cool-stories-index/sunnybear-adventures
 (15) Change copyright to Sunnyside-Times team? (also in Living at Sunnyside)
 (16) Download button fails in Libraries
 (17) News from Around the World not working (remove - no rss feeds)
@@ -49,5 +49,6 @@ ToDo:
 (24) Why is 'Source' shown on SsT menu bar
 (25) Create shortcode for single images.  Do we want thumbnails?
 (26) Layout of thumbnails generating invalid style attribute (see an output/xxx/index.html) with := in it.
+(27) --Create procedure for importing from WP backup as first of operating procedures.
 
 

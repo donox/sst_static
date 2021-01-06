@@ -11,7 +11,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 import shutil
 from functools import reduce
 from operator import mul
-from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH
+from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH, SITE_URL
 
 import platform
 
@@ -45,6 +45,8 @@ class ReplaceShortcodes(object):
     sc_re = re.compile(r'\[([a-zA-Z0-9\-_]+) *(\w+=[^\]]+)* *\]', re.I)
     sc_re_arg = re.compile(r'( *([A-Za-z0-9_]+) *= *"(.*)")+?')
     sc_re_arg_no_quotes = re.compile(r'( *([A-Za-z0-9_]+) *= *(.[a-zA-Z_]+))+?')
+
+    sc_re_hard_links = re.compile(r'href=\"(.*?sunnyside-times.com/)')
 
     def __init__(self):
         self.web_source = WEBSITE_PATH + 'pages'
@@ -124,6 +126,7 @@ class ReplaceShortcodes(object):
                     with open(file_path, 'r', encoding='utf-8') as infile:
                         self.shortcode_string = ''.join(infile.readlines())
                         current_string = self.parse_a_tag(self.shortcode_string)
+                        current_string = self.parse_hard_links(current_string)
                         result_string = ''
                         while current_string:
                             res = self.parse_shortcode(current_string)
@@ -437,7 +440,7 @@ class ReplaceShortcodes(object):
         a_tags = re.finditer(re_finder, file_string)
         string_start = 0
         string_res = ''
-        tag_count = 0
+        tag_count = -1
         for a_count, a_tag in enumerate(a_tags):
             tag_count = a_count
             begin_a_ref = a_tag.start(2)
@@ -457,7 +460,26 @@ class ReplaceShortcodes(object):
                 pass
             string_res += a_ref
             string_start = end_a_ref
-        if tag_count:
+        if tag_count != -1:
+            string_res += file_string[string_start:]
+            return string_res
+        return file_string
+    
+    def parse_hard_links(self, file_string):
+        """Look for instances of hard links with sunnyside-times.com and fix"""
+        hard_links = re.finditer(ReplaceShortcodes.sc_re_hard_links, file_string)
+        site = '/'.join(SITE_URL.split('/')[:-2])  + '/pages/'     # remove site name from URL as it is supplied on reference
+        string_start = 0
+        string_res = ''
+        tag_count = -1
+        for link_count, hard_link in enumerate(hard_links):
+            tag_count = link_count
+            begin_a_ref = hard_link.start(1)
+            string_res += file_string[string_start:begin_a_ref]
+            end_a_ref = hard_link.end(1)
+            string_res += site
+            string_start = end_a_ref
+        if tag_count != -1:
             string_res += file_string[string_start:]
             return string_res
         return file_string
