@@ -4,6 +4,10 @@ Rows:
       - Column:
         Width: 5
         Entries:
+          - Entry:
+              entry_type: quote
+              Quote: I Wanna Go Home
+              Author: Tom Dooley
           - Entry: DelightOfAutumn
       - Column:
         Width: 4

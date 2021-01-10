@@ -51,6 +51,7 @@ class ReplaceShortcodes(object):
     def __init__(self):
         self.web_source = WEBSITE_PATH + 'pages'
         self.content_dict = {}
+        self.current_file = ''
         self.unhandled = []
         self.button = False
         self.shortcode_string = ''
@@ -117,13 +118,15 @@ class ReplaceShortcodes(object):
                         foo = 3
                 if fname not in self.dead_files and \
                         fname.endswith('.md') and \
-                        not fname.startswith('veteran') and \
-                        not dirpath.endswith('-notes'):  # and \
+                        not dirpath.endswith('-notes'):  #   and \
+                        # fname != 'the-daffodil-man.md':
+                        # not fname.startswith('veteran') and \
                         # fname == 'page-one.md':
                     file_path = os.path.join(dirpath, fname)
                     self.content_dict['file_path'] = file_path
                     # print(file_path)
                     with open(file_path, 'r', encoding='utf-8') as infile:
+                        self.current_file = file_path
                         self.shortcode_string = ''.join(infile.readlines())
                         current_string = self.parse_a_tag(self.shortcode_string)
                         current_string = self.parse_hard_links(current_string)
@@ -254,6 +257,7 @@ class ReplaceShortcodes(object):
         elif 'image_ids' in all_keys:
             key = 'image_ids'
         else:
+            # raise ValueError(f"Slideshow with non-standard id list in file: {self.current_file}")
             return 'PARSE FAILURE'
             # raise ValueError(f'No id key found in {show_content}')
         try:
@@ -412,9 +416,15 @@ class ReplaceShortcodes(object):
                     caption = ''
             else:
                 caption = ''
+            if 'title' in pic_content.keys():
+                title = pic_content['title']
+                if caption == 'nan':
+                    title = ''
+            else:
+                title = ''
             try:
                 res = '{{% singlepic image="' + pic_path + '" width="' + width + '" height="' + height + '" '
-                res += 'alignment="' + float_pic + '" caption="' + caption + '"'
+                res += 'alignment="' + float_pic + '" caption="' + caption + '"' + ' title="' + title + '"'
                 res += ' %}}'
             except Exception as e:
                 raise ValueError(f"Error: {e} generating singlepic shortcode with content: {pic_content} ")
@@ -452,9 +462,9 @@ class ReplaceShortcodes(object):
                 has_download -= 1
                 a_ref = a_ref[has_download:]
                 source_file_parts = self.content_dict['file_path'].split('/')
-                nbr_double_period = len(source_file_parts)
+                nbr_double_period = len(source_file_parts)      # determine nesting in wp url
                 # lead = '../' * nbr_double_period
-                lead = ''
+                lead = ''         # THIS DOES  NOTHING - is there a missing case???
                 a_ref = '/' + lead + a_ref
             else:
                 pass

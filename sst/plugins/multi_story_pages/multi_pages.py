@@ -11,7 +11,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 # Note that import depends on sys.path and is not properly visible in pycharm
 from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH
 from plugins.multi_story_pages.process_story_snippet import process_story_snippet
-
+from plugins.multi_story_pages.process_quote import process_quote
 
 def run_jinja_template(template, context):
     try:
@@ -72,7 +72,7 @@ class MultiPage(object):
                                     col_context['entries'].append(entry_context)
                                     yield rownum, colnum, entrynum, entry_context, entry['Entry']
             except Exception as e:
-                raise ValueError(f"Invalid key in yaml page {fname}")
+                raise ValueError(f"Invalid key in yaml page {yaml_page}")
 
     def _yaml_entry(self, yaml_page):
         with open(yaml_page, 'r', encoding='utf-8') as fd:
@@ -97,21 +97,26 @@ class MultiPage(object):
     def handler(self, *args, **kwargs):
         for page_dir, special_page in self.get_pages_to_build_yaml():
             context = {}            # Each file is a separately built page
-            for row_num, col_num, entry_num, local_context, entry in  self._yaml_iterator(special_page, context):
+            for row_num, col_num, entry_num, local_context, entry in self._yaml_iterator(special_page, context):
                 position = (row_num, col_num, entry_num)
-                entry_descriptor = entry + '.yaml'
-                entry_page_path = page_dir + '/' + entry_descriptor
-                if not os.path.exists(entry_page_path):
-                    raise ValueError(f"File missing in {page_dir} for file: {entry_descriptor}")
-                try:
-                    entry = self._yaml_entry(entry_page_path)['Entry']
+                if type(entry) == str:
+                    entry_descriptor = entry + '.yaml'
+                    entry_page_path = page_dir + '/' + entry_descriptor
+                    if not os.path.exists(entry_page_path):
+                        raise ValueError(f"File missing in {page_dir} for file: {entry_descriptor}")
+                    try:
+                        entry = self._yaml_entry(entry_page_path)['Entry']
+                        entry_type = entry['entry_type']
+                    except Exception as e:
+                        raise ValueError(f"Invalid YAML - missing expected key in {entry.keys()}")
+                elif type(entry) == dict:
                     entry_type = entry['entry_type']
-                except Exception as e:
-                    raise ValueError(f"Invalid YAML - missing expected key in {entry.keys()}")
+                else:
+                    raise ValueError(f'Unrecognized Entry Type: {type(entry)} for entry: {entry}')
                 if entry_type == 'story_snippet':
                     res = process_story_snippet(entry, position, self.site, self.template_environment)
-                elif entry_type == 'story_snippet':
-                    foo = 3
+                elif entry_type == 'quote':
+                    res = process_quote(entry, position, self.site, self.template_environment)
                 elif entry_type == 'story_snippet':
                     foo = 3
                 elif entry_type == 'simple_story':

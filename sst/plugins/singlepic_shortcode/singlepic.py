@@ -46,10 +46,14 @@ class Singlepic(ShortcodePlugin):
         if 'align' in keys:
             context['alignment'] = kwargs['align']
         context['image_path'] = ''
-        if 'image in keys':
+        if 'image'in keys:
             context['image_path'] = kwargs['image']
-        context['caption'] = 'CAPTION'
-        context['title'] = 'TITLE'
+        context['caption'] = ''         # TODO: Need to pick up title and caption
+        if 'caption' in keys:
+            context['caption'] = kwargs['caption']
+        context['title'] = ''
+        if 'title' in keys:
+            context['title'] = kwargs['title']
         context['photographer'] = 'Photographer'
         context['description'] = ''
         context['css_class'] = ''

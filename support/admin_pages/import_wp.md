@@ -80,6 +80,10 @@ corresponding folders (look at existing site for guidance).  Alternatively, copy
 existing site to the new site and check if there is anything possibly missed and find a copy (probably on 
 live site) and bring it over.
 
+Check for proper pdf downloading.  Probably check after site is generating correctly, but the issue seems to be
+a failure to capture all the pdfs (some are individual files in downloads folder - not directories) and
+possible naming inconsistencies (e.g, Best_Books... vs BestBooks... ).  Look in Libraries, Birthdays, veterans...
+
 ### Copy Plugins, Themes, Support, SC_Templates, Conf.py 
 1. Copy **plugins, themes, sc_templates, support folders** from the existing site to the new site. 
 2. Copy Conf.py and replace copy in existing site.  Scan **conf.py** for instances of existing site and replace
