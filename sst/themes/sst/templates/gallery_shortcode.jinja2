@@ -1,0 +1,31 @@
+{#  -*- coding: utf-8 -*- #}
+
+{% if photo_array %}
+    <div class="row" style=" display: block">
+        {% for image in photo_array %}
+            {# We show only the first thumbnail, though we need to create the others so that the gallery displays #}
+            {% if loop.first %}
+                <div >
+                    <div style="text-align: {{ alignment }}">
+                        <a href="{{ image['url'] }}" class="thumbnail image-reference"
+                           title="{{ image['title']|e }}">
+                            <img src="{{ image['url_thumb'] }}" alt="{{ image['title']|e }}"/>
+                        </a>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-xs-6 col-md-3" style="display:None">
+                    <a href="{{ image['url'] }}" class="thumbnail image-reference"
+                       title="{{ image['title']|e }}">
+                        <img src="{{ image['url_thumb'] }}" alt="{{ image['title']|e }}"/>
+                    </a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <ul class="thumbnails">
+        <li style="display:none">
+    </ul>
+{% endif %}
+

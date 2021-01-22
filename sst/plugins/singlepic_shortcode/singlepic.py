@@ -39,12 +39,14 @@ class Singlepic(ShortcodePlugin):
             context['width'] = kwargs['w']
         context['height'] = '300px'
         if 'height' in keys:
-            context['height']  = kwargs['height']
+            context['height'] = kwargs['height']
         if 'h' in keys:
-            context['height']  = kwargs['h']
+            context['height'] = kwargs['h']
         context['alignment'] = ''
         if 'align' in keys:
             context['alignment'] = kwargs['align']
+        elif 'alignment' in keys:
+            context['alignment'] = kwargs['alignment']
         context['image_path'] = ''
         if 'image'in keys:
             context['image_path'] = kwargs['image']
@@ -54,6 +56,7 @@ class Singlepic(ShortcodePlugin):
         context['title'] = ''
         if 'title' in keys:
             context['title'] = kwargs['title']
+        # TODO: Need to handle alignment
         context['photographer'] = 'Photographer'
         context['description'] = ''
         context['css_class'] = ''

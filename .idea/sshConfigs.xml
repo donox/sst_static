@@ -3,6 +3,7 @@
   <component name="SshConfigs">
     <configs>
       <sshConfig authType="PASSWORD" host="access835068234.webspace-data.io" id="600d892b-ff04-4edf-a5be-ba97f3f5b511" port="22" nameFormat="DESCRIPTIVE" username="u101519407" />
+      <sshConfig authType="PASSWORD" host="ssh.pythonanywhere.com" id="17e46a5b-5ec8-4320-b5c7-c7bab09efe0d" port="22" nameFormat="DESCRIPTIVE" username="doxley" />
     </configs>
   </component>
 </project>

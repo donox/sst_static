@@ -61,6 +61,7 @@ class ReplaceShortcodes(object):
         self.files = set()
         self.content_dict['bad'] = open(PROJECT_PATH + 'support/bad_urls.txt', 'w')
         self.content_dict['issues'] = open(PROJECT_PATH + 'support/issues.txt', 'w')
+        self.content_dict['fixes'] = open(PROJECT_PATH + 'support/fixes.txt', 'w')
         self.dead_files = set()
         with open(PROJECT_PATH + 'support/marked_bad_urls.txt', 'r') as bads:
             not_done = True
@@ -78,6 +79,7 @@ class ReplaceShortcodes(object):
             self.content_dict['bad'].close()
             self.content_dict['bad'] = None
         self.content_dict['issues'].close()
+        self.content_dict['fixes'].close()
 
     def _build_inverse(self):
         # file '.md' is the top level file.  Rename to page-one.md
@@ -242,7 +244,8 @@ class ReplaceShortcodes(object):
             return res
         elif sc == 'child-pages':
             # The real work occurs in the actual shortcode processor during build
-            # this allows for use by end users after transition to Nikola is complete
+            # handling it here allows for use by end users after transition to Nikola is complete
+            # while still processing child_link codes from WP
             res = '{{% build_links_to_children %}}'
             return res
         else:
@@ -262,6 +265,8 @@ class ReplaceShortcodes(object):
             # raise ValueError(f'No id key found in {show_content}')
         try:
             pic_ids = [int(x.strip()) for x in show_content[key].split(',') if x != '']
+            if len(pic_ids) == 1:
+                self.content_dict['fixes'].writelines(f"One pic slideshow: {self.current_file}\n")
         except ValueError as e:
             fn = self.content_dict['file_path']
             self.content_dict['issues'].writelines(f"Non-digit ID in list: {show_content[key]} for file: {fn}")

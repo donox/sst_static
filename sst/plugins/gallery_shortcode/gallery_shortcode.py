@@ -66,6 +66,12 @@ class Plugin(ShortcodePlugin):
             img['url_thumb'] = '/' + '/'.join([gallery_folder, img['url_thumb']])
         photo_array_json = json.dumps(photo_array)
         context = {}
+        keys = kwargs.keys()
+        context['alignment'] = ''
+        if 'align' in keys:
+            context['alignment'] = kwargs['align']
+        elif 'alignment' in keys:
+            context['alignment'] = kwargs['alignment']
         context['description'] = ''
         context['title'] = ''
         context['lang'] = LocaleBorg().current_lang
@@ -76,8 +82,9 @@ class Plugin(ShortcodePlugin):
         context['permalink'] = '#'
         context.update(self.site.GLOBAL_CONTEXT)
         context.update(kw)
+        # NOTE: this template is in themes/templates
         output = self.site.template_system.render_template(
-            'gallery_shortcode.tmpl',
+            'gallery_shortcode.jinja2',
             None,
             context
         )

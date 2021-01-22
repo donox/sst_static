@@ -60,7 +60,7 @@ This creates the pics.csv file used by convert_shortcodes to map WP picture ID's
 
 ### Import Images
 This will copy the image files from the backup to the images folder.
-1. Extract the files in the back labeled 'others'. Navigate to the gallery folder and copy the **contents** 
+1. Extract the files in the backup labeled 'others'. Navigate to the gallery folder and copy the **contents** 
    to the image folder (will take a while)
 2. Open folder 'others2'. Again, copy contents.  Duplicate folders will merge content.
 3. Repeat 'others3'

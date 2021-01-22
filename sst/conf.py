@@ -5,22 +5,26 @@ import os
 import sys
 import platform
 
-OXLEY_PATH = '/home/don/PycharmProjects'
-OXLEY_PATH = '../../../'
-# IONOS_PATH = '~/homepages/11/d835068234/htdocs/'
-IONOS_PATH = '../../'
+OXLEY_PATH = '/home/don/'
+# OXLEY_PATH = '../../../'
+
 PATTERSON_PATH = '../../../'
+# PythonAnywhere
+PA_PATH = '/home/doxley/'
 
 os.environ['OPENBLAS_NUM_THREADS'] = '1'  # SOME ISSUE SPAWNING PROCESSES - Bad fix????
 
 node = platform.node()
-PARENT_PATH = IONOS_PATH  # Is this still right after moving convert_shortcodes??????????????????????
 if node == 'Descartes':
     PARENT_PATH = OXLEY_PATH + 'PycharmProjects/'
 elif node == 'SAMsMachine':
-    PARENT_PATH = PATTERSON_PATH + 'PycharmProjects'
+    PARENT_PATH = PATTERSON_PATH + 'PycharmProjects/'
+elif 'live' in node:
+    PARENT_PATH = PA_PATH
+# PARENT_PATH = PA_PATH
 PROJECT_PATH = PARENT_PATH + 'sst_static/'
 WEBSITE_PATH = PARENT_PATH + 'sst_static/sst/'
+
 
 # ! Some settings can be different in different languages.
 # ! A comment stating (translatable) is used to denote those.
@@ -36,7 +40,10 @@ BLOG_AUTHOR = "Don Oxley, et al"  # (translatable)
 BLOG_TITLE = "Sunnyside Times"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link. Don't forget the protocol (http/https)!
-SITE_URL = "http://localhost:8000/sst/"
+if PARENT_PATH == PA_PATH:
+    SITE_URL = "https://www.sunnyside-times.org/"
+else:
+    SITE_URL = "http://localhost:8000/"
 # This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
 # BASE_URL = "http:localhost:8000/sst/"
@@ -91,16 +98,15 @@ TRANSLATIONS_PATTERN = '{path}.{lang}.{ext}'
 
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
-        ("/pages/p1test/index.html", "Test"),
-        ("/pages/page-one/index.html", "Page One"),
-        ("/pages/page-two/index.html", "Page Two"),
-        ("/pages/activities-index/index.html", "Activities"),
-        ("/pages/cool-stories-index/index.html", "Cool Stories"),
-        ("/pages/senior-life-information/index.html", "Living at Sunnyside"),
-        ("/pages/news-index/index.html", "News"),
-        ("/pages/administration-index/index.html", "Admin"),
-        ("/pages/quick-access/index.html", "Quick Links"),
-        ("/pages/help/index.html", "Help"),
+        ("/pages/p1test/", "Test"),
+        ("/pages/page-one/", "Page One"),
+        ("/pages/page-two/", "Page Two"),
+        ("/pages/activities-index/", "Activities"),
+        ("/pages/cool-stories-index/", "Cool Stories"),
+        ("/pages/senior-life-information/", "Living at Sunnyside"),
+        ("/pages/administration-index/", "Admin"),
+        ("/pages/quick-access/", "Quick Links"),
+        ("/pages/help/", "Help"),
     ),
 }
 
@@ -322,7 +328,7 @@ COMPILERS = {
 # Nikola supports logo display.  If you have one, you can put the URL here.
 # Final output is <img src="LOGO_URL" id="logo" alt="BLOG_TITLE">.
 # The URL may be relative to the site root.
-# LOGO_URL = ''
+#LOGO_URL = '/images/hickorycove/Duct-tape.jpg'
 
 # When linking posts to social media, Nikola provides Open Graph metadata
 # which is used to show a nice preview. This includes an image preview
@@ -645,7 +651,11 @@ GITHUB_COMMIT_SOURCE = True
 # Where the output site should be located
 # If you don't use an absolute path, it will be considered as relative
 # to the location of conf.py
-# OUTPUT_FOLDER = 'output'
+if PARENT_PATH == PA_PATH:
+    OUTPUT_FOLDER = 'output'
+else:
+    OUTPUT_FOLDER = 'output'
+
 
 # where the "cache" of partial generated content should be located
 # default: 'cache'
@@ -1112,7 +1122,7 @@ MARKDOWN_EXTENSIONS = ['markdown.extensions.fenced_code', 'markdown.extensions.c
 # """
 
 # Show link to source for the posts?
-# SHOW_SOURCELINK = True
+SHOW_SOURCELINK = False
 # Copy the source files for your pages?
 # Setting it to False implies SHOW_SOURCELINK = False
 # COPY_SOURCES = True
@@ -1123,7 +1133,7 @@ MARKDOWN_EXTENSIONS = ['markdown.extensions.fenced_code', 'markdown.extensions.c
 
 # By default, Nikola generates RSS files for the website and for tags, and
 # links to it.  Set this to False to disable everything RSS-related.
-# GENERATE_RSS = True
+GENERATE_RSS = False
 
 # By default, Nikola does not generates Atom files for indexes and links to
 # them. Generate Atom for tags by setting TAG_PAGES_ARE_INDEXES to True.

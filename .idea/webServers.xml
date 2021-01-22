@@ -9,6 +9,13 @@
           </advancedOptions>
         </fileTransfer>
       </webServer>
+      <webServer id="4462cc6c-c2a4-45c1-8de5-e0ae7fb659f8" name="ssh.pythonanywhere.com">
+        <fileTransfer accessType="SFTP" host="ssh.pythonanywhere.com" port="22" sshConfigId="17e46a5b-5ec8-4320-b5c7-c7bab09efe0d" sshConfig="doxley@ssh.pythonanywhere.com:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>

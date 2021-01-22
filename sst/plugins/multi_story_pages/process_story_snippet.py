@@ -44,6 +44,7 @@ def process_story_snippet(entry, position, site, env):
         context['image_class'] = 'unused'
         context['entry_type'] = entry['entry_type']
         context['content'] = snippet_content
+        # TODO: Handle file_source_path
         fp = entry['story']['file_path']
         context['read_more'] = '/' + fp[:-3] + '/'         # remove ".md"
         template = env.get_template('story_snippet.jinja2')
