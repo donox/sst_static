@@ -3,7 +3,8 @@
 {% if photo_array %}
     <div class="row" style=" display: block">
         {% for image in photo_array %}
-            {# We show only the first thumbnail, though we need to create the others so that the gallery displays #}
+            {# We show only the first thumbnail, though we need to create the others so that the gallery displays
+                We need to display titles captions, etc. #}
             {% if loop.first %}
                 <div >
                     <div style="text-align: {{ alignment }}">
