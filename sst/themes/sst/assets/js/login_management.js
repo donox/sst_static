@@ -1,5 +1,3 @@
-$=jQuery;
-
 function setCookie(cname, cvalue, exdays) {
   var d = new Date();
   d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -25,7 +23,7 @@ function getCookie(cname) {
 function checkCookie() {
   var user = getCookie("username");
   if (user != "") {
-    alert("Welcome again " + user);
+    // alert("Welcome again " + user);
   } else {
     user = prompt("Please enter your name:", "");
     if (user != "" && user != null) {
@@ -38,11 +36,7 @@ function checkCookie() {
    THIS IS NOT USED EXCEPT WHEN EDITING IN DEVELOPER TOOLS
  */
 function vrfy(){
-  var loc = window.location.pathname;
+  let loc = window.location.href;
   alert(loc);
 }
 
-$(document).ready(function (){
-  alert("Got Here");
-    checkCookie();
-});

@@ -24,3 +24,24 @@
     {{ math.math_scripts_ifpost(post) }}
 </article>
 {% endblock %}
+
+{% block extra_js %}
+<script>
+$=jQuery;
+
+$(document).ready(function (){
+    checkCookie();
+    $(".nav-item a").each(function(){
+      let loc = window.location.href;
+      if (loc.endsWith('/')) return;
+      let goal_loc = $(this).attr("href");
+      let link = document.createElement("a");
+      link.href = loc + '/' + goal_loc;
+      link.setAttribute("class", $(this).attr("class"));
+      link.textContent = $(this).text();
+      $(this).replaceWith(link);
+;
+    })
+});
+</script>
+{% endblock %}

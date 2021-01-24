@@ -8,7 +8,7 @@ import re
 import os
 import platform
 import datetime as dt
-from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH
+from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH, SITE_URL
 
 
 class BuildLinksToChildFiles(ShortcodePlugin):
@@ -56,6 +56,7 @@ class BuildLinksToChildFiles(ShortcodePlugin):
             for file in filenames:
                 if file.endswith('.meta'):
                     meta_data = self.read_meta_file(dirpath + '/' + file)
+                    meta_data['abs_slug'] = SITE_URL + dir_to_process + '/' + meta_data['slug'] + '/'
                     files_to_display.append(meta_data)
             # for dirname in dirnames:
             #     dir_file_data = files_to_display[dirname]
