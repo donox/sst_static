@@ -61,7 +61,7 @@ The singlepic shortcode is used to insert a single image into a page.  It closel
 shortcode.  The major difference is that images are identified by pathname rather than id.
 
 > **\{\{% singlepic image="/images/Art/artists/WhilliamsHalloween.jpg" width="400px" height="300px" 
-> alignment="center" caption="" title="" %\}\}**
+> alignment="center" caption="" title="" has_borders="False" %\}\}**
 
 #####**"image="**
 Image provides the path to the image. All images are stored in a local directory named
@@ -78,5 +78,10 @@ default will generally be left as set by the browser when placing the image.
 Title and caption are optional, but the intent will be to take them from the photo
 metadata if they exist.  A title or caption specified in the shortcode will supercede
 something contained in the photo.
+
+####**"has_borders="**
+By default, individual pictures have a border.  For cartoons and similar fill-ins, it often
+looks better without a border.  In that case, adding the has_borders attribute and setting it
+to "False" (or "No") will remove the border.  
 
 
