@@ -1,0 +1,9 @@
+[Theme]
+engine = jinja
+parent = bootstrap4-jinja
+license = MIT
+author = Sunnyside Tech Team
+
+[Nikola]
+bootswatch = True
+

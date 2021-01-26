@@ -1,0 +1,40 @@
+---
+Rows:
+  - Row:
+      - Column:
+        Width: 5
+        Entries:
+          - Entry:
+              entry_type: quote
+              Quote: I Wanna Go Home
+              Author: Tom Dooley
+          - Entry: DelightOfAutumn
+      - Column:
+        Width: 4
+        Entries:
+#         - Entry: BaardCars
+          - Entry: SunnybearAdventures
+      - Column:
+        Width: 3
+        Entries:
+          - Entry: TownHall
+  - Row:
+      - Column:
+        Width: 3
+        Entries:
+#         - Entry: Challenging2020
+      - Column:
+        Width: 3
+        Entries:
+#         - Entry: SunnysideDoesItRight
+  - Row:
+      - Column:
+        Width: 3
+        Entries:
+#         - Entry: TownHall
+#         - Entry: NewResidents
+      - Column:
+        Width: 3
+        Entries:
+#         - Entry: ChristmasSale
+...

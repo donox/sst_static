@@ -1,0 +1,12 @@
+[Core]
+Name = convert_shortcodes
+Module = convert_shortcodes
+
+[Nikola]
+#Compiler = wordpress
+PluginCategory = Command
+
+[Documentation]
+Author = Don Oxley
+Version = 0.5
+Description = Convert  shortcodes

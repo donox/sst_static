@@ -1,0 +1,11 @@
+---
+Entry:
+  entry_type: story_snippet
+  story:
+    title: Resident Council Monthly "Town Hall" Meetings
+    byline: Tom Harkins
+    file_path: pages/activities-index/resident-council-and-committees/resident-council-3/resident-council-begins-monthly-town-hall-meetings.md
+    make_snippet: true    # Construct snippet from actual file (not provided by editors)
+    starting_text: On September 29, 2020 the Executive  # First few words of Text in Snippet
+    stopping_text: The Resident Council Executive Committee consists of           # First words NOT in Snippet
+...
