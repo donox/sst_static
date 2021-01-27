@@ -32,11 +32,18 @@ $=jQuery;
 
 $(document).ready(function (){
     checkCookie();
+    /*  This whole rigamarole fixes a problem where PythonAnywhere seems to
+        handle relative URL's differently (incorrectly?? for some cases). It
+        is removing one level of the computer absolute URL too many if
+        window.loc.href does not end with a '/'.
+        Loading the same pages on different servers works without this fix.
+     */
     $("a").each(function(){
       let loc = window.location.href;
       let loc_split = loc.split('/');
-      if (loc.endsWith('/')) return;
+      if (loc.endsWith('/')) return null;
       let goal_loc = $(this).attr("href");
+      if (goal_loc.startsWith('http')) return;
       let goal_split = goal_loc.split('/');
       while (true) {
           if (goal_split && goal_split[0] == '..'){

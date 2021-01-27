@@ -1,9 +1,12 @@
 [Theme]
 engine = jinja
 parent = bootstrap4-jinja
+author = The Nikola Contributors
+author_url = https://getnikola.com/
 license = MIT
-author = Sunnyside Tech Team
+based_on = Bootstrap 4 <http://getbootstrap.com/>
+tags = bootstrap
 
-[Nikola]
-bootswatch = True
+[Family]
+family = bootstrap4
 
