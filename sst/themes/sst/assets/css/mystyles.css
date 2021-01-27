@@ -102,3 +102,38 @@ p {
   padding-right: 1rem;
 }
 
+ /* Layout to support flex-box */
+ .src-flex-container {
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  flex-wrap: wrap;
+  align-items:center;
+ }
+.src-flex-container-rev {    /* reverses direction of child elements */
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  -webkit-flex-direction: row-reverse; /* Safari */
+  flex-direction:         row-reverse;
+  align-items:center;
+}
+.src-flex-container-col {    /* arranges elements in a column */
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  -webkit-flex-direction: column; /* Safari */
+  flex-direction:         column;
+  align-items:center;
+}
+.src-flex-item {
+  -webkit-flex-grow: 1; /* Safari */
+  flex-grow: 1;
+  flex-basis:100px;
+  padding:8px;
+}
+.src-grow-2 {
+  -webkit-flex-grow: 2; /* Safari */
+  flex-grow: 2;
+}
+.src-grow-3 {
+  -webkit-flex-grow: 3; /* Safari */
+  flex-grow: 3;
+}
