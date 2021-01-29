@@ -26,7 +26,6 @@ elif 'live' in node:
 PROJECT_PATH = PARENT_PATH + 'sst_static/'
 WEBSITE_PATH = PARENT_PATH + 'sst_static/sst/'
 
-
 # ! Some settings can be different in different languages.
 # ! A comment stating (translatable) is used to denote those.
 # ! There are two ways to specify a translatable setting:
@@ -108,6 +107,15 @@ NAVIGATION_LINKS = {
         ("/pages/administration-index/", "Admin"),
         ("/pages/quick-access/", "Quick Links"),
         ("/pages/help/", "Help"),
+        (
+            (
+                ("/pages/admin/shortcodes/", "Shortcodes"),
+                ("/pages/admin/multi_story_pages/", "Multi-Story Pages"),
+                ("/pages/admin/commands/", "System Commands"),
+                ("/pages/admin/import_wp/", "WP Import"),
+            ),
+            'Sys_Admin'
+        )
     ),
 }
 
@@ -329,7 +337,7 @@ COMPILERS = {
 # Nikola supports logo display.  If you have one, you can put the URL here.
 # Final output is <img src="LOGO_URL" id="logo" alt="BLOG_TITLE">.
 # The URL may be relative to the site root.
-#LOGO_URL = '/images/hickorycove/Duct-tape.jpg'
+# LOGO_URL = '/images/hickorycove/Duct-tape.jpg'
 
 # When linking posts to social media, Nikola provides Open Graph metadata
 # which is used to show a nice preview. This includes an image preview
@@ -656,7 +664,6 @@ if PARENT_PATH == PA_PATH:
     OUTPUT_FOLDER = 'output'
 else:
     OUTPUT_FOLDER = 'output'
-
 
 # where the "cache" of partial generated content should be located
 # default: 'cache'

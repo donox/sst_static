@@ -1,0 +1,37 @@
+---
+Rows:
+  - Row:
+      - Column:
+        Width: 12
+        Entries:
+         - Entry: NewRecyclingSpot
+  - Row:
+      - Column:
+        Width: 12
+        Entries:
+         - Entry: EilandLibrary
+  - Row:
+      - Column:
+        Width: 8
+        Entries:
+          - Entry:  JMUSpring
+      - Column:
+        Width: 4
+        Entries:
+          - Entry: Trivia
+  - Row:
+      - Column:
+        Width: 4
+        Entries:
+          - Entry: TownHall
+#          - Entry: NewResidents         # Need to make constructor
+      - Column:
+        Width: 8
+        Entries:
+  #         - Entry: TipaAndTales       # need to create master
+  - Row:
+      - Column:
+        Width: 12
+        Entries:
+      #         - Entry: In Memoriam    # need to create master or constructor
+...
