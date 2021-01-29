@@ -32,6 +32,8 @@ class ProcessMigrations(object):
                             save_dir = line[line_pos+6:].strip()
                             if save_dir[0] == '/':
                                 save_dir = save_dir[1:]     # remove any leading slash
+                            if save_dir[-1] == '/':
+                                save_dir = save_dir[:-1]     # remove any trailing slash
                             break
                     if save_dir:
                         out_md = WEBSITE_PATH + save_dir + '/' + ml_filename
