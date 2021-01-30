@@ -54,7 +54,7 @@ class ProcessMigrations(object):
                                 print(f'Error moving file: {file[:-5]} with error: {e}')
                     if file.endswith('yaml'):
                         in_fl = dirpath + '/' + file
-                        out_fl = WEBSITE_PATH + 'pages/admin/' + file
+                        out_fl = WEBSITE_PATH + 'files/admin/' + file
                         shutil.copyfile(in_fl, out_fl)
 
 converter = ProcessMigrations()

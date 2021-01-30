@@ -12,6 +12,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH
 from plugins.multi_story_pages.process_story_snippet import process_story_snippet
 from plugins.multi_story_pages.process_quote import process_quote
+from plugins.multi_story_pages.process_html_snippet import process_html_snippet
 
 
 def run_jinja_template(template, context):
@@ -163,8 +164,9 @@ class MultiPage(object):
                             res = process_quote(entry, position, self.site, self.template_environment)
                         elif entry_type == 'story_snippet':
                             foo = 3
-                        elif entry_type == 'simple_story':
-                            res = 'Simple story to be processed'
+                        elif entry_type == 'html_snippet':
+                            res = process_html_snippet(entry, position, self.site, self.template_environment,
+                                                        self.reporter)
                         else:
                             err_string = "Unrecognized YAML entry_type: {entry_type}"
                             self.reporter.record_err(err_string)
@@ -184,7 +186,7 @@ class MultiPage(object):
                         self.reporter.record_err(err_string)
             template = self.template_environment.get_template('page_layout.jinja2')
             output = template.render(**context)
-            output = [x + '\n' for x in output.split('\n') if x.strip()]
+            output = [x + '\n' for x in output.split('\n') if x.strip()]        # kill excess blank space
             page_slug = page_dir.split('/pages/')[-1]
             # ToDo: page_loc does not deal with non-top-level pages
             page_loc = WEBSITE_PATH + 'pages/' + page_slug
