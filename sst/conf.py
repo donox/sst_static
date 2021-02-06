@@ -6,8 +6,6 @@ import sys
 import platform
 
 OXLEY_PATH = '/home/don/'
-OXLEY_PATH = '/home/don/'
-# OXLEY_PATH = '../../../'
 
 PATTERSON_PATH = '../../../'
 # PythonAnywhere

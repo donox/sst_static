@@ -5,10 +5,8 @@ from nikola.plugin_categories import ShortcodePlugin
 import importlib
 from nikola.utils import get_logger, STDERR_HANDLER
 import re
-import os
-import platform
-import datetime as dt
-from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH
+from PIL import Image
+from conf import WEBSITE_PATH
 
 # NEED TO INSTALL PYTHON SUPPORT FOR IPTC and pull caption, etc from pics
 # Also need to do it for gallery - Can we push WP data into pics in prepass?
@@ -33,25 +31,59 @@ class Singlepic(ShortcodePlugin):
         keys = kwargs.keys()
         post = kwargs['post']
 
+        context['image_path'] = ''
+        image_width = image_height = None
+        if 'image' in keys:
+            image_path = kwargs['image']
+            context['image_path'] = image_path
+            tmp = WEBSITE_PATH + image_path[1:]
+            im = Image.open(tmp)
+            image_width, image_height = im.size
+
         context['has_borders'] = True
         if 'has_borders' in keys and (kwargs['has_borders'] == 'False' or kwargs['has_borders'] == 'No'):
             context['has_borders'] = False
 
-        context['width'] = '300px'
+        possible_width = image_width
         if 'width' in keys:
-            context['width'] = kwargs['width']
+            possible_width = kwargs['width']
         if 'w' in keys:
-            context['width'] = kwargs['w']
+            possible_width = kwargs['w']
+        if type(possible_width) is str:
+            if possible_width.endswith('px'):
+                possible_width = possible_width[:-2]
+            possible_width = int(possible_width)
+        if not possible_width:
+            possible_width = 300
+
+        possible_height = image_height
+        if 'height' in keys:
+            possible_height = kwargs['height']
+        if 'w' in keys:
+            possible_height = kwargs['w']
+        if type(possible_height) is str:
+            if possible_height.endswith('px'):
+                possible_height = possible_height[:-2]
+            possible_height = int(possible_height)
+        if not possible_height:
+            possible_height = 300
+
+        image_aspect_ratio = image_height/image_width
+        possible_aspect_ratio = possible_height/possible_width
+        if image_aspect_ratio > possible_aspect_ratio:
+            possible_width = image_width * possible_width / image_height
+        elif image_aspect_ratio < possible_aspect_ratio:
+            possible_height = image_height * possible_height / image_width
+        else:
+            pass
+        context['width'] = possible_width
+        context['height'] = possible_height
+
         try:
             context['border_width'] = str(int(context['width'][:-2]) + 20) + 'px'  # size of left/right borders
         except:
             context['border_width'] = context['width']
 
-        context['height'] = '300px'
-        if 'height' in keys:
-            context['height'] = kwargs['height']
-        if 'h' in keys:
-            context['height'] = kwargs['h']
         try:
             context['border_height'] = str(int(context['height'][:-2]) + 20) + 'px'  # size of top/bottom borders
         except:
@@ -60,7 +92,7 @@ class Singlepic(ShortcodePlugin):
         context['alignment'] = 'float-none'
         if 'align' in keys:
             direct = kwargs['align']
-        elif 'alignment in keys':
+        elif 'alignment' in keys:
             direct = kwargs['alignment']
         else:
             direct = None
@@ -71,9 +103,7 @@ class Singlepic(ShortcodePlugin):
         else:
             context['alignment'] = 'float-none'
 
-        context['image_path'] = ''
-        if 'image'in keys:
-            context['image_path'] = kwargs['image']
+
 
         context['caption'] = ''         # TODO: Need to pick up title and caption
         if 'caption' in keys:
