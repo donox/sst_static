@@ -53,7 +53,8 @@ class Singlepic(ShortcodePlugin):
         if type(possible_width) is str:
             if possible_width.endswith('px'):
                 possible_width = possible_width[:-2]
-            possible_width = int(possible_width)
+            if possible_width.isnumeric():
+                possible_width = int(possible_width)        # defend against improper width spec
         if not possible_width:
             possible_width = 300
 
@@ -65,7 +66,8 @@ class Singlepic(ShortcodePlugin):
         if type(possible_height) is str:
             if possible_height.endswith('px'):
                 possible_height = possible_height[:-2]
-            possible_height = int(possible_height)
+            if possible_height.isnumeric():
+                possible_height = int(possible_height)
         if not possible_height:
             possible_height = 300
         if image_width and image_height:            # Defending against missing image_path
