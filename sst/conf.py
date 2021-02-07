@@ -11,6 +11,9 @@ PATTERSON_PATH = '../../../'
 # PythonAnywhere
 PA_PATH = '/home/doxley/'
 
+# Tech Zone
+TZ_PATH = '/home/oxley/'
+
 os.environ['OPENBLAS_NUM_THREADS'] = '1'  # SOME ISSUE SPAWNING PROCESSES - Bad fix????
 
 node = platform.node()
@@ -20,6 +23,10 @@ elif node == 'rudi':
     PARENT_PATH = PATTERSON_PATH + 'PycharmProjects/'
 elif 'live' in node:
     PARENT_PATH = PA_PATH
+elif node == 'techzone':
+    PARENT_PATH = TZ_PATH + 'PycharmProjects/'
+
+
 # PARENT_PATH = PA_PATH
 PROJECT_PATH = PARENT_PATH + 'sst_static/'
 WEBSITE_PATH = PARENT_PATH + 'sst_static/sst/'
