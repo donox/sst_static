@@ -49,12 +49,12 @@ class BuildNewResidents(object):
 converter = BuildNewResidents()
 
 
-class MultiStoryPages(nikola.plugin_categories.Command):
+class NewResidents(nikola.plugin_categories.Command):
     name = 'new_residents'
     logger = None
 
     def __init__(self):
-        super(MultiStoryPages, self).__init__()
+        super(NewResidents, self).__init__()
 
     def _execute(self, command, args):
         self.logger = get_logger('ping', STDERR_HANDLER)

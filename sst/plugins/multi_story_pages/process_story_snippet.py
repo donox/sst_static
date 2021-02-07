@@ -22,6 +22,10 @@ def process_story_snippet(entry, position, site, env, err_reporter):
             story_content = ' '.join(fd.readlines())
             fd.close()
         keys = story.keys()
+        if 'make_snippet' not in keys:
+            err_string = f'No make_snippet directive - required directive for a story-snippet.'
+            err_reporter.record_err(err_string)
+            return
         if story['make_snippet']:
             # Need to create snippet that is not specified in the file itself
             # There may be an entry indicating the beginning of text NOT included in the snippet.

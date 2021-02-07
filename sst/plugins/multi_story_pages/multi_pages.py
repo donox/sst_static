@@ -147,7 +147,10 @@ class MultiPage(object):
                         entry = self._yaml_entry(entry_page_path)['Entry']
                         entry_type = entry['entry_type']
                     except Exception as e:
-                        err_string = f"Invalid YAML - missing expected key in {entry.keys()}"
+                        if entry_type.find('-') != -1:
+                            err_string = f"Do you have a '-' instead of a '_' in the entry {entry}?"
+                        else:
+                            err_string = f"Invalid YAML - missing expected key in {entry.keys()}"
                         self.reporter.record_err(err_string)
                 elif type(entry) == dict:
                     entry_type = entry['entry_type']

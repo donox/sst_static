@@ -35,10 +35,11 @@ class Singlepic(ShortcodePlugin):
         image_width = image_height = None
         if 'image' in keys:
             image_path = kwargs['image']
-            context['image_path'] = image_path
-            tmp = WEBSITE_PATH + image_path[1:]
-            im = Image.open(tmp)
-            image_width, image_height = im.size
+            if image_path:                      # Defending against missing image_path
+                context['image_path'] = image_path
+                tmp = WEBSITE_PATH + image_path[1:]
+                im = Image.open(tmp)
+                image_width, image_height = im.size
 
         context['has_borders'] = True
         if 'has_borders' in keys and (kwargs['has_borders'] == 'False' or kwargs['has_borders'] == 'No'):
@@ -67,15 +68,15 @@ class Singlepic(ShortcodePlugin):
             possible_height = int(possible_height)
         if not possible_height:
             possible_height = 300
-
-        image_aspect_ratio = image_height/image_width
-        possible_aspect_ratio = possible_height/possible_width
-        if image_aspect_ratio > possible_aspect_ratio:
-            possible_width = image_width * possible_width / image_height
-        elif image_aspect_ratio < possible_aspect_ratio:
-            possible_height = image_height * possible_height / image_width
-        else:
-            pass
+        if image_width and image_height:            # Defending against missing image_path
+            image_aspect_ratio = image_height/image_width
+            possible_aspect_ratio = possible_height/possible_width
+            if image_aspect_ratio > possible_aspect_ratio:
+                possible_width = image_width * possible_width / image_height
+            elif image_aspect_ratio < possible_aspect_ratio:
+                possible_height = image_height * possible_height / image_width
+            else:
+                pass
         context['width'] = possible_width
         context['height'] = possible_height
 
