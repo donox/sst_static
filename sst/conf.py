@@ -24,7 +24,7 @@ elif node == 'rudi':
 elif 'live' in node:
     PARENT_PATH = PA_PATH
 elif node == 'techzone':
-    PARENT_PATH = TZ_PATH
+    PARENT_PATH = TZ_PATH + 'PycharmProjects/'
 
 
 # PARENT_PATH = PA_PATH
