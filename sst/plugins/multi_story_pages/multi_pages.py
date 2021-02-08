@@ -4,7 +4,7 @@ import nikola.plugin_categories
 from nikola.utils import get_logger, STDERR_HANDLER
 import re
 import os
-import json
+import shutil
 import datetime as dt
 from ruamel.yaml import YAML
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -31,12 +31,16 @@ def run_jinja_template(template, context):
 class Reporter(object):
     def __init__(self, out_file):
         self.outfile = out_file
-        self.out_fd = open(PROJECT_PATH + 'support/' + out_file, 'w')
+        self.outpath = PROJECT_PATH + 'support/' + out_file
+        self.out_fd = open(self.outpath, 'w')
         self.directory = None
         self.file_in_process = None
 
     def close(self):
         self.out_fd.close()
+        # This is bizarrely needed as the next nikola command clears self.outpath
+        shutil.copyfile(self.outpath, self.outpath[:-4] + '_backup.txt')
+
 
     def set_directory(self, directory):
         self.directory = directory

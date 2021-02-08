@@ -216,6 +216,7 @@ POSTS = (
     ("posts/*.md", "posts", "post.tmpl"),
     ("posts/*.txt", "posts", "post.tmpl"),
     ("posts/*.html", "posts", "post.tmpl"),
+    ("posts/*.docx", "pages", "page.tmpl"),
     ("posts/*.wp", "posts", "post.tmpl"),
 )
 PAGES = (
@@ -223,6 +224,7 @@ PAGES = (
     ("pages/*.md", "pages", "page.tmpl"),
     ("pages/*.txt", "pages", "page.tmpl"),
     ("pages/*.html", "pages", "page.tmpl"),
+    ("pages/*.docx", "pages", "page.tmpl"),
     ("stories/*.wp", "stories", "story.tmpl"),
 )
 
@@ -289,24 +291,25 @@ TIMEZONE = "America/New_York"
 # 'markdown' is Markdown
 # 'html' assumes the file is HTML and just copies it
 COMPILERS = {
-    "rest": ['.rst', '.txt'],
+    # "rest": ['.rst', '.txt'],
     "markdown": ['.md', '.mdown', '.markdown'],
-    "textile": ['.textile'],
-    "txt2tags": ['.t2t'],
-    "bbcode": ['.bb'],
-    "wiki": ['.wiki'],
-    "ipynb": ['.ipynb'],
+    # "textile": ['.textile'],
+    # "txt2tags": ['.t2t'],
+    # "bbcode": ['.bb'],
+    # "wiki": ['.wiki'],
+    # "ipynb": ['.ipynb'],
     "html": ['.html', '.htm'],
     # PHP files are rendered the usual way (i.e. with the full templates).
     # The resulting files have .php extensions, making it possible to run
     # them without reconfiguring your server to recognize them.
-    "php": ['.php'],
+    # "php": ['.php'],
     "wordpress": ['.wp'],
     # Pandoc detects the input from the source filename
     # but is disabled by default as it would conflict
     # with many of the others.
-    # "pandoc": ['.rst', '.md', '.txt'],
+    "pandoc": ['.docx', '.rst'],
 }
+MARKDOWN_EXTENSIONS = ['markdown.extensions.extra', 'markdown.extensions.meta', 'markdown.extensions.tables']
 
 # Enable reST directives that insert the contents of external files such
 # as "include" and "raw." This maps directly to the docutils file_insertion_enabled

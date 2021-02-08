@@ -35,7 +35,7 @@ of the files in that folder is described under the **Multi-Story Pages** menu it
 The make_user_logins command generates the **user_logins.js** file in the **themes/sst/assets/js/** 
 directory that is used to verify users.  The generated file is a javascript object containing an
 encrypted list of usernames and user passwords.  The source for the file is the **users.csv** file
-in the **supoprt** directory.
+in the **support** directory.
 
 Entries in the users.csv file are the user name possibly followed by a password.  If no password
 is provided, the default **Sunny** password is used. 
