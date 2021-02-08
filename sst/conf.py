@@ -12,7 +12,7 @@ PATTERSON_PATH = '../../../'
 PA_PATH = '/home/doxley/'
 
 # Tech Zone
-TZ_PATH = '/home/oxley/'
+TZ_PATH = '/home/sunnysidetimes/'
 
 os.environ['OPENBLAS_NUM_THREADS'] = '1'  # SOME ISSUE SPAWNING PROCESSES - Bad fix????
 
@@ -24,7 +24,7 @@ elif node == 'rudi':
 elif 'live' in node:
     PARENT_PATH = PA_PATH
 elif node == 'techzone':
-    PARENT_PATH = TZ_PATH + 'PycharmProjects/'
+    PARENT_PATH = TZ_PATH
 
 
 # PARENT_PATH = PA_PATH
