@@ -7,6 +7,20 @@ as an additional argument).  It is highly desired that we improve the system to 
 convenience and understandability for the users.
 
 ##Custom Shortcodes
+###Add Meta Information Shortcode
+This shortcode adds things like titles and bylines.  We can easily add other such info as the need is 
+identified.  
+
+> **\{\{% meta_info info_type="title" %\}\}2 horse powered 2 tone Cadillac!\{\{%/ meta_info %\}\}**
+
+The **info_type** specifies what is to be added.  The choices are:
+
+1. **title** which adds a title to the story/page.
+2. **byline** which adds the list of writers to the page.  The result is a line starting with **Written by:** 
+   followed by the content in the shortcode.  There is no need to put "By" or the like.
+3. **photo** which adds the photo credits to the page.  Similar to byline, except that it applies to
+    the photographers.
+
 ###Child_Links Shortcode
 This shortcode generates a list of links to the child pages of a page (such as Stories by Residents).  Pages 
 are listed in time sorted order with most recent first. The name of the file (generally also name of the article) 
