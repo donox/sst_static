@@ -9,6 +9,7 @@ import os
 from urllib.parse import urlparse
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import shutil
+import csv
 from functools import reduce
 from operator import mul
 from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH, SITE_URL
@@ -73,6 +74,7 @@ class ReplaceShortcodes(object):
                 elif ln.startswith('DONE'):
                     not_done = False
         self._build_inverse()
+        self.title_dict = self._make_title_dict(WEBSITE_PATH + 'files/posts.csv')
 
     def close(self):
         if self.content_dict['bad']:
@@ -80,6 +82,14 @@ class ReplaceShortcodes(object):
             self.content_dict['bad'] = None
         self.content_dict['issues'].close()
         self.content_dict['fixes'].close()
+
+    def _make_title_dict(self, file_path):
+        with open(file_path, 'r') as csv_in:
+            csv_reader = csv.reader(csv_in)
+            result_dict = dict()
+            for name, title in csv_reader:
+                result_dict[name] = title
+        return result_dict
 
     def _build_inverse(self):
         # file '.md' is the top level file.  Rename to page-one.md
@@ -120,10 +130,11 @@ class ReplaceShortcodes(object):
                         foo = 3
                 if fname not in self.dead_files and \
                         fname.endswith('.md') and \
-                        not dirpath.endswith('-notes'):  #   and \
+                        not dirpath.endswith('-notes'):   #  and \
+                        # fname == 'free-detailing-of-cars.md':
                         # fname != 'the-daffodil-man.md':
                         # not fname.startswith('veteran') and \
-                        # fname == 'page-one.md':
+
                     file_path = os.path.join(dirpath, fname)
                     self.content_dict['file_path'] = file_path
                     # print(file_path)
@@ -132,6 +143,7 @@ class ReplaceShortcodes(object):
                         self.shortcode_string = ''.join(infile.readlines())
                         current_string = self.parse_a_tag(self.shortcode_string)
                         current_string = self.parse_hard_links(current_string)
+                        current_string = self.set_meta_content(current_string, fname)  # title, byline, remove extra tags
                         result_string = ''
                         while current_string:
                             res = self.parse_shortcode(current_string)
@@ -498,6 +510,53 @@ class ReplaceShortcodes(object):
             string_res += file_string[string_start:]
             return string_res
         return file_string
+
+    def set_meta_content(self, file_string, filename):
+        """Set meta content and remove unneeded tags.
+
+        (1) Many pages are enclosed in an <html><body><p> tag set that can be removed.
+        (2) We add a meta_content shortcode with the page title.
+        (3) We check for an identifiable byline, remove it and add meta_content shortcode.
+        (4) If the next sentence includes the word photo, we suspect it is a photo byline and
+            add a meta_content shortcode.
+        """
+        meta_shortcodes = ''
+        if file_string.startswith('<html><body>'):
+            str_start = 12
+            if file_string.endswith('</body></html>'):     # If not the end, just leave the content as is (still works).
+                str_end = -14
+                file_string = file_string[str_start:str_end]
+        if file_string.startswith('<p>'):       # Need to defend against multiple <p> elements
+            tmp = file_string.find('</p>')
+            if tmp == len(file_string)-4:
+                file_string = file_string[3:-4]
+            else:
+                file_string = file_string[3:tmp] + file_string[tmp+4:]
+        try:
+            title = self.title_dict[filename[:-3]]
+            meta_shortcodes += '{{% meta_info info_type="title" %}}' + title + '{{% /meta_info %}}\n'
+        except KeyError:
+            pass
+        # At this point, we should have the byline as the first entry in the file.
+        if file_string.startswith('by') or file_string.startswith('By'):
+            first_line = file_string.find('\n')
+            byline = file_string[2:first_line].lstrip()
+            meta_shortcodes += '{{% meta_info info_type="byline" %}}' + byline + '{{% /meta_info %}}\n'
+            file_string = file_string[first_line+1:]
+            # look for something containing 'photo' and maybe something containing '(B/b)y' and take what follows
+            second_line = file_string.find('\n')
+            if second_line != -1:
+                photo_byline = file_string[:second_line]
+                tmp = photo_byline.find('photo')
+                if tmp != -1:
+                    photo_byline = photo_byline[tmp:]
+                    tmp = max(photo_byline.find('By'), photo_byline.find('by'))
+                    if tmp != -1:
+                        photo_byline = photo_byline[tmp:].lstrip()
+                    meta_shortcodes += '{{% meta_info info_type="photo" %}}' + photo_byline + '{{% /meta_info %}}\n'
+        file_string = meta_shortcodes + file_string
+        return file_string
+
 
 
 import pandas as pd

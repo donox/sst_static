@@ -49,13 +49,18 @@ This creates the pics.csv file used by convert_shortcodes to map WP picture ID's
 3. Right click on the schema in the database tree on the left and select **Run SQL Script**
 4. Navigate to your database file created above and select it.  It should read the database,
    and you can follow progress in the terminal.
-5. Create the query: **select t1.pid, t1.filename, t1.alttext, t1.imagedate, t1.description, 
+5. Create and run the query: **select t1.pid, t1.filename, t1.alttext, t1.imagedate, t1.description, 
    t2.path from wp_ngg_pictures as t1 
    join wp_ngg_gallery as t2 on t1.galleryid = t2.gid order by 
    t1.pid;** in the console and run it (ctrl-enter).
 6. Right-click on  the console (with the result of the previous query) and select **Export Data**.
 7. Navigate to the files directory of the new_site and select.  Select CSV (default) and no headers (default).
    Set the filename to pics.csv.
+8. Create and run the query **select post_name, post_title from wp_posts
+   where post_status="publish" and post_type='page';**   
+9. Right-click on  the console (with the result of the previous query) and select **Export Data**.
+10. Navigate to the files directory of the new_site and select.  Select CSV (default) and no headers (default).
+   Set the filename to posts.csv.
 
 ### Import Images
 This will copy the image files from the backup to the images folder.
