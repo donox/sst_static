@@ -83,12 +83,12 @@ class Singlepic(ShortcodePlugin):
         context['height'] = possible_height
 
         try:
-            context['border_width'] = str(int(context['width'][:-2]) + 20) + 'px'  # size of left/right borders
+            context['border_width'] = str(int(context['width']) + 20) + 'px'  # size of left/right borders
         except:
             context['border_width'] = context['width']
 
         try:
-            context['border_height'] = str(int(context['height'][:-2]) + 20) + 'px'  # size of top/bottom borders
+            context['border_height'] = str(int(context['height']) + 20) + 'px'  # size of top/bottom borders
         except:
             context['border_height'] = context['height']
 
