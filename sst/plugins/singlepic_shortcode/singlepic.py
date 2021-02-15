@@ -61,8 +61,8 @@ class Singlepic(ShortcodePlugin):
         possible_height = image_height
         if 'height' in keys:
             possible_height = kwargs['height']
-        if 'w' in keys:
-            possible_height = kwargs['w']
+        if 'h' in keys:
+            possible_height = kwargs['h']
         if type(possible_height) is str:
             if possible_height.endswith('px'):
                 possible_height = possible_height[:-2]
@@ -74,23 +74,23 @@ class Singlepic(ShortcodePlugin):
             image_aspect_ratio = image_height/image_width
             possible_aspect_ratio = possible_height/possible_width
             if image_aspect_ratio > possible_aspect_ratio:
-                possible_width = image_width * possible_width / image_height
+                possible_width = possible_height / image_aspect_ratio
             elif image_aspect_ratio < possible_aspect_ratio:
-                possible_height = image_height * possible_height / image_width
+                possible_height = possible_width * image_aspect_ratio
             else:
                 pass
-        context['width'] = possible_width
-        context['height'] = possible_height
+        context['width'] = int(possible_width)
+        context['height'] = int(possible_height)
 
         try:
-            context['border_width'] = str(int(context['width']) + 20) + 'px'  # size of left/right borders
+            context['border_width'] = str(context['width'] + 20) + 'px'  # size of left/right borders
         except:
-            context['border_width'] = context['width']
+            context['border_width'] = str(context['width']) + 'px'
 
         try:
-            context['border_height'] = str(int(context['height']) + 20) + 'px'  # size of top/bottom borders
+            context['border_height'] = str(context['height'] + 20) + 'px'  # size of top/bottom borders
         except:
-            context['border_height'] = context['height']
+            context['border_height'] = str(context['height']) + 'px'
 
         context['alignment'] = 'float-none'
         if 'align' in keys:
@@ -105,8 +105,6 @@ class Singlepic(ShortcodePlugin):
             context['alignment'] = 'float-left'
         else:
             context['alignment'] = 'float-none'
-
-
 
         context['caption'] = ''         # TODO: Need to pick up title and caption
         if 'caption' in keys:

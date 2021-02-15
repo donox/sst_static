@@ -3,13 +3,11 @@
 from nikola.plugin_categories import ShortcodePlugin
 # this is a reference to another package at the same level
 import importlib
-from nikola.utils import get_logger, STDERR_HANDLER
 import re
 import os
 import platform
 import datetime as dt
 from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH, SITE_URL
-
 
 class MetaInfo(ShortcodePlugin):
     # This inserts meta information such as a title or byline into the document.
