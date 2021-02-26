@@ -19,7 +19,7 @@ os.environ['OPENBLAS_NUM_THREADS'] = '1'  # SOME ISSUE SPAWNING PROCESSES - Bad 
 node = platform.node()
 if node == 'Descartes':
     PARENT_PATH = OXLEY_PATH + 'PycharmProjects/'
-elif node == 'rudi':
+elif node == 'rudi2':
     PARENT_PATH = PATTERSON_PATH + 'PycharmProjects/'
 elif 'live' in node:
     PARENT_PATH = PA_PATH
