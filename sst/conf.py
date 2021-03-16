@@ -1234,7 +1234,9 @@ GENERATE_RSS = False
 EXTRA_HEAD_DATA = '<script src="' + SITE_URL + '../assets/js/login_management.js"></script>'
 EXTRA_HEAD_DATA += '<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>'
 EXTRA_HEAD_DATA += '<script src="' + SITE_URL + '../assets/js/user_logins.js"></script>'
+EXTRA_HEAD_DATA += '<script src="' + SITE_URL + '../assets/js/sst_javascript.js" defer></script>'
 EXTRA_HEAD_DATA += '<link href="' + SITE_URL + '../assets/css/mystyles.css" rel="stylesheet" type="text/css">'
+
 
 # Google Analytics or whatever else you use. Added to the bottom of <body>
 # in the default template (base.tmpl).

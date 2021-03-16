@@ -18,7 +18,7 @@
     {% for resident_dict in residents %}
         {% set resident = resident_dict.Resident %}
         {% if resident.Name %}
-            <tr class="newRes {{ current }}" style="display: {% if current %}table-row{% else %}none{% endif %};">
+            <tr class="newRes {{ current }}">
                 {% set current = '' %}
                 <td><strong>{{ resident.Name }}</strong>,
                     {{ resident.Address }},

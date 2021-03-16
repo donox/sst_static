@@ -1,24 +1,28 @@
-$=jQuery;
+$ = jQuery;
 $(document).ready(function () {
 
-    function run_slideshow(){
-        $('.slideshow').each(function(){
-        let slides = $(this).children();
-        let rotate = $(this).attr('interval') * 100;
-        let ndx = 0;
-        let rotator = function(){
-            $.each(slides, function(a,b){
-                    $(this).hide();
-                });
-                $(slides[ndx]).show();
-                ndx++;
-                if (ndx >= slides.length){ndx=0};
-                setTimeout(rotator, rotate);
-            };
-         rotator();
-        }
+    function run_slideshow() {
+        $('.slideshow').each(function () {
+                let slides = $(this).children();
+                let rotate = $(this).attr('interval') * 100;
+                let ndx = 0;
+                let rotator = function () {
+                    $.each(slides, function (a, b) {
+                        $(this).hide();
+                    });
+                    $(slides[ndx]).show();
+                    ndx++;
+                    if (ndx >= slides.length) {
+                        ndx = 0
+                    }
+                    ;
+                    setTimeout(rotator, rotate);
+                };
+                rotator();
+            }
         )
     }
+
     run_slideshow();
 });
 
@@ -36,7 +40,7 @@ var button_state = (function () {
     let categories = [event_state, wellness_state, religion_state, club_state, community_state];
     let category_names = ['Event', 'Wellness', 'Religion', 'Resident Clubs', 'Community'];
     let category_classes = ['fc-evt_button-button', 'fc-well_button-button', 'fc-rel_button-button',
-    'fc-club_button-button', 'fc-community_button-button'];
+        'fc-club_button-button', 'fc-community_button-button'];
     return {
         initialize: function () {
             //Do anything needed here
@@ -51,19 +55,21 @@ var button_state = (function () {
                 }
             }
         },
-        color_buttons: function(info){
+        color_buttons: function (info) {
             for (let i = 0; i < audiences.length; i++) {
                 $('.' + audience_classes[i]).removeClass('sst-highlight');
                 if (audiences[i]) {
                     $('.' + audience_classes[i]).addClass('sst-highlight');
                 }
-            };
+            }
+            ;
             for (let i = 0; i < categories.length; i++) {
                 $('.' + category_classes[i]).removeClass('sst-highlight');
                 if (categories[i]) {
                     $('.' + category_classes[i]).addClass('sst-highlight');
                 }
-            };
+            }
+            ;
         },
         set_category: function (btn) {
             let res = '';
@@ -92,5 +98,36 @@ var button_state = (function () {
         },
     }
 })();
+
+/* Rotation based on Next/Prev button */
+    var $divs = $(".newRes"),
+        index = 0;
+    $("#prevRes").hide()
+
+    $("#nextRes").click(function () {
+        updateStatus(1);
+    });
+
+    $("#prevRes").click(function () {
+        updateStatus(-1);
+    });
+    $(".newRes").hide()
+
+function updateStatus(a) {
+
+    $divs.eq(index).removeClass("current").hide();
+    index += a;
+    $divs.eq(index).addClass("current").show();
+    $("#nextRes").toggle(index !== $divs.length - 1);
+    $("#prevRes").toggle(index !== 0);
+    var pos = index + 1;
+    $("#locRes").each(function () {
+        var txt = $(this).text().replace(/.*/, "Resident " + pos + " of " + $divs.length);
+        $(this).text(txt);
+    })
+}
+
+updateStatus(0);
+
 
 //# sourceURL=sst_javascript.js
