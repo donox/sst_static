@@ -47,6 +47,8 @@ BLOG_TITLE = "Sunnyside Times"  # (translatable)
 # in a prominent link. Don't forget the protocol (http/https)!
 if PARENT_PATH == PA_PATH:
     SITE_URL = "https://www.sunnyside-times.org/"
+elif PARENT_PATH == TZ_PATH:
+    SITE_URL = "https://172.20.12.155:8000/"
 else:
     SITE_URL = "http://localhost:8000/"
 # This is the URL where Nikola's output will be deployed.

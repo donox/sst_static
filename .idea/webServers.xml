@@ -16,6 +16,13 @@
           </advancedOptions>
         </fileTransfer>
       </webServer>
+      <webServer id="118df923-1488-4d40-86de-6293a374d854" name="sunnysidetimes@172.20.12.155">
+        <fileTransfer rootFolder="/home/sunnysidetimes/" accessType="SFTP" host="172.20.12.155" port="22" sshConfigId="96f2e5b0-7510-490b-894f-4cf7a95d62bd" sshConfig="sunnysidetimes@172.20.12.155:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>
