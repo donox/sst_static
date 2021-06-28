@@ -94,6 +94,7 @@ bg-dark
     {% endif %}
     {% block extra_js %}{% endblock %}
     <script>
+    {#  'div#content is normal selector for baguetteBox, div.slide-show enables multiple shows per page #}
     baguetteBox.run('div.slide-show', {
         ignoreClass: 'islink',
         captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
