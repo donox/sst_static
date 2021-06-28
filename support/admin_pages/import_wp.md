@@ -29,7 +29,7 @@ needed to convert the WP photo ID's to the pathnames needed in Nikola.  The 'oth
 contain all pictures and other files of possible interest.  
 
 Because of a bug in the database backup/restore, the backup file will not successfully import into 
-a MySQL DB without a minor fixup. The photo table are defined to have a default date (eg., required), 
+a MySQL DB without a minor fixup. The photo tables are defined to have a default date (eg., required), 
 the backup has a default date of '0000-00-00' which is invalid.  To successfully import the db
 file, you need to modify **all** occurrences of the date string. I generally set it to '2000-01-01' though 
 anything will do.  Because of the large size of the file, most editors have trouble loading/modifying it.

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="SshConfigs">
     <configs>
-      <sshConfig authType="PASSWORD" host="access835068234.webspace-data.io" id="600d892b-ff04-4edf-a5be-ba97f3f5b511" port="22" nameFormat="DESCRIPTIVE" username="u101519407" />
-      <sshConfig authType="PASSWORD" host="ssh.pythonanywhere.com" id="17e46a5b-5ec8-4320-b5c7-c7bab09efe0d" port="22" nameFormat="DESCRIPTIVE" username="doxley" />
-      <sshConfig authType="PASSWORD" host="172.20.12.155" id="96f2e5b0-7510-490b-894f-4cf7a95d62bd" port="22" nameFormat="DESCRIPTIVE" username="sunnysidetimes" />
+      <sshConfig authType="PASSWORD" connectionConfig="{&quot;serverAliveInterval&quot;:300}" host="access835068234.webspace-data.io" id="600d892b-ff04-4edf-a5be-ba97f3f5b511" port="22" nameFormat="DESCRIPTIVE" username="u101519407" />
+      <sshConfig authType="PASSWORD" connectionConfig="{&quot;serverAliveInterval&quot;:300}" host="ssh.pythonanywhere.com" id="17e46a5b-5ec8-4320-b5c7-c7bab09efe0d" port="22" nameFormat="DESCRIPTIVE" username="doxley" />
+      <sshConfig authType="PASSWORD" connectionConfig="{&quot;serverAliveInterval&quot;:300}" host="172.20.12.155" id="96f2e5b0-7510-490b-894f-4cf7a95d62bd" port="22" nameFormat="DESCRIPTIVE" username="sunnysidetimes" />
     </configs>
   </component>
 </project>
