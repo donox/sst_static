@@ -25,6 +25,9 @@ class WpDBFix(object):
         pass
 
     def fix_db(self):
+        """The Wordpress database dump creates an invalid load in that it provides a default date where
+        none existed in the source.  The default date is of the form '0000-00-00' which is itself invalid for
+        MySQL.  This routine simply finds and replaces all instances of that date format with a valid one."""
         with open(self.file_in, 'r') as fd_in:
             with open(self.file_out, 'w+') as fd_out:
                 count = 0

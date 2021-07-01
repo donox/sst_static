@@ -287,7 +287,11 @@ class ReplaceShortcodes(object):
         gallery_name = f'Gal{reduce(mul, pic_ids) % 100000}'
         gal_path = WEBSITE_PATH + 'galleries/' + gallery_name
         if os.path.exists(gal_path):
-            return  # Presume if it exists, that it is the same as we are creating
+            # Presume if it exists, that it is the same as we are creating
+            # This can occur, for example, when a slide show is used on a page and featured on a multi-page.
+            # We need to find the shortcode that was returned and return it again.
+            shortcode = '{{% gallery ' + gallery_name + ' %}}'
+            return shortcode
         else:
             os.mkdir(gal_path)
             x_pic_ids = list(set(pic_ids))  # Eliminate duplicates in list (may lose order)
