@@ -16,6 +16,10 @@
     text-align: right;
 }
 
+.slide-show {
+    margin: 30px;
+    margin-bottom: 0px;
+}
 .author {
     font-weight: bold;
     font-size: small;
