@@ -16,6 +16,13 @@ residents.  It uses a definition file **new_residents.yaml** that is maintained 
 I can be updated manually or, preferably, automatically updated (software yet to be written) from
 an available primary source. 
 
+####nikola build_photo_usage
+This command supports maintenance of the site, particularly by the content managers.  When run, it adds
+two menu items to the Sys_Admin menu.  **PHOTO USAGE DATA** provides some summary statistics such as the 
+number of pages and galleries, the number of unused pages and galleries, etc.  It also provides a list of
+urls for all unused pages and galleries.  **PAGES TO PHOTOS** is a searchable listing that maps each page
+to the photos and galleries that are referenced by it.  
+
 ####nikola pages_in_migration
 The pages in migration command is intended to support files that may be created or modified outside
 the pages directory.  This is primarily intended for pages that may need to be modified during the 
