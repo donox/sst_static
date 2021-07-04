@@ -1,7 +1,7 @@
 {#  -*- coding: utf-8 -*- #}
 
 {% if photo_array %}
-    <div class="slide-show float-left">
+    <div class="slide-show float-left">   {# Need to allow users to control direction of float #}
         <div class="row" style="display: inline-block">
             {% for image in photo_array %}
                 {# We show only the first thumbnail, though we need to create the others so that the gallery displays

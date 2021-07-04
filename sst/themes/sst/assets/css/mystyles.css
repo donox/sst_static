@@ -16,6 +16,7 @@
     text-align: right;
 }
 
+/* Set margins to make floats with surrounding text avoid overlaps */
 .slide-show {
     margin: 30px;
     margin-bottom: 0px;
