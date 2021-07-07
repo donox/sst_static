@@ -3,6 +3,7 @@
 
 ####Index
 [Story Snippet](#story-snippet)
+[Intra-Page Navigation](#intra-page)
 
 ####Introduction
 Pages containing more than one story are necessary for Page One and Page Two and any similar pages. In
@@ -35,7 +36,8 @@ note are the '---' at the beginning and the '...' at the end of the file.  Note 
 items at the same level and the use of the '- ' (does not occur in single entry file) to indicate a new
 item in a list. There are a few other special characters that may conflict with our use.  There is a 
 nice summary of the Gotchas [here](
-https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html#gotchas)
+https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html#gotchas).  In particular, a colon (:)
+followed by a space or newline must be enclosed in quotes (generally use double quotes).
 
 ####Story Snippets
 <a id="#story-snippet"/>
@@ -86,6 +88,25 @@ If the snippet is the entire content, use this to prevent the creation of a "Rea
 
 #####...
 End the file with "..." on the beginning of a line.
+
+####Intra-page Navigation
+<a id="#story-snippet"/>
+
+Intra-page navigation is supported for any entry.  There are two navigation elements available: **target** and
+**goback**.  Note, they are placed in an entry at the same level as **entry-type** and are independent of one 
+another.
+
+#####target
+**target** (note lower case) creates an *anchor* (HTML "a" tag) indicating the target to which the page may go.  All targets
+accumulate during the building of the page and then displayed at the top of the page allowing the reader to 
+click on any target and be taken directly to that story.
+
+The text following the **target** is displayed to the user.  The navigation goes to the beginning of the containing 
+**Entry**. 
+
+#####goback
+**goback** is placed after the defining entry, and the text is displayed to create the link.  The navigation takes 
+the user back to the top of the page.  
 
 [Back to Top](#top)
 
