@@ -1,6 +1,15 @@
 {#  -*- coding: utf-8 -*- #}
 {# context['rows'][0]['cols'][0]['entries'][0] #}
 <div class="container">
+    {% if preamble is defined %}
+        <ul>
+        {% for target in preamble %}
+            <li>
+            ** {{ target }} **
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
     {% for row in rows %}
         <div class="row">
             {% set cols = row.cols %}
@@ -44,6 +53,9 @@
                                     </div>
                                 </div>
                             {% endif %}
+                        {% if entry.goback is defined %}
+                            {{ entry.goback }}
+                        {% endif %}
                         </div>
                     {% endfor %}
                 </div>

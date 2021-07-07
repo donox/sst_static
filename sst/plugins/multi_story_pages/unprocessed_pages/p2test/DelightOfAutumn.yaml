@@ -1,6 +1,8 @@
 ---
 Entry:
   entry_type: story_snippet
+  target: Go To Get Ice Cream
+  return: Full of Ice Cream
   story:
     title: The Delights of Autumn
     byline: Colleen Cahill-Landis

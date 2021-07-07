@@ -72,6 +72,7 @@ class MultiPage(object):
         self.yaml_dir = WEBSITE_PATH + 'plugins/multi_story_pages/pages'
         self.content_dict = {}
         self.site = None
+        self.preamble = []    # Will contain list of tags at top of page to link to places within page
         search_path = WEBSITE_PATH + '/plugins/multi_story_pages/templates'
         template_loader = FileSystemLoader(searchpath=search_path)
         self.template_environment = Environment(loader=template_loader)
@@ -136,6 +137,39 @@ class MultiPage(object):
                     except Exception as e:
                         raise ValueError(f"Failure loading {dir_yaml} with error: {e}")
 
+    def _process_entry(self, entry_type, local_context, entry, position):
+        if "target" in entry.keys():
+            target = entry["target"]    # arbitrary string as content of anchor
+            target_address = "#target_" + str(len(self.preamble) + 1)
+            target_html = f'<a href="{target_address}"> {target} </a>'
+            self.preamble.append(target_html)
+        if entry_type == 'story_snippet':
+            res = process_story_snippet(entry, position, self.site, self.template_environment,
+                                        self.reporter)
+        elif entry_type == 'quote':
+            res = process_quote(entry, position, self.site, self.template_environment)
+        elif entry_type == 'story_snippet':
+            foo = 3
+        elif entry_type == 'html_snippet':
+            res = process_html_snippet(entry, position, self.site, self.template_environment,
+                                       self.reporter)
+        else:
+            err_string = "Unrecognized YAML entry_type: {entry_type}"
+            self.reporter.record_err(err_string)
+        if res:
+            local_context['content'] = res
+            local_context['entry_type'] = entry_type
+            local_context['width_class'] = ''
+            local_context['title_class'] = ''
+            local_context['caption_class'] = ''
+            local_context['image_class'] = ''
+            # post = kwargs['post']             # Not valid unless shortcode???
+            # folder = post.folder
+            # post_name = post.post_name
+            # source_path = post.source_path
+            if "goback" in entry.keys():
+                local_context['goback'] = f'<a href="#Top"><span style="color: #00ccff;">To: {entry["goback"]}</span></a>'
+
     def handler(self, *args, **kwargs):
         for page_dir, special_page in self.get_pages_to_build_yaml():
             context = {}  # Each file is a separately built page
@@ -164,33 +198,11 @@ class MultiPage(object):
                     entry_type = None
                 if entry_type:
                     try:
-                        if entry_type == 'story_snippet':
-                            res = process_story_snippet(entry, position, self.site, self.template_environment,
-                                                        self.reporter)
-                        elif entry_type == 'quote':
-                            res = process_quote(entry, position, self.site, self.template_environment)
-                        elif entry_type == 'story_snippet':
-                            foo = 3
-                        elif entry_type == 'html_snippet':
-                            res = process_html_snippet(entry, position, self.site, self.template_environment,
-                                                        self.reporter)
-                        else:
-                            err_string = "Unrecognized YAML entry_type: {entry_type}"
-                            self.reporter.record_err(err_string)
-                        if res:
-                            local_context['content'] = res
-                            local_context['entry_type'] = entry_type
-                            local_context['width_class'] = ''
-                            local_context['title_class'] = ''
-                            local_context['caption_class'] = ''
-                            local_context['image_class'] = ''
-                            # post = kwargs['post']             # Not valid unless shortcode???
-                            # folder = post.folder
-                            # post_name = post.post_name
-                            # source_path = post.source_path
+                        self._process_entry(entry_type, local_context, entry, position)
                     except Exception as e:
                         err_string = f'Error from element processing: {e}'
                         self.reporter.record_err(err_string)
+            context["preamble"] = self.preamble
             template = self.template_environment.get_template('page_layout.jinja2')
             output = template.render(**context)
             output = [x + '\n' for x in output.split('\n') if x.strip()]        # kill excess blank space
