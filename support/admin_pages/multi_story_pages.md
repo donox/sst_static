@@ -58,7 +58,7 @@ of the site is represented by the folder "pages/".  For example, the location of
 be "pages/page-one.md".  Note also the (generally) ".md" extension associated with the file.
 
 #####make_snippet
-This like is generally copied as is.  It is intended to handle the case (not yet implemented) where
+This is generally copied as is.  It is intended to handle the case (not yet implemented) where
 the editors provide  separate specific snippet not taken from the file itself.
 
 #####starting_text, stopping_text

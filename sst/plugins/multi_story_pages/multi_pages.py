@@ -41,7 +41,6 @@ class Reporter(object):
         # This is bizarrely needed as the next nikola command clears self.outpath
         shutil.copyfile(self.outpath, self.outpath[:-4] + '_backup.txt')
 
-
     def set_directory(self, directory):
         self.directory = directory
         tmp = directory.split('/')[-1]
