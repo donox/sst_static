@@ -3,7 +3,7 @@ This user guide lists the shortcodes available in Sunnyside Times for the creati
 shortcodes are custom creations in SsT and others are provided by the underlying system. 
 
 When using shortcodes, please be alert for issues/needs where there may be a more effective variant (such
-as an additional argument).  It is highly desired that we improve the system to create something of maximum
+as an additional argument).  We really want to improve the system to create something of maximum
 convenience and understandability for the users.
 
 ##Custom Shortcodes
@@ -21,15 +21,6 @@ The **info_type** specifies what is to be added.  The choices are:
 3. **photo** which adds the photo credits to the page.  Similar to byline, except that it applies to
     the photographers.
 
-###Child_Links Shortcode
-This shortcode generates a list of links to the child pages of a page (such as Stories by Residents).  Pages 
-are listed in time sorted order with most recent first. The name of the file (generally also name of the article) 
-is used as the link name.
-
-> **\{\{% build_links_to_children %\}\}**
-
-This shortcode currently has no arguments or other specifiers though developing them seems reasonable.
-
 ###Gallery Shortcode
 The gallery shortcode defines a "gallery" of pictures.  Galleries are currently a bit of a 
 work in progress. There are two parts to using a gallery:
@@ -42,7 +33,7 @@ Inserting the gallery simply requires inserting the gallery shortcode:
 >**\{\{% gallery gallery_name %\}\}**
 
 Creating the gallery requires the creation of a folder containing the actual images to be included in the 
-gallery and the creation of a specifier file named **metadata.yml** which tell how the gallery is to be rendered.
+gallery and the creation of a specifier file named **metadata.yml** which tells how the gallery is to be rendered.
 An example of a metadata.yml file:
 >---
 >name: IMG_0842.JPG  
@@ -97,5 +88,16 @@ something contained in the photo.
 By default, individual pictures have a border.  For cartoons and similar fill-ins, it often
 looks better without a border.  In that case, adding the has_borders attribute and setting it
 to "False" (or "No") will remove the border.  
+
+###Child_Links Shortcode
+This shortcode generates a list of links to the child pages of a page (such as Stories by Residents).  Pages 
+are listed in time sorted order with most recent first. The name of the file (generally also name of the article) 
+is used as the link name.
+
+> **\{\{% build_links_to_children %\}\}**
+
+This shortcode currently has no arguments or other specifiers though developing them seems reasonable.
+
+
 
 

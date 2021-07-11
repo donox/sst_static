@@ -26,7 +26,6 @@ elif 'live' in node:
 elif node == 'techzone':
     PARENT_PATH = TZ_PATH + 'PycharmProjects/'
 
-
 # PARENT_PATH = PA_PATH
 PROJECT_PATH = PARENT_PATH + 'sst_static/'
 WEBSITE_PATH = PARENT_PATH + 'sst_static/sst/'
@@ -115,6 +114,7 @@ NAVIGATION_LINKS = {
         ("/pages/help/", "Help"),
         (
             (
+                ("/pages/admin/word_based_input/", "Word-based Source Documents"),
                 ("/pages/admin/shortcodes/", "Shortcodes"),
                 ("/pages/admin/multi_story_pages/", "Multi-Story Pages"),
                 ("/pages/admin/commands/", "System Commands"),
@@ -1240,7 +1240,6 @@ EXTRA_HEAD_DATA += '<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-j
 EXTRA_HEAD_DATA += '<script src="' + SITE_URL + '../assets/js/user_logins.js"></script>'
 EXTRA_HEAD_DATA += '<script src="' + SITE_URL + '../assets/js/sst_javascript.js" defer></script>'
 EXTRA_HEAD_DATA += '<link href="' + SITE_URL + '../assets/css/mystyles.css" rel="stylesheet" type="text/css">'
-
 
 # Google Analytics or whatever else you use. Added to the bottom of <body>
 # in the default template (base.tmpl).

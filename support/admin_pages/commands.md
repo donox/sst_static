@@ -13,7 +13,7 @@ residents.  It uses a definition file **new_residents.yaml** that is maintained 
 **sst_static/support/work_files/** directory.  The result are two files: **new-residents.html** and 
 **new-residents.meta** in the pages directory of the site.
 
-I can be updated manually or, preferably, automatically updated (software yet to be written) from
+It can be updated manually or, preferably, automatically updated (software yet to be written) from
 an available primary source. 
 
 ####nikola build_photo_usage
@@ -22,6 +22,19 @@ two menu items to the Sys_Admin menu.  **PHOTO USAGE DATA** provides some summar
 number of pages and galleries, the number of unused pages and galleries, etc.  It also provides a list of
 urls for all unused pages and galleries.  **PAGES TO PHOTOS** is a searchable listing that maps each page
 to the photos and galleries that are referenced by it.  
+
+####nikola process_docx_files
+This command converts a docx file into a .md file.  There is a directory (docx_pages) under 
+support.  Docx files are placed in that directory along with a corresponding meta file.
+When this command is run, it creates a .md file also in that directory. A copy of that
+created file is placed in the appropriate directory in **pages** (the .md file is no
+longer needed).  In general, once a file has been processed, it may be removed as the 
+converted file in the pages directory will serve as the new master file. 
+
+The .meta file has a path attribute that gives the directory to which the .md file is
+to be copied (e.g., ".. path: /pages/cool-stories-index/resident-told-stories/" ).
+
+We assume that all photos and their appropriate locations are communicated separately. 
 
 ####nikola pages_in_migration
 The pages in migration command is intended to support files that may be created or modified outside
