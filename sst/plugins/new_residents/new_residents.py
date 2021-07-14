@@ -38,10 +38,12 @@ class BuildNewResidents(object):
         results = template.render(context).replace('\n','')
         meta_file = make_meta_file_content('New Residents', 'new-residents',
                                            description='New Resident links content for Page One')
-        with open(self.outfiles+'.meta', 'w') as meta_fd:
+        with open(self.outfiles+'page-one.meta', 'w') as meta_fd:
             meta_fd.writelines(meta_file)
             meta_fd.close()
         with open(self.outfiles+'.html', 'w') as html_fd:
+            html_fd.write("<span></span>")
+            html_fd.write('<a id="newRes"></a>')
             html_fd.writelines(results)
             html_fd.close()
 
