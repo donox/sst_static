@@ -23,7 +23,7 @@ Create the text content for the document.  Use headings (not title), bold, and i
 as desired. 
 
 Insert author, title, and photo information shortcodes at the appropriate location in 
-the document.  The easiest way to do this is copy/paste and existing shortcode
+the document.  The easiest way to do this is copy/paste an existing shortcode
 instance and modify it as necessary.  
 
 #####Insert Title, Byline, Photo Byline

@@ -35,10 +35,12 @@ class DocxProcessor(object):
                             res = subprocess.run(command, check=True)
                         except Exception as e:
                             print(f'Error running pandoc with command: {command} and error: {e}')
-                        # We need to remove occurrences of and escaped underline ("\_") in the md file
+                        # NOTE:  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        # Pandoc is escaping a number of characters including (_, $, ").  We need to correct
+                        # only for such characters occurring in the shortcode
                         with open(in_md, 'r') as created_md:
                             md_content = created_md.read()
-                            md_content = md_content.replace("\\_", "_")
+                            md_content = md_content.replace("\\_", "_").replace('\\"', '"').replace("\\$", "$")
                             created_md.close()
                         with open(in_md, 'w') as created_md:
                             created_md.write(md_content)

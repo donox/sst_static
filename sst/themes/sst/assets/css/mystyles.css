@@ -9,6 +9,10 @@
     border: #86cfda solid 10px;
     border-style: ridge;
 }
+.sst_byline{
+    font-weight: bolder;
+    font-size: smaller;
+}
 
 .sst_click_slideshow {
     font-weight: bold;
