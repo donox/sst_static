@@ -25,6 +25,8 @@ elif 'live' in node:
     PARENT_PATH = PA_PATH
 elif node == 'techzone':
     PARENT_PATH = TZ_PATH + 'PycharmProjects/'
+# In a Docker container, we have sst_static immediately in /home
+else PARENT_PATH = '/home/'
 
 # PARENT_PATH = PA_PATH
 PROJECT_PATH = PARENT_PATH + 'sst_static/'
