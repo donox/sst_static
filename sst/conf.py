@@ -26,7 +26,8 @@ elif 'live' in node:
 elif node == 'techzone':
     PARENT_PATH = TZ_PATH + 'PycharmProjects/'
 # In a Docker container, we have sst_static immediately in /home
-else PARENT_PATH = '/home/'
+else:
+    PARENT_PATH = '/home/'
 
 # PARENT_PATH = PA_PATH
 PROJECT_PATH = PARENT_PATH + 'sst_static/'
@@ -50,6 +51,8 @@ if PARENT_PATH == PA_PATH:
     SITE_URL = "https://www.sunnyside-times.org/"
 elif PARENT_PATH == TZ_PATH:
     SITE_URL = "https://172.20.12.155:8000/"
+elif PARENT_PATH == '/home':
+    SITE_URL = "https://localhost:80"
 else:
     SITE_URL = "http://localhost:8000/"
 # This is the URL where Nikola's output will be deployed.
