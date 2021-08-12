@@ -6,7 +6,7 @@ import re
 import os
 import shutil
 import datetime as dt
-from ruamel.yaml import YAML
+from ruyaml import YAML
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 # Note that import depends on sys.path and is not properly visible in pycharm
 from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH
