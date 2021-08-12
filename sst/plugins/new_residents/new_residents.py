@@ -4,7 +4,7 @@ from nikola.plugin_categories import ShortcodePlugin
 from nikola.utils import get_logger, STDERR_HANDLER
 import nikola.plugin_categories
 from conf import PROJECT_PATH, WEBSITE_PATH
-from ruamel.yaml import YAML
+from ruyaml import YAML
 from jinja2 import Environment, FileSystemLoader
 from utilities.meta_files import make_meta_file_content
 
