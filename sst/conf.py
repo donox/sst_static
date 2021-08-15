@@ -47,7 +47,9 @@ BLOG_AUTHOR = "The Sunnyside Times team"  # (translatable)
 BLOG_TITLE = "Sunnyside Times"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link. Don't forget the protocol (http/https)!
-if PARENT_PATH == PA_PATH:
+if os.path.abspath(os.getcwd()) == '/home/sst_static/sst':      # is this a docker container?
+    SITE_URL = "https://localhost:80"                           # need to determine where we are really running too!!
+elif PARENT_PATH == PA_PATH:
     SITE_URL = "https://www.sunnyside-times.org/"
 elif PARENT_PATH == TZ_PATH:
     SITE_URL = "https://172.20.12.155:8000/"
