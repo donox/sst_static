@@ -1,0 +1,11 @@
+[Core]
+Name = wp_fixups
+Module = wp_fixups
+
+[Nikola]
+PluginCategory = Command
+
+[Documentation]
+Author = Don Oxley
+Version = 0.5
+Description = Things to run to clean up WP import before beginning processing
