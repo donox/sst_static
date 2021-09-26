@@ -10,14 +10,14 @@ from utilities.meta_files import make_meta_file_content
 
 
 class BuildNewResidents(object):
-    # This shortcode creates a date sorted list of links to all files in a
-    # directory.  It is generally used in an index file (e.g., Stories by Residents)
-    # to automatically maintain a time ordered list of content pages.
+    # This nikola command creates an html table containing information on new Sunnyside residents
+    # suitable for including in a parent page as a story snippet.  The result output is a page
+    # ("new-residents.html") and meta file in the pages directory.
 
     def __init__(self):
         self.site = None
         self.source_data = PROJECT_PATH + 'support/work_files/new_residents.yaml'
-        self.outfiles = WEBSITE_PATH + 'pages/new-residents'           # add extension
+        self.outfiles = WEBSITE_PATH + 'pages/new-residents'
         self.profile_directory = '/pages/cool-stories-index/new-resident-profiles/'
         with open(self.source_data, 'r', encoding='utf-8') as fd:
             yml = YAML(typ='safe')
