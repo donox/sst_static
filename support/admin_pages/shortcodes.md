@@ -20,6 +20,19 @@ The **info_type** specifies what is to be added.  The choices are:
    followed by the content in the shortcode.  There is no need to put "By" or the like.
 3. **photo** which adds the photo credits to the page.  Similar to byline, except that it applies to
     the photographers.
+    
+###Add Disposition Shortcode
+This shortcode adds a note at the end of a story giving the date of publication.  (not implemented yet:) I will 
+also record a target removal date and specify the ultimate disposition of the story (discard, archive, ...). 
+
+> **\{\{% disposition post_date="date story published" remove_date="date to remove" on_removal="archive" %\}\}**
+
+**post_date** (optional) specifies a date (typically in mm/dd/yyyy format) that the story is published.  It will 
+be added to story in a small font as "published: date".
+**remove_date** (optional) specifies a date when the story will be taken down (--undecided if this is a report for 
+the admin to follow or is an automatic removal - probably the former).
+**on_removal** (optional) is one of **archive** or **discard** telling the system what to do with the story
+when it is removed.
 
 ###Gallery Shortcode
 The gallery shortcode defines a "gallery" of pictures.  Galleries are currently a bit of a 

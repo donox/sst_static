@@ -42,7 +42,6 @@ class WpFixups(object):
     # (2) The value of an argument is a single character string [a-zA-Z_]
     # -- the argument types may not be mixed.
 
-    # Note that the "^]]" below defends against a left bracket immediately following a shortcode
     sc_re = re.compile(r'\[([a-zA-Z0-9\-]+) *(\w+=[^\]]+)* *\]', re.I)
     sc_re_arg = re.compile(r'( *([A-Za-z0-9_]+) *= *"(.*)")+?')
     sc_re_arg_no_quotes = re.compile(r'( *([A-Za-z0-9_]+) *= *(.[a-zA-Z_]+))+?')
