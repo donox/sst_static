@@ -6,11 +6,11 @@ This page builds on that description but generally follows the procedure as desc
 In the Wordpress backend, go to **Tools/Export**.  It is a small issue, but because there may be updates 
 to the site between the time a backup is created (around 4:00pm daily) and the time the xml dump is taken, 
 it would be best to pull the xml dump around the same time as the backup if there is the possibility of 
-a change to the site in the intervening time.
-1. Use the "ALl" content button. 
+a change to the site in the intervening time. 
+1. Use the "All" content button. 
 2. In a terminal, navigate to the Nikola **project** (one level above the site where we normally run
    commands).
-3. run **nikola import-wordpress /home/don/Downloads/sstxml.xml (path to your download)
+3. run **nikola import_wordpress /home/don/Downloads/sstxml.xml (path to your download)
 4. At this point, you should be able to cd into the new_site and do a nikola build.
 5. Assuming the build was successful, you can run nikola serve and should be able to see the 
    imported site <http://localhost:8000/pages/page-two/> though it will not have pics or navbar, etc. 
@@ -39,11 +39,11 @@ makes the needed corrections.  To use, move the input file into the support dire
 **db.sql** (or modify the code with a different name).  From a terminal, **cd** back to the normal site (this
 is to get access to plugins).  Run **nikola wp_db_fix** which 
 will take several seconds and should report several changes. You can **cd** back to **new_site**. It will
-create a file **db2.sql** also in the support directory containing the modified file.  You may remove
+create a file **db_out.sql** also in the support directory containing the modified file.  You may remove
 them from the support directory when done.
 
 #### Use Datagrip to Import the WP DB File
-This creates the pics.csv file used by convert_shortcodes to map WP picture ID's to Nikola pathnames.
+This creates the pics.csv file used by convert_shortcodes to map WP picture ID's to Nikola pathnames. 
 1. Open DataGrip and create a new schema ('s3' in this example).
 2. In a console run the statement: **use s3;**
 3. Right click on the schema in the database tree on the left and select **Run SQL Script**
@@ -63,7 +63,7 @@ This creates the pics.csv file used by convert_shortcodes to map WP picture ID's
    Set the filename to posts.csv.
 
 ### Import Images
-This will copy the image files from the backup to the images folder.
+This will copy the image files from the backup to the images folder. 
 1. Extract the files in the backup labeled 'others'. Navigate to the gallery folder and copy the **contents** 
    to the image folder (will take a while)
 2. Open folder 'others2'. Again, copy contents.  Duplicate folders will merge content.
@@ -101,7 +101,7 @@ If there are any fixes in fixes.txt, run nikola  wp_fixups_from_issues.
 ### Convert Shortcodes and Build
 Run nikola convert_shortcodes.
 
-If all goes well, run nikola build.
+If all goes well, run nikola build (follow sequence given in **system commands**).
 
 Run nikola serve and use browser to see if site has imported properly.
 
