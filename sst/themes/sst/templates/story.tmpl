@@ -1,0 +1,65 @@
+{#  -*- coding: utf-8 -*- #}
+{% import 'post_helper.tmpl' as helper with context %}
+{% import 'post_header.tmpl' as pheader with context %}
+{#{% import 'comments_helper.tmpl' as comments with context %}#}
+{#{% import 'math_helper.tmpl' as math with context %}#}
+{% extends 'post.tmpl' %}
+{#{% extends 'page.tmpl' %}#}
+
+{% block content %}
+<article class="post-{{ post.meta('type') }} storypage" itemscope="itemscope" itemtype="http://schema.org/Article">
+    <header>
+ {#  Remove display of html_title - it reflects the filename - not sure where it comes from
+ {#      {{ pheader.html_title() }} #}
+ {#      {{ pheader.html_translations(post) }}  #}
+    </header>
+    <div class="e-content entry-content" itemprop="articleBody text">
+    {{ post.text() }}
+    </div>
+    {% if site_has_comments and enable_comments and not post.meta('nocomments') %}
+        <section class="comments">
+        <h2>{{ messages("Comments") }}</h2>
+        {{ comments.comment_form(post.permalink(absolute=True), post.title(), post.base_path) }}
+        </section>
+    {% endif %}
+    {{ math.math_scripts_ifpost(post) }}
+</article>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$=jQuery;
+
+$(document).ready(function (){
+    checkCookie();
+    /*  This whole rigamarole fixes a problem where PythonAnywhere seems to
+        handle relative URL's differently (incorrectly?? for some cases). It
+        is removing one level of the computer absolute URL too many if
+        window.loc.href does not end with a '/'.
+        Loading the same pages on different servers works without this fix.
+     */
+    $("a").each(function(){
+      let loc = window.location.href;
+      let loc_split = loc.split('/');
+      if (loc.endsWith('/')) return null;
+      let goal_loc = $(this).attr("href");
+      if (goal_loc.startsWith('http')) return;
+      let goal_split = goal_loc.split('/');
+      while (true) {
+          if (goal_split && goal_split[0] == '..'){
+            loc_split.pop();
+            goal_split.shift();
+          } else break;
+      }
+      loc = loc_split.join('/');
+      goal_loc = goal_split.join('/');
+      let link = document.createElement("a");
+      link.href = loc + '/' + goal_loc;
+      link.setAttribute("class", $(this).attr("class"));
+      link.textContent = $(this).text();
+      $(this).replaceWith(link);
+;
+    })
+});
+</script>
+{% endblock %}

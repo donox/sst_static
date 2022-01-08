@@ -1,0 +1,12 @@
+[Core]
+Name = make_user_logins
+Module = make_user_logins
+
+[Nikola]
+PluginCategory = Command
+
+[Documentation]
+Author = Don Oxley
+Version = 0.5
+Description = Build file of md5 of user names and logins
+

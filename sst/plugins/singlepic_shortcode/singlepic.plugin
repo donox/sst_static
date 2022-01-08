@@ -1,0 +1,12 @@
+[Core]
+Name = singlepic
+Module = singlepic
+
+[Nikola]
+PluginCategory = Shortcode
+
+[Documentation]
+Author = Don Oxley
+Version = 0.1
+Description = A shortcode to display a single image on a page
+

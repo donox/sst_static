@@ -1,0 +1,13 @@
+[Core]
+Name = disposition
+Module = disposition
+
+[Nikola]
+PluginCategory = ShortcodePlugin
+
+[Documentation]
+Author = Don Oxley
+Version = 0.1
+Description = A handler for the disposition shortcode.
+
+

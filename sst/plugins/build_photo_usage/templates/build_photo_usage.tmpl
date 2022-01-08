@@ -1,0 +1,86 @@
+{#  -*- coding: utf-8 -*- #}
+<h2>Map Pages to Photos They Reference</h2>
+
+
+<table>
+    <thead>
+    <th>Page</th>
+    <th>Folder</th>
+    <th>Gallery</th>
+    <th>Image</th>
+    </thead>
+    <tbody>
+    {% set page_done = {"last": "", "current": "", "gal_last": "", "gal_current":""} %}
+    {% for page in all_pages.items() %}
+        {{ page_done.update({"current": page[0]}) }}
+        {% set file = page[1]['file'] %}
+        {% set path = page[1]['path'] %}
+        {% set gal = page[1]['in_gallery'] %}
+        {% set galleries = page[1]['galleries'] %}
+        {% set images = page[1]['images'] %}
+        {%- if galleries|length or images|length -%}
+            {%- for image in images -%}
+                <tr class="adminPage">
+                    {%- if page_done.current != page_done.last -%}
+                        <td>
+                            {{ page[0] }}
+                            {{ page_done.update({"last": page_done.current }) }}
+                        </td>
+                    {% else %}
+                        <td>&nbsp;&nbsp;&nbsp;' '</td>
+                    {% endif %}
+                    <td>
+                        {{ path }}
+                    </td>
+                    <td>. . .</td>
+                    <td>
+                        {{ image }}
+                    </td>
+                </tr>
+            {% endfor %}
+            {%- for gallery in galleries -%}
+                {{ page_done.update({"gal_last": "", "gal_current": gallery }) }}
+                {% if all_galleries[gallery] is defined %}
+                {% for pic in all_galleries[gallery]['image'] %}
+                    <tr class="adminPage">
+                        <td>
+                            {{ page[0] }}
+                        </td>
+                        <td>
+                            {{ path }}
+                        </td>
+                        {%- if page_done.gal_current != page_done.gal_last -%}
+                        <td>
+                            {{ gallery }}
+                            {{ page_done.update({"gal_last": page_done.gal_current }) }}
+                        </td>
+                    {% else %}
+                        <td>&nbsp;&nbsp;&nbsp;' '</td>
+                    {% endif %}
+                        <td>
+                            {{ pic }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% else %}
+                    <tr class="adminPage">
+                        <td>
+                            {{ page[0] }}
+                        </td>
+                     <td>
+                            {{ path }}
+                        </td>
+                    <td>
+                            {{ gallery }}
+                            {{ page_done.update({"gal_last": page_done.gal_current }) }}
+                        </td>
+                    <td style="color:red; font-weight: bold; font-size: large">
+                        GALLERY DOES NOT EXIST
+                    </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+    </tbody>
+</table>

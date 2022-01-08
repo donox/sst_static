@@ -1,0 +1,13 @@
+{#  -*- coding: utf-8 -*- #}
+
+{% if type == 'title' %}
+<h2>
+    {{ content }}
+</h2>
+{% endif %}
+{% if type == 'byline' %}
+    <div class="sst_byline">Written by: {{ content }}</div>
+{% endif %}
+{% if type == 'photo' %}
+<div class="sst_byline">Photos by: {{ content }}</div>
+{% endif %}
