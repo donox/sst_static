@@ -11,9 +11,6 @@ PATTERSON_PATH = '/home/sam/'
 # PythonAnywhere
 PA_PATH = '/home/doxley/'
 
-# Tech Zone
-TZ_PATH = '/home/sunnysidetimes/'
-
 os.environ['OPENBLAS_NUM_THREADS'] = '1'  # SOME ISSUE SPAWNING PROCESSES - Bad fix????
 
 node = platform.node()
@@ -23,8 +20,6 @@ elif node == 'rudi2':
     PARENT_PATH = PATTERSON_PATH + 'PycharmProjects/'
 elif 'live' in node:
     PARENT_PATH = PA_PATH
-elif node == 'techzone':
-    PARENT_PATH = TZ_PATH + 'PycharmProjects/'
 # In a Docker container, we have sst_static immediately in /home
 else:
     PARENT_PATH = '/home/'
@@ -47,12 +42,10 @@ BLOG_AUTHOR = "The Sunnyside Times team"  # (translatable)
 BLOG_TITLE = "Sunnyside Times"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link. Don't forget the protocol (http/https)!
-if os.path.abspath(os.getcwd()) == '/home/sst_static/sst':      # is this a docker container?
-    SITE_URL = "https://localhost:80/"                           # need to determine where we are really running too!!
+if os.path.abspath(os.getcwd()) == '/home/sst_static/sst':  # is this a docker container?
+    SITE_URL = "https://localhost:80/"  # need to determine where we are really running too!!
 elif PARENT_PATH == PA_PATH:
     SITE_URL = "https://www.sunnyside-times.org/"
-elif PARENT_PATH == TZ_PATH:
-    SITE_URL = "https://172.20.12.155:8000/"
 elif PARENT_PATH == '/home':
     SITE_URL = "https://localhost:80/"
 else:
@@ -117,11 +110,15 @@ NAVIGATION_LINKS = {
         ("/pages/cool-stories-index/", "Cool Stories"),
         ("/pages/senior-life-information/", "Living at Sunnyside"),
         ("/pages/administration-index/", "Admin"),
-        ("/pages/activities-index/resident-council-and-committees/resident-council-index/sunnyside-residents-maps/", "Maps"),
+        ("/pages/activities-index/resident-council-and-committees/resident-council-index/sunnyside-residents-maps/",
+         "Maps"),
         ("/pages/quick-access/", "Quick Links"),
         ("/pages/help/", "Help"),
         (
             (
+                ("/pages/admin/website_management/", "Website Management"),
+                ("/pages/admin/website_management/web_source_control", "Web Source Control"),
+                ("/pages/admin/word_based_source_control/", "Word Based Source Control"),
                 ("/pages/admin/word_based_input/", "Word-based Source Documents"),
                 ("/pages/admin/shortcodes/", "Shortcodes"),
                 ("/pages/admin/multi_story_pages/", "Multi-Story Pages"),
@@ -678,7 +675,7 @@ GITHUB_COMMIT_SOURCE = True
 
 # Where the output site should be located
 # If you don't use an absolute path, it will be considered as relative
-# to the location of conf.py
+# to the location of confXX.py
 if PARENT_PATH == PA_PATH:
     OUTPUT_FOLDER = 'output'
 else:
@@ -1267,7 +1264,7 @@ EXTRA_HEAD_DATA += '<link href="' + SITE_URL + '../assets/css/mystyles.css" rel=
 #
 # An example re is the following:
 # '.*\/(?P<date>\d{4}-\d{2}-\d{2})-(?P<slug>.*)-(?P<title>.*)\.rst'
-# (Note the '.*\/' in the beginning -- matches source paths relative to conf.py)
+# (Note the '.*\/' in the beginning -- matches source paths relative to confXX.py)
 # FILE_METADATA_REGEXP = None
 
 # Should titles fetched from file metadata be unslugified (made prettier?)
