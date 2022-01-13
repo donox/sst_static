@@ -15,4 +15,4 @@ for dirpath, _, fileList in os.walk('images/'):
         if 'thumbnail' in file:
             count += 1
             os.remove(dirpath + '/' + file)
-print(f"Removed: {count} files and {count_dir} directconf.pyories")
+print(f"Removed: {count} files and {count_dir} directories")

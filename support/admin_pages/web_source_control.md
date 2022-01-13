@@ -31,7 +31,9 @@ Writing and non-technical editing processes are outside the scope of this docume
 ###Technical Editing
 An unmodified Word document should be handled by the system without failing, though we are assuming that all
 documents have at least a title and preferably an author attribution.  It **must** have a filename and directory
-where it is to be located.  The filename must be unique within the directory.  If it contains photos - either 
+where it is to be located.  The filename must be unique within the directory.  The directory is the directory (path)
+on the website where the file is located (named **pages** within the website structure)
+If it contains photos - either 
 individually or in a gallery, those photos must also have names and directory locations for placement.  
 
 The process of technical editing is responsible for adding (or checking) shortcodes to the document.  In particular, 
@@ -39,8 +41,8 @@ this role is responsible for verifying directory locations for files and ensurin
 corresponding directory.  This role is also responsible for constructing the **yaml** files needed to create 
 galleries. 
 
-***Note that we don't have a way to specify the filepath for a story in a shortcode.***  Until more automated means
-are available, this role passes all files to the System Admin for actual inclusion in the system. 
+***Note that we don't currently have a way to specify the filepath for a story in a shortcode.***  Until more automated 
+means are available, this role passes all files to the System Admin for actual inclusion in the system. 
 
 ###System Admin
 For content related activities, this role is responsible for the actual uploading the content onto the site and running 

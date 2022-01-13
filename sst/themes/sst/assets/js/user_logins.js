@@ -1,4 +1,4 @@
-var user_logins = {
+const user_logins = {
 "906d76ac16a1beda5e3fe5112aba75e1": "ffc76083445e28a7e4b314a07a8c3b6a",
 "a0127cbf9bd307f0f73ed651fb7af2a5": "ffc76083445e28a7e4b314a07a8c3b6a",
 "486004d3e67972f2303d44701b13c80a": "ffc76083445e28a7e4b314a07a8c3b6a",

@@ -77,6 +77,9 @@ bg-dark
         <!--End of body content-->
 
         <footer id="footer">
+            <!-- Include Crypto libraries to allow checking of user login  -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
             {{ content_footer }}
             {{ template_hooks['page_footer']() }}
             {% block extra_footer %}{% endblock %}

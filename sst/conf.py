@@ -117,7 +117,7 @@ NAVIGATION_LINKS = {
         (
             (
                 ("/pages/admin/website_management/", "Website Management"),
-                ("/pages/admin/website_management/web_source_control", "Web Source Control"),
+                ("/pages/admin/web_source_control", "Web Source Control"),
                 ("/pages/admin/word_based_source_control/", "Word Based Source Control"),
                 ("/pages/admin/word_based_input/", "Word-based Source Documents"),
                 ("/pages/admin/shortcodes/", "Shortcodes"),

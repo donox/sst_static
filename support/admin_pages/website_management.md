@@ -15,32 +15,43 @@ There are a number of forms of source documents that can be used to create conte
 may involve its own process.  The two primary formats are a structured **Word document** and a **Markdown document**.
 Other forms include **HTML** documents and specialized documents controlling things like organization and layout
 where appropriate.  These are typically **YAML** documents. Use of HTML or YAML documents are generally described
-along with their usage procedures.  Lastly, documents may be ***unformatted** meaning they are used as is without
-processing by the website itself.  These include things like **pdf** or similar documents.
+along with their usage procedures.  Lastly, documents may be *unformatted* meaning they are used as is without
+processing by the website itself.  These include things like **pdf's** or similar documents.
 
 ####Word Document as Source
 MS Word format is presumed to the be primary medium for creating web content.
-[Creating Pages Using MS Word Documents](https://sunnyside-times.com/pages/admin/word_based_input) describes the
+[Creating Pages Using MS Word Documents](../word_based_input) describes the
 mechanics of creating a suitable Word document.
-[Managing Word-based Source Documents](https://sunnyside-times.com/pages/admin/website_management/word_based_source_control)
+[Managing Word-based Source Documents](../word_based_source_control)
 describes the processes used to manage the workflow.
 
+###Adding and Removing Users
+The file **users.csv** in the **admin** directory is a list of all permitted users of the system.  The plugin 
+**make_user_logins** converts this file to an encrypted list (**user_logins.js**) that loads as an asset to the 
+running system.  It
+is initially presumed that all users share the same password.  When a user logs in to the system and provides
+a password, the system encrypts both the user name and the provided password.  It checks to see if the encrypted
+pair is in the provided list to determine if the user can access the system.
 
+To update the user_logins.js file, run the command **nikola make_user_logins**.  
 
-###ADummy stuff to be removed
-This shortcode adds things like titles and bylines.  We can easily add other such info as the need is 
-identified.  
+When a user logs in, a cookie ("username") is set associated with the website.  The cookie expires after
+six months and the user will need to log in again. 
 
-> **\{\{% meta_info info_type="title" %\}\}2 horse powered 2 tone Cadillac!\{\{%/ meta_info %\}\}**
+###Backups
+Source code required for the site is maintained in **github**.  Maintaining backups of site content is more 
+problematical.  There are multiple instances of the content beginning with primary documents such as Word 
+and continuing on to the generated HTML that is displayed.  
 
-The **info_type** specifies what is to be added.  The choices are:
+[Web Source Control](../website_source_control) contains
+the processes for managing source or content for the site.  The basic idea is that responsibility for 
+the primary source (such as Word or photos) belongs to Editors and Technical Editors and is generally done
+using Google Docs.  The System Admin is responsible for backups of material on the site itself.  These are in 
+those folders such as Pages, Images, Files that are used to build the site.  
 
-1. **title** which adds a title to the story/page.
-2. **byline** which adds the list of writers to the page.  The result is a line starting with **Written by:** 
-   followed by the content in the shortcode.  There is no need to put "By" or the like.
-3. **photo** which adds the photo credits to the page.  Similar to byline, except that it applies to
-    the photographers.
-    
+Until an automated process is implemented, the System Admin will make a compressed copy of relevant folders
+and copy them to Google Drive.  
+
 
 
 
