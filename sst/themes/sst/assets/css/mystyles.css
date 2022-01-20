@@ -1,0 +1,185 @@
+/* Hide the body of the page till we verify that the user is logged in. */
+body {
+    display:none;
+}
+/* Styles for use in signs */
+.sst_border_quote {
+    border: saddlebrown solid 10px;
+    border-style: ridge;
+    border-radius: 5px;
+}
+
+.sst_border {
+    border: #86cfda solid 10px;
+    border-style: ridge;
+}
+.sst_byline{
+    font-weight: bolder;
+    font-size: smaller;
+}
+
+.sst_pub_date {
+    font-size: small;
+    text-align: right;
+    font-weight: normal;
+}
+
+.sst_click_slideshow {
+    font-weight: bold;
+    font-size: small;
+    text-align: right;
+}
+
+/* Set margins to make floats with surrounding text avoid overlaps */
+.slide-show {
+    margin: 30px;
+    margin-bottom: 0px;
+}
+.author {
+    font-weight: bold;
+    font-size: small;
+}
+
+.sst_sign_text {
+    font-size: large;
+    font-weight: bolder;
+    font-style: oblique;
+}
+
+/* increase paragraph separation */
+p {
+    margin-bottom: 1.5rem;
+}
+
+/* Make navbar remain at top of page when scrolling */
+.navbar-fixed-top {
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    margin-bottom: 0;
+}
+
+/* set photo behind navbar */
+.nav-bg-img {
+    max-height: 50px;
+
+    /* Center and scale the image nicely */
+    background-position: left;
+    background-repeat: repeat-x;
+    background-size: cover;
+
+    /* Needed to position the navbar */
+    position: relative;
+}
+
+/* Position the navbar container inside the image */
+.navbar-item nav-item {
+    font-size: larger;
+    font-width: bold;
+}
+
+/* Set colors for Bootstrap Carousel glyphicons */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    height: 100px;
+    width: 100px;
+    outline: black;
+    background-size: 100%, 100%;
+    border-radius: 50%;
+    /*border: 1px solid black;*/
+    background-image: none;
+}
+
+.carousel-control-next-icon:after {
+    content: '>';
+    font-size: 55px;
+    color: black;
+}
+
+.carousel-control-prev-icon:after {
+    content: '<';
+    font-size: 55px;
+    color: black;
+}
+
+.carousel-indicators {
+    /* required to override bootstrap */
+    /*right: unset !important;*/
+    /*left: unset !important;*/
+    /*padding-left: unset !important;*/
+    /*margin-right: unset !important;*/
+    /*margin-left: unset !important;*/
+    /* your css styles */
+    /*width: auto;*/
+    background-color: unset;
+!important;
+    color: unset;
+!important;
+    padding: 18px 18px;
+    /*background-color: rgba(96, 107, 114, .8);*/
+    border-radius: 18px;
+    line-height: 0;
+}
+
+.carousel-indicators li {
+    z-index: 9999;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    align-items: center;
+    color: red;
+!important;
+    background-color: red;
+!important;
+'
+}
+
+/* default image wrapper class to center an image in its container */
+.image-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* Layout to support flex-box */
+.src-flex-container {
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.src-flex-container-rev { /* reverses direction of child elements */
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    -webkit-flex-direction: row-reverse; /* Safari */
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.src-flex-container-col { /* arranges elements in a column */
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    -webkit-flex-direction: column; /* Safari */
+    flex-direction: column;
+    align-items: center;
+}
+
+.src-flex-item {
+    -webkit-flex-grow: 1; /* Safari */
+    flex-grow: 1;
+    flex-basis: 100px;
+    padding: 8px;
+}
+
+.src-grow-2 {
+    -webkit-flex-grow: 2; /* Safari */
+    flex-grow: 2;
+}
+
+.src-grow-3 {
+    -webkit-flex-grow: 3; /* Safari */
+    flex-grow: 3;
+}

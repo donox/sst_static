@@ -42,7 +42,6 @@ class WpFixups(object):
     # (2) The value of an argument is a single character string [a-zA-Z_]
     # -- the argument types may not be mixed.
 
-    # Note that the "^]]" below defends against a left bracket immediately following a shortcode
     sc_re = re.compile(r'\[([a-zA-Z0-9\-]+) *(\w+=[^\]]+)* *\]', re.I)
     sc_re_arg = re.compile(r'( *([A-Za-z0-9_]+) *= *"(.*)")+?')
     sc_re_arg_no_quotes = re.compile(r'( *([A-Za-z0-9_]+) *= *(.[a-zA-Z_]+))+?')
@@ -50,7 +49,11 @@ class WpFixups(object):
     def __init__(self):
         self.web_source = WEBSITE_PATH + '/pages'
         self.content_dict = {}
-        self.content_dict['fixes'] = open(PROJECT_PATH + 'support/fixes.txt', 'r')
+        self.content_dict['fixes'] = None
+        try:
+            self.content_dict['fixes'] = open(PROJECT_PATH + 'support/fixes.txt', 'r')
+        except FileNotFoundError:
+            pass
 
     def close(self):
         if self.content_dict['bad']:
@@ -113,31 +116,32 @@ class WpFixups(object):
             yield line
 
     def fix_inputs(self):
-        n = 0
-        for line in self.file_reader():
-            n += 1
-            end_cmd = line.find(':')
-            if end_cmd == -1:
-                pass
-            else:
-                cmd = line[:end_cmd]
-                args = line[end_cmd+1:]
-                if cmd == 'DEAD FILE':
-                    self.dead_file(args)
-                elif cmd == 'UNHANDLED SHORTCODE':
-                    while line.find('++') == -1:
-                        line = next(self.file_reader())
-                        n += 1
-                        args += line
-                    self.unhandled_shortcode(args)
-                elif cmd == 'foo':
-                    pass
-                elif cmd == 'foo':
-                    pass
-                elif cmd == 'foo':
+        if self.content_dict['fixes']:
+            n = 0
+            for line in self.file_reader():
+                n += 1
+                end_cmd = line.find(':')
+                if end_cmd == -1:
                     pass
                 else:
-                    raise ValueError(f'Unrecognized command: {cmd}')
+                    cmd = line[:end_cmd]
+                    args = line[end_cmd+1:]
+                    if cmd == 'DEAD FILE':
+                        self.dead_file(args)
+                    elif cmd == 'UNHANDLED SHORTCODE':
+                        while line.find('++') == -1:
+                            line = next(self.file_reader())
+                            n += 1
+                            args += line
+                        self.unhandled_shortcode(args)
+                    elif cmd == 'foo':
+                        pass
+                    elif cmd == 'foo':
+                        pass
+                    elif cmd == 'foo':
+                        pass
+                    else:
+                        raise ValueError(f'Unrecognized command: {cmd}')
 
     def dead_file(self, args):
         file_path = args.split(':')[-1][:-1]    # pick out path and remove \n
