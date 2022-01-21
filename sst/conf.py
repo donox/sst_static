@@ -57,7 +57,7 @@ BLOG_TITLE = "Sunnyside Times"  # (translatable)
 #     SITE_URL = "http://localhost:8000/"
 
 if ev == "sscgurus":
-    SITE_URL = "http://sscgurus.com/"
+    SITE_URL = "https://sscgurus.com/"
 elif ev == "local":
     SITE_URL = "http://localhost:8000/"
 else:
