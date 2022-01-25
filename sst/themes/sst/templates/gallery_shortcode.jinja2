@@ -1,0 +1,36 @@
+{#  -*- coding: utf-8 -*- #}
+
+{% if photo_array %}
+    <div class="slide-show float-left">   {# Need to allow users to control direction of float #}
+        <div class="row" style="display: inline-block">
+            {% for image in photo_array %}
+                {# We show only the first thumbnail, though we need to create the others so that the gallery displays
+                We need to display titles captions, etc. #}
+                {% if loop.first %}
+                    <div>
+                        <div class="sst_border" style="text-align: {{ alignment }}">
+                            <a href="{{ image['url'] }}" class="thumbnail image-reference"
+                               title="{{ image['title']|e }}">
+                                <img src="{{ image['url_thumb'] }}" alt="{{ image['title']|e }}"
+                                     style="max-height: {{ image['height'] }}; max-width: {{ image['width'] }};"/>
+                            </a>
+                        </div>
+                        <div class="sst_click_slideshow">Click image to start slideshow</div>
+                    </div>
+                {% else %}
+                    <div class="col-xs-6 col-md-3" style="display:None">
+                        <a href="{{ image['url'] }}" class="thumbnail image-reference"
+                           title="{{ image['title']|e }}">
+                            <img src="{{ image['url_thumb'] }}" alt="{{ image['title']|e }}"/>
+                        </a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <ul class="thumbnails">
+        <li style="display:none">
+    </ul>
+{% endif %}
+
