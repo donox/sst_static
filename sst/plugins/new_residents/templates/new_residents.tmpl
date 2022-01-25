@@ -1,0 +1,38 @@
+{#  -*- coding: utf-8 -*- #}
+<p><span style="font-family: inherit; font-size: 26px; background-color: white; color: black;">New Residents</span></p>
+<div><strong>Interviews of new residents are back! We would also welcome volunteers to help with interviewing and
+    writing – just call Linda Bradley at 8663!</strong></div>
+<div>Say “Hi” to our most recent new neighbors!</div>
+
+<table>
+    <tbody>
+    {% set current = 'current' %}
+    <tr>
+        <td>
+            <div>
+                <button id="prevRes" style="">❮Prev</button>&nbsp;<button id="nextRes">Next❯</button>
+            </div>
+            <div><span id="locRes">Resident 1 of {{ res_count }}</span></div>
+        </td>
+    </tr>
+    {% for resident_dict in residents %}
+        {% set resident = resident_dict.Resident %}
+        {% if resident.Name %}
+            <tr class="newRes {{ current }}">
+                {% set current = '' %}
+                <td><strong>{{ resident.Name }}</strong>,
+                    {{ resident.Address }},
+                    {{ resident.Phone }},
+                    {{ resident.Move_in }},
+                    {{ resident.From }}<br>
+                    {% if resident.Profile %}
+                        <a class="maxbutton-2 maxbutton maxbutton-inter-page-link"
+                           href="{{ resident.Profile }}">
+                            <span class="mb-text">{{ resident.Name }}</span></a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
