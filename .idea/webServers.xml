@@ -23,7 +23,7 @@
           </advancedOptions>
         </fileTransfer>
       </webServer>
-      <webServer id="c87f864a-fa48-4ff5-84f8-9e37e69a125e" name="sscgurus.com" url="http://sscgurus.com">
+      <webServer id="c87f864a-fa48-4ff5-84f8-9e37e69a125e" name="sscgurus.com (project level)" url="http://sscgurus.com">
         <fileTransfer rootFolder="/httpdocs" host="sscgurus.com" port="21">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
