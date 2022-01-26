@@ -11,7 +11,9 @@ convenience and understandability for the users.
 This shortcode adds things like titles and bylines.  We can easily add other such info as the need is 
 identified.  
 
-> **\{\{% meta_info info_type="title" %\}\}2 horse powered 2 tone Cadillac!\{\{%/ meta_info %\}\}**
+> **\{\{% meta_info info_type="title" %\}\}2 horse powered 2 tone Cadillac!\{\{% /meta_info %\}\}**
+
+Note the space *before* the forward slash terminating the shortcode.
 
 The **info_type** specifies what is to be added.  The choices are:
 

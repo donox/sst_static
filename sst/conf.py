@@ -5,14 +5,16 @@ import os
 import sys
 import platform
 
+try:
+    ev = os.environ['TargetHost']
+except:
+    raise SystemError("No TargetHost Environment Variable specified")
+
 OXLEY_PATH = '/home/don/'
 
 PATTERSON_PATH = '/home/sam/'
 # PythonAnywhere
 PA_PATH = '/home/doxley/'
-
-# Tech Zone
-TZ_PATH = '/home/sunnysidetimes/'
 
 os.environ['OPENBLAS_NUM_THREADS'] = '1'  # SOME ISSUE SPAWNING PROCESSES - Bad fix????
 
@@ -23,8 +25,6 @@ elif node == 'rudi2':
     PARENT_PATH = PATTERSON_PATH + 'PycharmProjects/'
 elif 'live' in node:
     PARENT_PATH = PA_PATH
-elif node == 'techzone':
-    PARENT_PATH = TZ_PATH + 'PycharmProjects/'
 # In a Docker container, we have sst_static immediately in /home
 else:
     PARENT_PATH = '/home/'
@@ -51,12 +51,18 @@ if os.path.abspath(os.getcwd()) == '/home/sst_static/sst':      # is this a dock
     SITE_URL = "https://localhost:80/"                           # need to determine where we are really running too!!
 elif PARENT_PATH == PA_PATH:
     SITE_URL = "https://www.sunnyside-times.org/"
-elif PARENT_PATH == TZ_PATH:
-    SITE_URL = "https://172.20.12.155:8000/"
 elif PARENT_PATH == '/home':
     SITE_URL = "https://localhost:80/"
 else:
     SITE_URL = "http://localhost:8000/"
+
+if ev == "sscgurus":
+    SITE_URL = "https://sscgurus.com/"
+elif ev == "local":
+    SITE_URL = "http://localhost:8000/"
+else:
+    raise SystemError(f"Unrecognized target host environment variable: {ev}")
+
 # This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
 # BASE_URL = "http:localhost:8000/sst/"

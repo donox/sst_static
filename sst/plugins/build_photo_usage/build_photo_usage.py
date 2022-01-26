@@ -62,7 +62,7 @@ class PhotoUsage(object):
                 for file in os.listdir(gal_path):
                     if os.path.isdir(os.path.join(gal_path, file)):
                         print(f'Found nested gallery: {gal_path} with subdirectory: {file}')
-                    elif file.endswith('.jpg'):
+                    elif file.lower().endswith('.jpg'):
                         self.images_in_galleries.add(file)
                         if file not in self.photos:
                             self.photos[file] = []
@@ -76,6 +76,8 @@ class PhotoUsage(object):
                             self.galleries[a_dir] = {"gallery": a_dir, "image": [file]}
                         else:
                             self.galleries[a_dir]["image"].append(file)
+                    elif file.lower().startswith('metadata'):
+                        pass
                     else:
                         print(f'Found non-jpg file in gallery: {gal_path}, file: {file}')
         # Create page list with a dictionary giving the pages it references
