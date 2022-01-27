@@ -41,28 +41,21 @@ WEBSITE_PATH = PARENT_PATH + 'sst_static/sst/'
 # ! Option (a) is used when you don't want that setting translated.
 # ! Option (b) is used for settings that are different in different languages.
 
-
+# TODO: NOTE THAT A REDIRECT FOR THE SITE LOGO TO A SPECIFIC PAGE IS ENCODED IN 'themes/sst/templates/base.tmpl'
+#      THAT SHOULD BE AUTO GENERATED.
 # Data about this site
 BLOG_AUTHOR = "The Sunnyside Times team"  # (translatable)
 BLOG_TITLE = "Sunnyside Times"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link. Don't forget the protocol (http/https)!
-# if os.path.abspath(os.getcwd()) == '/home/sst_static/sst':  # is this a docker container?
-#     SITE_URL = "https://localhost:80/"  # need to determine where we are really running too!!
-# elif PARENT_PATH == PA_PATH:
-#     SITE_URL = "https://www.sunnyside-times.org/"
-# elif PARENT_PATH == '/home':
-#     SITE_URL = "https://localhost:80/"
-# else:
-#     SITE_URL = "http://localhost:8000/"
-
 if ev == "sscgurus":
     SITE_URL = "https://sscgurus.com/"
 elif ev == "local":
     SITE_URL = "http://localhost:8000/"
+elif PARENT_PATH == PA_PATH:
+    SITE_URL = "https://www.sunnyside-times.org/"
 else:
-    raise SystemError(f"Unrecognized target host enviornment variable: {ev}")
-
+    raise SystemError(f"Unrecognized target host environment variable: {ev}")
 
 # This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
@@ -132,8 +125,8 @@ NAVIGATION_LINKS = {
             (
                 ("/pages/admin/website_management/", "Website Management"),
                 ("/pages/admin/web_source_control", "Web Source Control"),
-                ("/pages/admin/word_based_source_control/", "Word Based Source Control"),
                 ("/pages/admin/word_based_input/", "Word-based Source Documents"),
+                ("/pages/admin/word_based_source_control/", "Word-based Source Control"),
                 ("/pages/admin/shortcodes/", "Shortcodes"),
                 ("/pages/admin/multi_story_pages/", "Multi-Story Pages"),
                 ("/pages/admin/commands/", "System Commands"),
