@@ -123,7 +123,8 @@ NAVIGATION_LINKS = {
         ("/pages/help/", "Help"),
         (
             (
-                ("/pages/admin/website_management./", "Website Management"),
+                ("/pages/admin/website_management/", "Website Management"),
+                ("/pages/admin/web_source_control/", "Website Source Management"),
                 ("/pages/admin/word_based_input/", "Word-based Source Documents"),
                 ("/pages/admin/word_based_source_control/", "Word-based Source Control"),
                 ("/pages/admin/shortcodes/", "Shortcodes"),
