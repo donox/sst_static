@@ -41,9 +41,9 @@ The gallery shortcode defines a "gallery" of pictures.  Galleries are currently 
 work in progress. There are two parts to using a gallery:
 
 1. Create the gallery itself.
-2. Insert the gallery at the desired location.
-u
-Inserting the gallery simply requires inserting the gallery shortcode:
+2. Insert the gallery at the desired location in the story.
+
+Inserting the gallery in the story simply requires inserting the gallery shortcode:
 
 >**\{\{% gallery gallery_name %\}\}**
 
@@ -51,9 +51,9 @@ Creating the gallery requires the creation of a folder containing the actual ima
 gallery and the creation of a specifier file named **metadata.yml** which tells how the gallery is to be rendered.
 An example of a metadata.yml file:
 >---
+>Gallery path: /galleries/some_dir_for_content
 >name: IMG_0842.JPG  
 >order: 0  
->Gallery source page: '../../../PycharmProjects/sst_static/sst//pages/activities-index/resident-led-activities-index/indoor-games/bridge.md with gallery name - Gal17160'  
 >---
 >name: IMG_0843.JPG  
 >caption: Photo Caption   
@@ -64,14 +64,12 @@ An example of a metadata.yml file:
 >order: 2  
 >---
 
-Note that the first entry contains the path name to the internal source page containing the gallery
-reference.  This is provided to allow the easy removal of the gallery by identifying the locations
-where it is used.   There may be more than one **Gallery source page** entry.  Captions for an image
-are taken from the photo meta data by the package we use to display an image.
-
-
-*The gallery shortcode is a somewhat modified version of a system provided experimental shortcode,
-thus accounting for some of its eccentricities.  It really needs a thorough overhaul.*
+The metadata.yml file has one entry for each photo with photos separated by "---".  Each line is
+an attribute that has a name followed by a colon and space. The value of the attribute immediately
+follows on the same line. Each photo *must* have a "name".  It may optionally have a "caption" and/or
+an "order".  Additionally, one entry *must* have a path name where the gallery will be saved 
+in the system (Ideally, the gallery path would not be in a photo entry, but for technical reasons
+fixing that would require more effort than its worth). 
 
 *The actual display of the gallery is handled by a "Lightbox" named "baguetteBox".  Additional 
 description can be found [here](https://getnikola.com/handbook.html#images-and-galleries).*
