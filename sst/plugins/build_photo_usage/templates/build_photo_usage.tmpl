@@ -12,13 +12,15 @@
     <tbody>
     {% set page_done = {"last": "", "current": "", "gal_last": "", "gal_current":""} %}
     {% for page in all_pages.items() %}
+        {# page is a list element which is itself a tuple.  page[0] is the name of the .md file and
+            page[1] is a dict with keys: path, file, galleries (a list) and images (a list) #}
         {{ page_done.update({"current": page[0]}) }}
         {% set file = page[1]['file'] %}
         {% set path = page[1]['path'] %}
         {% set gal = page[1]['in_gallery'] %}
         {% set galleries = page[1]['galleries'] %}
         {% set images = page[1]['images'] %}
-        {%- if galleries|length or images|length -%}
+        {%- if galleries|length or images|length -%}   {# Note: the '-' causes whitespace removal before/after block #}
             {%- for image in images -%}
                 <tr class="adminPage">
                     {%- if page_done.current != page_done.last -%}

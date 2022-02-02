@@ -132,7 +132,8 @@ NAVIGATION_LINKS = {
                 ("/pages/admin/commands/", "System Commands"),
                 ("/pages/admin/import_wp/", "WP Import"),
                 ("/pages/admin/photo_usage_data/", "Photo Usage Data"),
-                ("/pages/admin/pages_to_photos/", "Pages To Photos")
+                ("/pages/admin/pages_to_photos/", "Pages To Photos"),
+                ("/pages/admin/pages_directory/", "Sorted Page List")
             ),
             'Sys_Admin'
         )
@@ -648,8 +649,8 @@ ATOM_FILENAME_BASE = "feed"
 # relative URL.
 #
 # If you don't need any of these, just set to []
+# REDIRECTIONS = [("index.html", "/pages/page-one")]
 REDIRECTIONS = []
-
 # Presets of commands to execute to deploy. Can be anything, for
 # example, you may use rsync:
 # "rsync -rav --delete output/ joe@my.site:/srv/www/site"
