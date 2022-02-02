@@ -93,8 +93,11 @@ class PhotoUsage(object):
                     self.pages[file] = page_ref
                     self._find_pics_in_pages(page_ref)
                     page_ref["path"] = short_path  # Remove clutter directories for publishing
+                    page_ref["path_key"] = self._make_path_key(page_ref)
         self.unused_images = self.image_list - self.images_in_a_page
         self.unused_galleries = self.gallery_list - self.galleries_in_a_page
+        all_pages_to_sort = sorted(list(self.pages.items()), key=lambda x: x[1]['path_key'])
+        context['page_list'] = all_pages_to_sort
         context['unused_images'] = self.unused_images
         context['unused_galleries'] = self.unused_galleries
         context["count_all_images"] = len(self.image_list)
@@ -133,6 +136,27 @@ class PhotoUsage(object):
         with open(self.outfiles_dir + '/photo_usage_data.html', 'w') as html_fd:
             html_fd.writelines(results)
             html_fd.close()
+
+        template = env.get_template('build_page_usage.tmpl')
+        results = template.render(context).replace('\n', '')
+        results = re.sub(" None", " ", results)  # remove occurrences of 'None'
+        results = re.sub(" +", " ", results)  # remove excess whitespace
+        meta_file = make_meta_file_content('Pages to Photos', 'pages_to_photos',
+                                           description='Mapping of pages to photos they use')
+        with open(self.outfiles_dir + '/pages_directory.meta', 'w') as meta_fd:
+            meta_fd.writelines(meta_file)
+            meta_fd.close()
+        with open(self.outfiles_dir + '/pages_directory.html', 'w') as html_fd:
+            html_fd.writelines(results)
+            html_fd.close()
+        foo = 3
+
+    @staticmethod
+    def _make_path_key(item_ref):
+        # Create full path that serves as input to sort
+        file = item_ref['file'].split('.')[0]       # remove file extension
+        path = item_ref['path']
+        return path + '/' + file
 
     def _find_pics_in_pages(self, page_ref):
         """Find occurrences of gallery or singlepic shortcodes in a page.

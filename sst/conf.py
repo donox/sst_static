@@ -124,7 +124,7 @@ NAVIGATION_LINKS = {
         (
             (
                 ("/pages/admin/website_management/", "Website Management"),
-                ("/pages/admin/web_source_control", "Web Source Control"),
+                ("/pages/admin/web_source_control/", "Website Source Management"),
                 ("/pages/admin/word_based_input/", "Word-based Source Documents"),
                 ("/pages/admin/word_based_source_control/", "Word-based Source Control"),
                 ("/pages/admin/shortcodes/", "Shortcodes"),
@@ -132,7 +132,8 @@ NAVIGATION_LINKS = {
                 ("/pages/admin/commands/", "System Commands"),
                 ("/pages/admin/import_wp/", "WP Import"),
                 ("/pages/admin/photo_usage_data/", "Photo Usage Data"),
-                ("/pages/admin/pages_to_photos/", "Pages To Photos")
+                ("/pages/admin/pages_to_photos/", "Pages To Photos"),
+                ("/pages/admin/pages_directory/", "Sorted Page List")
             ),
             'Sys_Admin'
         )
@@ -648,8 +649,8 @@ ATOM_FILENAME_BASE = "feed"
 # relative URL.
 #
 # If you don't need any of these, just set to []
+# REDIRECTIONS = [("index.html", "/pages/page-one")]
 REDIRECTIONS = []
-
 # Presets of commands to execute to deploy. Can be anything, for
 # example, you may use rsync:
 # "rsync -rav --delete output/ joe@my.site:/srv/www/site"
@@ -682,7 +683,7 @@ GITHUB_COMMIT_SOURCE = True
 
 # Where the output site should be located
 # If you don't use an absolute path, it will be considered as relative
-# to the location of confXX.py
+# to the location of conf.py
 if PARENT_PATH == PA_PATH:
     OUTPUT_FOLDER = 'output'
 else:
@@ -1271,7 +1272,7 @@ EXTRA_HEAD_DATA += '<link href="' + SITE_URL + '../assets/css/mystyles.css" rel=
 #
 # An example re is the following:
 # '.*\/(?P<date>\d{4}-\d{2}-\d{2})-(?P<slug>.*)-(?P<title>.*)\.rst'
-# (Note the '.*\/' in the beginning -- matches source paths relative to confXX.py)
+# (Note the '.*\/' in the beginning -- matches source paths relative to conf.py)
 # FILE_METADATA_REGEXP = None
 
 # Should titles fetched from file metadata be unslugified (made prettier?)

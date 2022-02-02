@@ -1,0 +1,21 @@
+{#  -*- coding: utf-8 -*- #}
+<h2>Sorted Directory of Pages</h2>
+<table>
+    <thead>
+    <th>Page</th>
+    </thead>
+    <tbody>
+    {% set page_done = {"last": "", "current": "", "gal_last": "", "gal_current":""} %}
+    {% for page in page_list %}
+        {# page is a list element which is itself a tuple.  page[0] is the name of the .md file and
+            page[1] is a dict with keys: path, file, path_key, galleries (a list) and images (a list) #}
+        {{ page_done.update({"current": page[0]}) }}
+        {% set path = page[1]['path_key'] %}
+        <tr class="adminPage">
+           <td>
+                {{ path }}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
