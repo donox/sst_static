@@ -30,11 +30,11 @@ instance and modify it as necessary.
 All these items use the same ("meta_info") shortcode and are generally added at the top. 
 of the document.  
 
-<span>\{\{% meta_info info_type="title" %}}xxxTITLExxx\{\{% meta_info %}}</span>
+<span>\{\{% meta_info info_type="title" %}}xxxTITLExxx\{\{% /meta_info %}}</span>
 
-<span>\{\{% meta_info info_type="byline" %}}xxxAUTHORsxxx\{\{% meta_info %}}</span>
+<span>\{\{% meta_info info_type="byline" %}}xxxAUTHORsxxx\{\{% /meta_info %}}</span>
 
-<span>\{\{% meta_info info_type="photo" %}}xxxPHOTOGRAPHERsxxx\{\{% meta_info %}}</span>
+<span>\{\{% meta_info info_type="photo" %}}xxxPHOTOGRAPHERsxxx\{\{% /meta_info %}}</span>
 
 #####Insert Single Photo
 Insert photos using the "singlepic" shortcode:
