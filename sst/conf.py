@@ -131,6 +131,7 @@ NAVIGATION_LINKS = {
                 ("/pages/admin/multi_story_pages/", "Multi-Story Pages"),
                 ("/pages/admin/commands/", "System Commands"),
                 ("/pages/admin/import_wp/", "WP Import"),
+                ("/pages/admin/user_login/", "Manage user Logins"),
                 ("/pages/admin/photo_usage_data/", "Photo Usage Data"),
                 ("/pages/admin/pages_to_photos/", "Pages To Photos"),
                 ("/pages/admin/pages_directory/", "Sorted Page List")

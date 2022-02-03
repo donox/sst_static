@@ -51,5 +51,8 @@ in sst_utils and run the program producing the file *staff.csv* in /UserData/.
 TBD
 
 ####Creating the Combined System Login File
-TBD
+After updating any use group necessary, create a combined file *users.csv* and replace the copy in 
+the support directory.  Use sst-util setting *create_combined_login* to do this.  
+
+After updating uss.csv, run **nikola make_user_logins** to create the *user_logins.js* asset file. 
 
