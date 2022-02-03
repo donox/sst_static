@@ -13,7 +13,7 @@
         {% set path = page[1]['path_key'] %}
         <tr class="adminPage">
            <td>
-                {{ path }}
+                {{ path | replace("/", "\t/\t")}}
             </td>
         </tr>
     {% endfor %}
