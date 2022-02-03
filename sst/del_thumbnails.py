@@ -6,9 +6,9 @@ import shutil
 count = 0
 count_dir = 0
 print("starting")
-for dirpath, _, fileList in os.walk('/home/don/PycharmProjects/sst_static/new_site/images/'):
+for dirpath, _, fileList in os.walk('images/'):
     dir_last_node = dirpath.split('/')[-1]
-    if dir_last_node == 'thumbs' or dir_last_node == 'cache':
+    if dir_last_node == 'thumbs' or dir_last_node == 'cache' or dir_last_node == 'dynamic':
         shutil.rmtree(dirpath)
         count_dir += 1
     for file in fileList:
