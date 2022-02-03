@@ -1,3 +1,7 @@
+/* Hide the body of the page till we verify that the user is logged in. */
+body {
+    display:none;
+}
 /* Styles for use in signs */
 .sst_border_quote {
     border: saddlebrown solid 10px;

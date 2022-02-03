@@ -684,7 +684,7 @@ GITHUB_COMMIT_SOURCE = True
 
 # Where the output site should be located
 # If you don't use an absolute path, it will be considered as relative
-# to the location of conf.py
+# to the location of confXX.py
 if PARENT_PATH == PA_PATH:
     OUTPUT_FOLDER = 'output'
 else:
@@ -1273,7 +1273,7 @@ EXTRA_HEAD_DATA += '<link href="' + SITE_URL + '../assets/css/mystyles.css" rel=
 #
 # An example re is the following:
 # '.*\/(?P<date>\d{4}-\d{2}-\d{2})-(?P<slug>.*)-(?P<title>.*)\.rst'
-# (Note the '.*\/' in the beginning -- matches source paths relative to conf.py)
+# (Note the '.*\/' in the beginning -- matches source paths relative to confXX.py)
 # FILE_METADATA_REGEXP = None
 
 # Should titles fetched from file metadata be unslugified (made prettier?)
