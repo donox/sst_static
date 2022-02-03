@@ -48,7 +48,7 @@ Save the spreadsheet as an **.xls** file and upload it to /UserData/.  Enable pr
 in sst_utils and run the program producing the file *staff.csv* in /UserData/.
 
 ####Horizon Club Logins
-TBD
+TBD 
 
 ####Creating the Combined System Login File
 After updating any use group necessary, create a combined file *users.csv* and replace the copy in 
