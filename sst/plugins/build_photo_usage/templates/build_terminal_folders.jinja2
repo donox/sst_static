@@ -1,0 +1,24 @@
+{#  -*- coding: utf-8 -*- #}
+<h2>Sorted List of Directories Immediately Containing Pages</h2>
+<table>
+    <thead>
+    <th>Terminal Folder</th><th>Page Count</th><th>Parent Path</th>
+    </thead>
+    <tbody>
+    {% for entry in terminal_folders %}
+        {# an entry is a 2-tuple with item 2 = dictionary containing keys: folder, count, path
+            item 1 is also the folder #}
+        <tr class="adminPage">
+           <td>
+                {{entry[1]["folder"]}}
+            </td>
+            <td>
+                {{entry[1]["count"]}}
+            </td>
+             <td>
+                {{entry[1]["path"]}}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
