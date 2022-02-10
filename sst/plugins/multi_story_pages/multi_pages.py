@@ -64,6 +64,7 @@ class Reporter(object):
 
 
 class MultiPage(object):
+    '''Process pages consisting of multiple stories with configuration specified in yaml file.'''
     name = 'multi_pages'
 
     def __init__(self):
