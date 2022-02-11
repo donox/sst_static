@@ -50,6 +50,8 @@ BLOG_TITLE = "Sunnyside Times"  # (translatable)
 # in a prominent link. Don't forget the protocol (http/https)!
 if ev == "sscgurus":
     SITE_URL = "https://sscgurus.com/"
+elif ev == "pa":
+    SITE_URL = "https://www.sunnyside-times.org/"
 elif ev == "local":
     SITE_URL = "http://localhost:8000/"
 elif PARENT_PATH == PA_PATH:
