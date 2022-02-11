@@ -98,6 +98,9 @@ class PhotoUsage(object):
         self.unused_galleries = self.gallery_list - self.galleries_in_a_page
         all_pages_to_sort = sorted(list(self.pages.items()), key=lambda x: x[1]['path_key'])
         context['page_list'] = all_pages_to_sort
+        terminal_folders = self.find_terminal_folders()
+        terminal_folders_list = sorted(list(terminal_folders.items()), key=lambda x: x[1]['folder'])
+        context['terminal_folders'] = terminal_folders_list
         context['unused_images'] = self.unused_images
         context['unused_galleries'] = self.unused_galleries
         context["count_all_images"] = len(self.image_list)
@@ -149,7 +152,37 @@ class PhotoUsage(object):
         with open(self.outfiles_dir + '/pages_directory.html', 'w') as html_fd:
             html_fd.writelines(results)
             html_fd.close()
+
+        template = env.get_template('build_terminal_folders.jinja2')
+        results = template.render(context).replace('\n', '')
+        results = re.sub(" None", " ", results)  # remove occurrences of 'None'
+        results = re.sub(" +", " ", results)  # remove excess whitespace
+        meta_file = make_meta_file_content('Terminal Folders', 'terminal_folders',
+                                           description='Sorted terminal folder list')
+        with open(self.outfiles_dir + '/terminal_folders.meta', 'w') as meta_fd:
+            meta_fd.writelines(meta_file)
+            meta_fd.close()
+        with open(self.outfiles_dir + '/terminal_folders.html', 'w') as html_fd:
+            html_fd.writelines(results)
+            html_fd.close()
         foo = 3
+
+    def find_terminal_folders(self):
+        """Build list of folders that directly contain pages."""
+        folder_list = dict()
+        for page in self.pages:
+            path = self.pages[page]["path"]  # this is the path excluding the page
+            terminal = path.split('/')[-1]
+            try:
+                entry = folder_list[terminal]
+                entry["count"] += 1
+            except:
+                entry = dict()
+                folder_list[terminal] = entry
+                entry["folder"] = terminal
+                entry["count"] = 1
+                entry["path"] = path
+        return folder_list
 
     @staticmethod
     def _make_path_key(item_ref):
