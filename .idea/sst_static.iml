@@ -3,6 +3,12 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/sst" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/sst/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/sst/files" />
+      <excludeFolder url="file://$MODULE_DIR$/sst/images" />
+      <excludeFolder url="file://$MODULE_DIR$/sst/migrating_pages" />
+      <excludeFolder url="file://$MODULE_DIR$/sst/output" />
+      <excludeFolder url="file://$MODULE_DIR$/sst/pages" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.8 (sst_venv)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

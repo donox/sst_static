@@ -654,8 +654,8 @@ ATOM_FILENAME_BASE = "feed"
 # relative URL.
 #
 # If you don't need any of these, just set to []
-# REDIRECTIONS = [("index.html", "/pages/page-one")]
-REDIRECTIONS = []
+REDIRECTIONS = [("index.html", "/pages/page-one")]
+# REDIRECTIONS = []
 # Presets of commands to execute to deploy. Can be anything, for
 # example, you may use rsync:
 # "rsync -rav --delete output/ joe@my.site:/srv/www/site"
@@ -1344,6 +1344,9 @@ EXTRA_HEAD_DATA += '<link href="' + SITE_URL + '../assets/css/mystyles.css" rel=
 
 # Plugins you don't want to use. Be careful :-)
 # DISABLED_PLUGINS = ["render_galleries"]
+# NOTE:: render_taxonomies wants to create a top-level index.html file which conflicts with
+#        the redirect specified above.  
+DISABLED_PLUGINS = ["render_taxonomies"]
 
 # Special settings to disable only parts of the indexes plugin.
 # Use with care.
