@@ -206,14 +206,13 @@ class PhotoUsage(object):
                     # print(f'Gallery: {match[1]}')
                     tmp = match[1]
                     page_ref["galleries"].append(tmp)
-                    if tmp not in self.galleries_in_a_page:
-                        self.galleries_in_a_page.add(tmp)
+                    self.galleries_in_a_page.add(tmp)
                 elif match[2] == 'singlepic':
                     # print(f'Singlepic: {match[3]}')
                     tmp = match[3]
                     page_ref["images"].append(tmp)
-                    if tmp not in self.images_in_a_page:
-                        self.images_in_a_page.add(tmp)
+                    self.images_in_a_page.add(tmp)   # set addition
+
                 else:
                     print(f'MISSED: {match}, PAGE: {full_path}')
 
