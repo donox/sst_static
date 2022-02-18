@@ -134,7 +134,7 @@ NAVIGATION_LINKS = {
                 ("/pages/admin/photo_usage_data/", "Photo Usage Data"),
                 ("/pages/admin/pages_to_photos/", "Pages To Photos"),
                 ("/pages/admin/pages_directory/", "Sorted Page List"),
-                ("/pages/admin/terminal_folders/", "Sorted Terminal Folders")
+                ("/pages/admin/terminal_folders/", "Sorted Terminal Folders"),
                 ("", "----------------"),
                 ("/pages/admin/shortcodes/", "Shortcodes"),
                 ("/pages/admin/multi_story_pages/", "Multi-Story Pages"),
