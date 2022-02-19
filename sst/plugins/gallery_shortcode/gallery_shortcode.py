@@ -92,7 +92,7 @@ class Plugin(ShortcodePlugin):
         context.update(kw)
         # NOTE: this template is in themes/templates
         output = self.site.template_system.render_template(
-            'gallery_shortcode.jinja2',
+            'gallery_shortcode.tmpl',
             None,
             context
         )

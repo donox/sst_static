@@ -130,15 +130,18 @@ NAVIGATION_LINKS = {
                 ("/pages/admin/web_source_control/", "Website Source Management"),
                 ("/pages/admin/word_based_input/", "Word-based Source Documents"),
                 ("/pages/admin/word_based_source_control/", "Word-based Source Control"),
-                ("/pages/admin/shortcodes/", "Shortcodes"),
-                ("/pages/admin/multi_story_pages/", "Multi-Story Pages"),
-                ("/pages/admin/commands/", "System Commands"),
-                ("/pages/admin/import_wp/", "WP Import"),
-                ("/pages/admin/user_login/", "Manage user Logins"),
+                ("", "----------------"),
                 ("/pages/admin/photo_usage_data/", "Photo Usage Data"),
                 ("/pages/admin/pages_to_photos/", "Pages To Photos"),
                 ("/pages/admin/pages_directory/", "Sorted Page List"),
-                ("/pages/admin/terminal_folders/", "Sorted Terminal Folders")
+                ("/pages/admin/terminal_folders/", "Sorted Terminal Folders"),
+                ("", "----------------"),
+                ("/pages/admin/shortcodes/", "Shortcodes"),
+                ("/pages/admin/multi_story_pages/", "Multi-Story Pages"),
+                ("", "----------------"),
+                ("/pages/admin/commands/", "System Commands"),
+                ("/pages/admin/import_wp/", "WP Import"),
+                ("/pages/admin/user_login/", "Managing User Logins"),
             ),
             'Sys_Admin'
         )
@@ -1345,7 +1348,7 @@ EXTRA_HEAD_DATA += '<link href="' + SITE_URL + '../assets/css/mystyles.css" rel=
 # Plugins you don't want to use. Be careful :-)
 # DISABLED_PLUGINS = ["render_galleries"]
 # NOTE:: render_taxonomies wants to create a top-level index.html file which conflicts with
-#        the redirect specified above.  
+#        the redirect specified above.
 DISABLED_PLUGINS = ["render_taxonomies"]
 
 # Special settings to disable only parts of the indexes plugin.
