@@ -30,7 +30,7 @@ class DocxProcessor(object):
                         ml_filename = file[:-4] + 'md'
                         in_md = dirpath + '/' + ml_filename
                         save_dir = ''
-                        command = ["pandoc", f"{in_docx}", "-o",  f"{in_md}"]
+                        command = ["pandoc", f"{in_docx}", "-o",  f"{in_md} -t markdown-simple_tables+pipe_tables "]
                         try:
                             res = subprocess.run(command, check=True)
                         except Exception as e:
@@ -38,6 +38,18 @@ class DocxProcessor(object):
                         # NOTE:  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                         # Pandoc is escaping a number of characters including (_, $, ").  We need to correct
                         # only for such characters occurring in the shortcode
+
+                        # NOTE:  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        # This is a hack as Pandoc appears to be appending the parameter char string to the outfile name
+                        file_base = ml_filename.split('.')[0]
+                        dir_files = os.listdir(dirpath)
+                        for file_nm in dir_files:
+                            if file_nm.startswith(file_base):
+                                if file_nm.strip().endswith('markdown-simple_tables+pipe_tables'):
+                                    # This is the file that has been misnamed
+                                    os.rename(dirpath + '/' + file_nm, dirpath + '/' + file_base + '.md')
+                        # END OF HACK
+
                         with open(in_md, 'r') as created_md:
                             md_content = created_md.read()
                             # TODO:  create generator returning just shortcodes and do replace within
