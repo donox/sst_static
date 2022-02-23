@@ -7,6 +7,11 @@ The best way to learn to use these commands is to copy and modify an existing se
 
 *[This capability is a work in progress.  Please help with suggestions, issues, ideas, ...]*
 
+**WARNING:  Avoid the use of tabs in .txt files (commands.txt, meta.txt, xxx-template-story.txt, galleries' 
+metadata.yml).**
+
+**WARNING: Avoid the use of spaces in file names.  Both "-" and "_" may be used.**
+
 ###commands.txt
 All commands.txt files share the same basic format.  They are **.txt** files in a simplified
 yaml format (this need not be meaningful).  The file is structured as a series of individual commands, each
@@ -52,6 +57,29 @@ with a value giving the name of the folder to process.
 ###Command: process_single_folder, Command set: (top, content)
 The command *process_single_folder* is used to select which folder at its level is to be processed. It may
 occur more than once in a command_set.
+
+###Command: story, Command set: (story)
+The command *story* is the working command that handles a story destined for the site.  There are a number 
+of variants including the ability to process docx files and template created files.  The specific work 
+performed is determined by the content of the folder and specifications in the **meta.txt** file.  
+
+There are three types of content, each optional:
+
+1. **Story**.  There may be a single document resulting in a markdown file and ultimately a single web page.
+A story may be either a *Word document* or it may be a *YAML file* that provides the content needed by a
+pre-existing template.
+
+2. **Photos**.  There may be an arbitrary number of photos which are generally referenced by an included
+story, but, in fact, are independent and can be referenced from any other content.  If there are photos, there
+must be a *photos.txt* file specifying the pathnames where the photos are to be stored in the site's 
+*images* directory.  The photo.txt file is a list of pathnames for the photos.  Each photo in the folder
+**must** match the last segment of a pathname in photos.txt.  Note that care needs to be taken on ensuring
+filenames have no spaces and that capitalization matches. 
+
+3. **Galleries**. There may be an arbitrary number of galleries of photos.  A gallery is in its own 
+folder.  Each folder within the parent folder is assumed to contain a gallery.  The structure of a gallery
+folder is described under the *SYS_ADMIN/Shortcodes* page. 
+
 
 
 

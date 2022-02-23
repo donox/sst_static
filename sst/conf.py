@@ -137,6 +137,7 @@ NAVIGATION_LINKS = {
                 ("/pages/admin/terminal_folders/", "Sorted Terminal Folders"),
                 ("", "----------------"),
                 ("/pages/admin/shortcodes/", "Shortcodes"),
+                ("/pages/admin/editor_commands/", "Editor Commands"),
                 ("/pages/admin/multi_story_pages/", "Multi-Story Pages"),
                 ("", "----------------"),
                 ("/pages/admin/commands/", "System Commands"),
