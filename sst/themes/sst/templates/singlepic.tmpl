@@ -7,11 +7,11 @@
     {% else %}
     {% set mgn = '' %}
 {%  endif %}
-<div class="{{ css_class }} {{ alignment }}{{ mgn }}">
+<div class="{{ css_class }} {{ mgn }}">
     {% if title %}
         <div class="figure-caption has-text-black {{ title_class }}">{{ title }}</div>
     {% endif %}
-        <div class="figure
+        <div class="figure {{ alignment }}
         {% if has_borders %}
             sst_border
         {% endif %}" style="width:{{border_width}}; height:{{border_height}}; margin:auto">

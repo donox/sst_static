@@ -2,6 +2,12 @@
 body {
     display:none;
 }
+/* style to center an image as there isn't a built-in */
+.center_image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 /* Styles for use in signs */
 .sst_border_quote {
     border: saddlebrown solid 10px;

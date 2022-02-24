@@ -103,6 +103,8 @@ class Singlepic(ShortcodePlugin):
             context['alignment'] = 'float-right'
         elif direct == 'left':
             context['alignment'] = 'float-left'
+        elif direct == 'center':
+            context['alignment'] = 'center_image'
         else:
             context['alignment'] = 'float-none'
 
