@@ -139,6 +139,7 @@ NAVIGATION_LINKS = {
                 ("/pages/admin/shortcodes/", "Shortcodes"),
                 ("/pages/admin/editor_commands/", "Editor Commands"),
                 ("/pages/admin/multi_story_pages/", "Multi-Story Pages"),
+                ("/pages/admin/template_pages/", "Template-based Pages"),
                 ("", "----------------"),
                 ("/pages/admin/commands/", "System Commands"),
                 ("/pages/admin/import_wp/", "WP Import"),
