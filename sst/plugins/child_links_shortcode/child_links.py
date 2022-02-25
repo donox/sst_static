@@ -80,7 +80,7 @@ class BuildLinksToChildFiles(ShortcodePlugin):
                     files_to_display.append(meta_data)
 
         out_list = sorted(files_to_display,
-                          key=lambda x: meta_data['date'], reverse=True)
+                          key=lambda x: x['date'], reverse=True)
         context = {}
         context['items'] = out_list
         context['description'] = ''
