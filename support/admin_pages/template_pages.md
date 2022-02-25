@@ -28,7 +28,7 @@ There are other things that can be done, if we find that the need arises.
 The normal Sunnybear story (side-by-side photos and text, alternating sides) can be completed using a template. 
 All that is required is to provide the photos and a file giving the values to be substituted in the template.
 An example of a Sunnybear story file can be 
-downloaded <a href="/files/downloads/admin/Sunnybear_New_Year.txt" download="sunny">here</a>.
+downloaded <a href="/admin/Sunnybear_New_Year.txt" download >here</a>.
 
 Each '---' defines a different *section* of the file.  Except for the first section, each section corresponds
 to a single photo and associated text.
