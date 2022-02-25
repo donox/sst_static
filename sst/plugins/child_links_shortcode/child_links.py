@@ -8,6 +8,7 @@ import re
 import os
 import platform
 import datetime as dt
+from dateutil import parser
 from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH, SITE_URL
 
 
@@ -27,6 +28,7 @@ class BuildLinksToChildFiles(ShortcodePlugin):
         return super().set_site(site)
 
     def handler(self, *args, **kwargs):
+        print("CHILD LINKS CALLED")
         kw = {
             'output_folder': self.site.config['OUTPUT_FOLDER'],
         }
@@ -56,18 +58,29 @@ class BuildLinksToChildFiles(ShortcodePlugin):
             for file in filenames:
                 if file.endswith('.meta'):
                     meta_data = self.read_meta_file(dirpath + '/' + file)
+                    if "path" in meta_data.keys():
+                        temp = meta_data['path']
+                    else:
+                        temp = dirpath
+                    if temp.startswith('/'):
+                        temp = temp[1:]
+                    if temp.endswith('/'):
+                        temp = temp[:-1]
                     # NOTE: This is a hack as PythonAnywhere is not properly resolving relative
                     #       URL's.  If fixed, remove next line and change 'abs_slug' to 'slug'
                     #       in child_links.tmpl
-                    meta_data['abs_slug'] = SITE_URL + dir_to_process + '/' + meta_data['slug'] + '/'
+                    meta_data['abs_slug'] = SITE_URL + temp + '/' + meta_data['slug'] + '/'
+                    # Note: we have to defend against an invalid/incomplete date time format.  We'll assume
+                    #       either a valid date or just make today a default.
+                    try:
+                        res = parser.parse(meta_data['date'])
+                    except Exception as e:
+                        res = dt.datetime.today()
+                    meta_data['date'] = res
                     files_to_display.append(meta_data)
-            # for dirname in dirnames:
-            #     dir_file_data = files_to_display[dirname]
-            break
-        out_list = sorted(files_to_display,
-                          key=lambda x: dt.datetime.strptime(x['date'], '%Y-%m-%d %H:%M:%S'),
-                          reverse=True)
 
+        out_list = sorted(files_to_display,
+                          key=lambda x: x['date'], reverse=True)
         context = {}
         context['items'] = out_list
         context['description'] = ''

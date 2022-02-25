@@ -1,122 +1,30 @@
-Duplicate file: volunteering.md
+Duplicate file: word_based_source_control.md
 
-Duplicate file: sunnybear-header.md
+Duplicate file: photo_usage_data.html
 
-Duplicate file: sunnyside-does-it-right.md
+Duplicate file: user_login.md
 
-Duplicate file: multi_story_pages.md
+Duplicate file: commands.md
+
+Duplicate file: example_multi_story_page.yaml
+
+Duplicate file: example_single_entry.yaml
+
+Duplicate file: shortcodes.md
 
 Duplicate file: web_source_control.md
 
-Duplicate file: recommend-operating-system.md
+Duplicate file: website_management.md
+
+Duplicate file: multi_story_pages.md
+
+Duplicate file: pages_to_photos.html
+
+Duplicate file: import_wp.md
+
+Duplicate file: word_based_input.md
 
 Duplicate file: massanetta-springs-road-cleaned-up.md
 
-Duplicate file: resident-communications-survey.md
-
-Duplicate file: gift-shop.md
-
-Duplicate file: sunny-treasures-index.md
-
-Duplicate file: sunny-treasures-furniture.md
-
-Duplicate file: sunny-treasures-gift-shop.md
-
-Duplicate file: sunnyside-resident-council-2019-2020-directory.md
-
-Duplicate file: free-classes-at-blue-ridge-community-college.md
-
-Duplicate file: register-opportunity.md
-
-Duplicate file: sign-up-for-opportunity.md
-
-Duplicate file: manage-opportunity.md
-
-Duplicate file: registration-result.md
-
-Duplicate file: artandartists.md
-
-Duplicate file: music.md
-
-Duplicate file: sunnyside-senior-readers.md
-
-Duplicate file: technology-club.md
-
-Duplicate file: volunteer-roller.md
-
-Duplicate file: outdoor-games.md
-
-Duplicate file: photography.md
-
-Duplicate file: indoor-games.md
-
-Duplicate file: music.attachments.json
-
-Duplicate file: aviation.md
-
-Duplicate file: book-buddies.md
-
-Duplicate file: sunnyside-resident-art-gallery.md
-
-Duplicate file: a-portrait-of-the-artist.md
-
-Duplicate file: ducks-in-a-row.md
-
-Duplicate file: volunteers-needed-to-help-with-jmu-research-project.md
-
-Duplicate file: putting.md
-
-Duplicate file: and-the-winners-are.md
-
-Duplicate file: putting-tournament-winners.md
-
-Duplicate file: ss-photo-scavenger-hunt.md
-
-Duplicate file: photography-scavenger-hunt-week-two.md
-
-Duplicate file: photography-scavenger-hunt-week-4.md
-
-Duplicate file: practice-makes-perfect-the-first-1000-times-dont-count.md
-
-Duplicate file: photography-scavenger-hunt-week-3.md
-
-Duplicate file: photography-scavenger-hunt-week-one.md
-
-Duplicate file: photography-scavenger-hunt-week-5.md
-
-Duplicate file: buzzards.md
-
-Duplicate file: tech-club-tv.md
-
-Duplicate file: be-social-virtually-with-zoom.md
-
-Duplicate file: sunnyside-in-3d.md
-
-Duplicate file: we-have-virtual-reality.md
-
-Duplicate file: the-techzone-is-up-and-running.md
-
-Duplicate file: who-are-these-masked-marauders.md
-
-Duplicate file: those-passwords.md
-
-Duplicate file: sst-focus-group.md
-
-Duplicate file: the-tech-faire-was-a-hit.md
-
-Duplicate file: billiards.md
-
-Duplicate file: bridge.md
-
-Duplicate file: bingo.md
-
-Duplicate file: rummikub.md
-
-Duplicate file: mah-jongg.md
-
-Duplicate file: bunco.md
-
-Duplicate file: scrabble.md
-
-Duplicate file: campbell-wins-pool-tournament.md
+Duplicate file: new-residents.md
 
