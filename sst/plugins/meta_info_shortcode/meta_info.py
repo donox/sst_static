@@ -9,6 +9,7 @@ import platform
 import datetime as dt
 from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH, SITE_URL
 
+
 class MetaInfo(ShortcodePlugin):
     # This inserts meta information such as a title or byline into the document.
     name = 'meta_info'
@@ -53,17 +54,3 @@ class MetaInfo(ShortcodePlugin):
         )
         return output, deps
 
-    def read_meta_file(self, filepath):
-        res_dict = {}
-        re_line = re.compile('\.\. (\w+): (.*)\n')
-        # ..wp - status: publish
-        with open(filepath, 'r') as fd:
-            for line in fd:
-                matched_res = re.match(re_line, line)
-                try:
-                    v1 = matched_res.group(1)
-                    v2 = matched_res.group(2)
-                    res_dict[v1] = v2
-                except Exception as e:
-                    print(f'BROKEN LINE?: {line}')
-        return res_dict

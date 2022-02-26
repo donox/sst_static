@@ -1,0 +1,9 @@
+{#  -*- coding: utf-8 -*- #}
+{% if display == 'button' %}
+    <a type="button" class="btn btn-primary is-link" style="margin:3px;"
+    href="{{href}}"  target="{{target}}" >{{display_text}}</a>
+{% elif display == 'link' %}
+    <a type="button" class="is-link" style="margin:3px;"
+    href="{{href}}" target="{{target}}">{{display_text}}</a>
+{% endif %}
+
