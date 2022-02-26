@@ -36,6 +36,22 @@ the admin to follow or is an automatic removal - probably the former).
 **on_removal** (optional) is one of **archive** or **discard** telling the system what to do with the story
 when it is removed.
 
+###Links Shortcode
+This shortcode provides the means to link (html "a" tag) items or locations in a document.  In particular,
+it is used to add downloads such as pdf files and to link to either external or internal urls.
+
+> **\{\{% links purpose="download" reference="url or document" target="new" %\}\}**
+
+**purpose** (required) specifies the intent of the link.  Possible values are:
+1. **download** indicates that the link specifies a document (reference attribute) that may be
+downloaded by the user.  The document must occur in the *files* directory of the website. 
+
+**reference** (required) specifies the url identifying the page or document the link goes to.
+
+**target** (optional) specifies where to open a linked document.  If it has the value **new**, it 
+will open in a new browser page.  Alternatively, it may use any of the attribute values specified
+in the html spec for the target attribute. (Note that "new" simply duplicates the html value "_blank")
+
 ###Gallery Shortcode
 The gallery shortcode defines a "gallery" of pictures.  Galleries are currently a bit of a 
 work in progress. There are two parts to using a gallery:

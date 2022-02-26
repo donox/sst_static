@@ -10,9 +10,9 @@ import datetime as dt
 from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH, SITE_URL
 
 
-class MetaInfo(ShortcodePlugin):
-    # This inserts meta information such as a title or byline into the document.
-    name = 'meta_info'
+class Links(ShortcodePlugin):
+    #  A shortcode to insert links ("a" tag) info for downloads, urls, etc
+    name = 'links'
 
     def __init__(self):
         self.site = None
@@ -27,28 +27,32 @@ class MetaInfo(ShortcodePlugin):
         kw = {
             'output_folder': self.site.config['OUTPUT_FOLDER'],
         }
-        content = content_type = ''
-        post = kwargs['post']
-        for key in kwargs:
-            if key == 'data':
-                content = kwargs['data']
-            if key == 'info_type':
-                content_type = kwargs['info_type']
-
-        folder = post.folder
-        post_name = post.post_name
-        source_path = post.source_path
-        site = kwargs['site']
-        deps = []  # WHAT IS THIS FOR
-
         context = {}
-        context['content'] = content
-        context['type'] = content_type
-        context['permalink'] = '#'
+        keys = kwargs.keys()
+        post = kwargs['post']
+
+        if "purpose" not in keys:
+            raise ValueError(f"No key \"purpose\" found in links shortcode.")
+        purpose = kwargs["purpose"]
+        context["purpose"] = purpose
+        if "reference" not in keys:
+            raise ValueError(f"No key \"reference\" found in links shortcode.")
+        reference = kwargs["reference"]
+        target = None
+        if "target" in keys:
+            target = kwargs["target"]
+        button = "DOWNLOAD"
+        context["button"] = button
+        if purpose == "download":
+            file_path = "files/" + reference
+            if not os.path.exists(file_path):
+                raise ValueError(f"No document found at location {reference}")
+            context["href"] = reference
+        deps = []  # WHAT IS THIS FOR
         context.update(self.site.GLOBAL_CONTEXT)
         context.update(kw)
         output = self.site.template_system.render_template(
-            'disposition.tmpl',
+            'links.tmpl',
             None,
             context
         )
