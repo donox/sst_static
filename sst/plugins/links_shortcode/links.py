@@ -38,15 +38,28 @@ class Links(ShortcodePlugin):
         if "reference" not in keys:
             raise ValueError(f"No key \"reference\" found in links shortcode.")
         reference = kwargs["reference"]
-        target = None
         if "target" in keys:
             target = kwargs["target"]
-        button = "DOWNLOAD"
-        context["button"] = button
+            context["target"] = target
+            if target == "new":
+                context["target"] = "_blank"
+        else:
+            context["target"] = None
+        if "display" in keys:
+            display = kwargs["display"]
+            if display.lower() not in ["button", "link"]:
+                raise ValueError(f"Unrecognized display request type: {display}")
+            context["display"] = display.lower()
+        else:
+            context["display"] = "link"
+        if "display_text" in keys:
+            context["display_text"] = kwargs["display_text"]
         if purpose == "download":
             file_path = "files/" + reference
             if not os.path.exists(file_path):
                 raise ValueError(f"No document found at location {reference}")
+            context["href"] = reference
+        elif purpose == "transfer":
             context["href"] = reference
         deps = []  # WHAT IS THIS FOR
         context.update(self.site.GLOBAL_CONTEXT)
