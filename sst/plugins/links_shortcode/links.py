@@ -54,6 +54,12 @@ class Links(ShortcodePlugin):
             context["display"] = "link"
         if "display_text" in keys:
             context["display_text"] = kwargs["display_text"]
+        else:
+            if context["display"] == "button":
+                context["display_text"] = "Go To"
+            else:
+                context["display_text"] = "here"
+
         if purpose == "download":
             file_path = "files/" + reference
             if not os.path.exists(file_path):
