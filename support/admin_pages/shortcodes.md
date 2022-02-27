@@ -43,6 +43,7 @@ it is used to add downloads such as pdf files and to link to either external or 
 > **\{\{% links purpose="download" reference="url or document" target="new" display="button" display_text="Read More" %\}\}**
 
 **purpose** (required) specifies the intent of the link.  Possible values are:
+
 1. **download** indicates that the link specifies a document (reference attribute) that may be
 downloaded by the user.  The document must occur in the *files* directory of the website. 
 2. **transfer** indicates a transfer (launch) of an external website.  The *target* attribute 
