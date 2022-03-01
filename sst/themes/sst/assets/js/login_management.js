@@ -25,12 +25,12 @@ function checkCookie() {
     if (user != "") {
         $("body").show();
     } else {
-        user = prompt("Please enter your name:", "");
+        user = prompt("You must log in the first time you visit \n    the new Sunnyside-Times\n\n    Please enter your name:", "");
         if (user != "" && user != null) {
             var un = CryptoJS.MD5(user);
             if (user_logins[un]) {
                 pswd = user_logins[un];
-                pswdtry = prompt("Please enter your password:", "");
+                pswdtry = prompt("Please enter your password: \n(temporary reminder: Sunny)", "");
                 if (CryptoJS.MD5(pswdtry) == pswd) {
                     setCookie("username", user, 365);
                     $("body").show();
