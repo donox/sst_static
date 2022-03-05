@@ -7,6 +7,6 @@
 {% endif %}
 <ol>
 {% for item in items %}
-    <li><a href="{{ item.abs_slug }}"> {{ item.title }} <span style="font-size: small; color:black"> [{{ item.date }}] </span></a></li>
+    <li><a href="{{ item.slug }}"> {{ item.title }} <span style="font-size: small; color:black"> [{{ item.date }}] </span></a></li>
 {% endfor %}
 </ol>
