@@ -167,6 +167,9 @@ The (optional) direction parameter has a value of **"row"**, **"row-reverse"**,
 left-to-right, *row-reverse* specifies right-to-left.  *Column* specifies top-to-bottom
 while *column-reverse* specifies bottom-to-top.
 
+#####**"other attributes"**
+While seldom used, boxes may have other attributes such as the html *style* element.  Any other
+attributes on the shortcode are added to the underlying html without modification or checking.
 
 
 
