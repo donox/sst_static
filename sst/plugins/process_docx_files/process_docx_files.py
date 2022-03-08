@@ -6,6 +6,8 @@ from nikola.utils import get_logger, STDERR_HANDLER
 import os
 import shutil
 from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH
+from plugins.process_docx_files.flexbox_support import SupportFlexbox
+from collections import deque
 
 
 class DocxProcessor(object):
@@ -55,8 +57,14 @@ class DocxProcessor(object):
                             # TODO:  create generator returning just shortcodes and do replace within
                             md_content = md_content.replace("\\_", "_").replace('\\"', '"').replace("\\$", "$")
                             created_md.close()
+
+                            flex = SupportFlexbox()
+                            result = []
+                            flex.process_box_shortcodes(md_content, result)
+                            revised_content = ''.join(result)
+
                         with open(in_md, 'w') as created_md:
-                            created_md.write(md_content)
+                            created_md.write(revised_content)
                             created_md.close()
                         for line in metadata:
                             line_pos = line.find(' path:')

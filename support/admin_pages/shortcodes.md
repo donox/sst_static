@@ -123,7 +123,7 @@ Title and caption are optional, but the intent will be to take them from the pho
 metadata if they exist.  A title or caption specified in the shortcode will supercede
 something contained in the photo.
 
-####**"has_borders="**
+#####**"has_borders="**
 By default, individual pictures have a border.  For cartoons and similar fill-ins, it often
 looks better without a border.  In that case, adding the has_borders attribute and setting it
 to "False" (or "No") will remove the border.  
@@ -136,6 +136,33 @@ is used as the link name.
 > **\{\{% build_links_to_children %\}\}**
 
 This shortcode currently has no arguments or other specifiers though developing them seems reasonable.
+
+###Layout Shortcodes
+These shortcodes provide the ability to specify layout for a document.  It is based on the CSS
+Flexbox model which is described in 
+[this basic tutorial](https://www.quackit.com/css/flexbox/tutorial/flexbox_introduction.cfm).
+
+The general idea is to place parts of a web page (think picture, or a few paragraphs of text) in 
+a container that specifies how to organize the content such as in a row or a column.  While the
+Flexbox is a very general and powerful facility, our use is typically much more limited.
+
+Each container (*box*) can specify how other containers (*boxitem*) that are contained within it
+are arranged.  Each contained item (*boxitem*) itself contains arbitrary content excluding other
+boxes or boxitems.  
+
+Care needs to be exercised to ensure that boxitems do not overlap one another and that 
+all boxitems are properly contained within a box
+
+> **\{\{% box direction="row" %\}\} xx boxitems xx \{\{% /box %\}\}**
+
+> **\{\{% boxitem  %\}\} xx content xx ** \{\{% /boxitem %\}\}**
+
+
+#####**"direction="**
+The (optional) direction parameter has a value of **"row"**, **"row-reverse"**, 
+**"column"**, or **"column-reverse"**.  The default value is *row*.  *Row* specifies
+left-to-right, *row-reverse* specifies right-to-left.  *Column* specifies top-to-bottom
+while *column-reverse* specifies bottom-to-top.
 
 
 
