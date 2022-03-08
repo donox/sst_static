@@ -37,6 +37,11 @@ class DocxProcessor(object):
                             res = subprocess.run(command, check=True)
                         except Exception as e:
                             print(f'Error running pandoc with command: {command} and error: {e}')
+                        # NOTE:   !!!!!!!!!!!!!!!!!!!!!!!
+                        # Pandoc surrounds each line in a <p></p> element.  This can cause broken html
+                        # for any shortcode that spans multiple lines - in particular, those with separate
+                        # start and end elements (the box shortcode defends against this).
+
                         # NOTE:  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                         # Pandoc is escaping a number of characters including (_, $, ").  We need to correct
                         # only for such characters occurring in the shortcode

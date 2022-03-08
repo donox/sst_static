@@ -137,8 +137,8 @@ is used as the link name.
 
 This shortcode currently has no arguments or other specifiers though developing them seems reasonable.
 
-###Layout Shortcodes
-These shortcodes provide the ability to specify layout for a document.  It is based on the CSS
+###Layout Shortcode
+This shortcode provides the ability to specify layout for a document.  It is based on the CSS
 Flexbox model which is described in 
 [this basic tutorial](https://www.quackit.com/css/flexbox/tutorial/flexbox_introduction.cfm).
 
@@ -146,17 +146,20 @@ The general idea is to place parts of a web page (think picture, or a few paragr
 a container that specifies how to organize the content such as in a row or a column.  While the
 Flexbox is a very general and powerful facility, our use is typically much more limited.
 
-Each container (*box*) can specify how other containers (*boxitem*) that are contained within it
-are arranged.  Each contained item (*boxitem*) itself contains arbitrary content excluding other
-boxes or boxitems.  
+Each container (*box*) can specify how other containers (*which may themselves be boxes*) that are contained within it
+are arranged.  
 
-Care needs to be exercised to ensure that boxitems do not overlap one another and that 
-all boxitems are properly contained within a box
+Care needs to be exercised to ensure that boxes do not overlap one another and that boxes containing boxes do
+not overlap improperly.  Because it may be visually difficult to ensure proper containment in some cases, the 
+box shortcode differs from all other shortcodes in that the ending element (the */box* section) includes a 
+name attribute.  Having a name attribute in both the start and ending shortcode specifier for a box allows the
+system to more easily check for improper nesting and make a more useful error report.
 
-> **\{\{% box direction="row" %\}\} xx boxitems xx \{\{% /box %\}\}**
+> **\{\{% box name="xxboxnamexx" direction="row" %\}\} xx box content xx \{\{% /box name="xxboxnamexx" %\}\}**
 
-> **\{\{% boxitem  %\}\} xx content xx ** \{\{% /boxitem %\}\}**
-
+#####**"name="**
+The name parameter serves to connect the beginning and end of the shortcode.  The value of the name attribute
+must be unique within the document. 
 
 #####**"direction="**
 The (optional) direction parameter has a value of **"row"**, **"row-reverse"**, 
