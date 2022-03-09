@@ -16,7 +16,7 @@ class SupportFlexbox(object):
     # Note: DOTALL makes '.' include newlines
     box_comp_start = re.compile(box_start)
     box_comp_end = re.compile(box_end)
-    box_attr = re.compile(r'(?P<attribute>\w+)="(?P<value>\w+)"')
+    box_attr = re.compile(r'(?P<attribute>\w+)="(?P<value>(\w|_|-|:|;)+)"')
 
     def __init__(self):
         self.stack = deque()
@@ -91,9 +91,33 @@ class SupportFlexbox(object):
         else:
             result.append(in_string)
 
-    @staticmethod
-    def _build_flex_container_start(attrs):
-        start_str = f'<div class="src_flex_container" {attrs}>'
+    def _build_flex_container_start(self, attrs):
+        attr_dict = dict()
+        while True:
+            parsed_attrs = self.box_attr.search(attrs)
+            if not parsed_attrs:
+                break
+            attr_dict[parsed_attrs.group('attribute')] = parsed_attrs.group('value')
+            attrs = attrs[parsed_attrs.end('value'):]
+        dict_keys = list(attr_dict.keys())
+        if 'direction' in dict_keys:
+            dict_keys.remove('direction')
+            val = attr_dict['direction']
+            if val == 'row':
+                cls = 'src-flex-container'
+            elif val == 'row-reverse':
+                cls = 'src-flex-container-rev'
+            elif val == 'column' or val == 'col':
+                cls = 'src-flex-container-col'
+            elif val == 'column-reverse' or val == 'col-reverse':
+                cls = 'src-flex-container-col-rev'
+            else:
+                cls = f'src-flex-container UNRECOGNIZED BOX DIRECTION {val}'
+        other_attrs = []
+        for key in dict_keys:
+            other_attrs.append(f' {key}="{attr_dict[key]}"')
+        other_attrs = ' '.join(other_attrs)
+        start_str = f'<div class="{cls}" {other_attrs}>'
         return start_str
 
 

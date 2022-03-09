@@ -30,6 +30,13 @@
           </advancedOptions>
         </fileTransfer>
       </webServer>
+      <webServer id="2ece48b5-b404-4e93-a036-72de8ef975c5" name="sunnyside-times.com" url="http://sunnyside-times.com">
+        <fileTransfer rootFolder="/httpdocs" host="sunnyside-times.com" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>

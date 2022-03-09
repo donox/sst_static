@@ -173,6 +173,14 @@ p {
     align-items: center;
 }
 
+.src-flex-container-col-rev { /* arranges elements in a column */
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    -webkit-flex-direction: column-reverse; /* Safari */
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
 .src-flex-item {
     -webkit-flex-grow: 1; /* Safari */
     flex-grow: 1;

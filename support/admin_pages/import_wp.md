@@ -1,13 +1,16 @@
 ### Procedure to Load a WP Backup
 The process is described in the Nikola handbook at [Importing Wordpress](https://getnikola.com/handbook.html#importing-your-wordpress-site-into-nikola).
 This page builds on that description but generally follows the procedure as described.
-
+{{% box direction="reverse" %}}
+{{% boxitem %}}
 #### Generating and importing an XML dump of the site
 In the Wordpress backend, go to **Tools/Export**.  It is a small issue, but because there may be updates 
 to the site between the time a backup is created (around 4:00pm daily) and the time the xml dump is taken, 
 it would be best to pull the xml dump around the same time as the backup if there is the possibility of 
 a change to the site in the intervening time.
 1. Use the "ALl" content button. 
+{{% /boxitem %}}
+{{% boxitem %}}
 2. In a terminal, navigate to the Nikola **project** (one level above the site where we normally run
    commands).
 3. run **nikola import-wordpress /home/don/Downloads/sstxml.xml (path to your download)
@@ -22,7 +25,8 @@ be earlier saves in Wordpress.  They may be deleted.
 
 There is also one page with no filename (just the extension ".md").  This is actually Page One and should be 
 renamed (including the ".meta" file) as "page-one.md".  Also, update the slug in the ".meta" file.
-
+{{% /boxitem %}} 
+{{% /box %}}
 #### Download Most Recent Backup from Google Drive
 The db.gz file contains the SQL DB and is the primary file for getting the information 
 needed to convert the WP photo ID's to the pathnames needed in Nikola.  The 'other' files 
