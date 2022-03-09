@@ -60,7 +60,8 @@ class DocxProcessor(object):
                         with open(in_md, 'r') as created_md:
                             md_content = created_md.read()
                             # TODO:  create generator returning just shortcodes and do replace within
-                            md_content = md_content.replace("\\_", "_").replace('\\"', '"').replace("\\$", "$")
+                            md_content = md_content.replace("\\_", "_").replace('\\"', '"').replace("\\$", "$").\
+                                replace('“', '"').replace('”', '"')
                             created_md.close()
 
                             flex = SupportFlexbox()
