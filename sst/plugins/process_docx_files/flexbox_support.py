@@ -100,11 +100,12 @@ class SupportFlexbox(object):
             attr_dict[parsed_attrs.group('attribute')] = parsed_attrs.group('value')
             attrs = attrs[parsed_attrs.end('value'):]
         dict_keys = list(attr_dict.keys())
+        cls = 'src-flex-container'
         if 'direction' in dict_keys:
             dict_keys.remove('direction')
             val = attr_dict['direction']
             if val == 'row':
-                cls = 'src-flex-container'
+                cls = 'src-flex-container'   # not necessary - doc value only
             elif val == 'row-reverse':
                 cls = 'src-flex-container-rev'
             elif val == 'column' or val == 'col':

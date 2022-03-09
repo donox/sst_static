@@ -105,6 +105,9 @@ class ProcessDocxFiles(nikola.plugin_categories.Command):
     name = 'process_docx_files'
     logger = None
 
+    doc_purpose = "Convert docx files in support/docx_pages to md files in pages."
+    doc_usage = "TBD"    # see https://www.getnikola.com/extending.html#command-plugins for example
+
     def __init__(self):
         super(ProcessDocxFiles, self).__init__()
 
