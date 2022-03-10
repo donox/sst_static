@@ -66,10 +66,6 @@ class BuildLinksToChildFiles(ShortcodePlugin):
                         temp = temp[1:]
                     if temp.endswith('/'):
                         temp = temp[:-1]
-                    # NOTE: This is a hack as PythonAnywhere is not properly resolving relative
-                    #       URL's.  If fixed, remove next line and change 'abs_slug' to 'slug'
-                    #       in child_links.tmpl
-                    meta_data['abs_slug'] = SITE_URL + temp + '/' + meta_data['slug'] + '/'
                     # Note: we have to defend against an invalid/incomplete date time format.  We'll assume
                     #       either a valid date or just make today a default.
                     try:

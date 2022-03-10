@@ -6,6 +6,8 @@ from nikola.utils import get_logger, STDERR_HANDLER
 import os
 import shutil
 from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH
+from plugins.process_docx_files.flexbox_support import SupportFlexbox
+from collections import deque
 
 
 class DocxProcessor(object):
@@ -35,6 +37,11 @@ class DocxProcessor(object):
                             res = subprocess.run(command, check=True)
                         except Exception as e:
                             print(f'Error running pandoc with command: {command} and error: {e}')
+                        # NOTE:   !!!!!!!!!!!!!!!!!!!!!!!
+                        # Pandoc surrounds each line in a <p></p> element.  This can cause broken html
+                        # for any shortcode that spans multiple lines - in particular, those with separate
+                        # start and end elements (the box shortcode defends against this).
+
                         # NOTE:  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                         # Pandoc is escaping a number of characters including (_, $, ").  We need to correct
                         # only for such characters occurring in the shortcode
@@ -53,10 +60,17 @@ class DocxProcessor(object):
                         with open(in_md, 'r') as created_md:
                             md_content = created_md.read()
                             # TODO:  create generator returning just shortcodes and do replace within
-                            md_content = md_content.replace("\\_", "_").replace('\\"', '"').replace("\\$", "$")
+                            md_content = md_content.replace("\\_", "_").replace('\\"', '"').replace("\\$", "$").\
+                                replace('“', '"').replace('”', '"')
                             created_md.close()
+
+                            flex = SupportFlexbox()
+                            result = []
+                            flex.process_box_shortcodes(md_content, result)
+                            revised_content = ''.join(result)
+
                         with open(in_md, 'w') as created_md:
-                            created_md.write(md_content)
+                            created_md.write(revised_content)
                             created_md.close()
                         for line in metadata:
                             line_pos = line.find(' path:')
@@ -90,6 +104,9 @@ converter = DocxProcessor()
 class ProcessDocxFiles(nikola.plugin_categories.Command):
     name = 'process_docx_files'
     logger = None
+
+    doc_purpose = "Convert docx files in support/docx_pages to md files in pages."
+    doc_usage = "TBD"    # see https://www.getnikola.com/extending.html#command-plugins for example
 
     def __init__(self):
         super(ProcessDocxFiles, self).__init__()
