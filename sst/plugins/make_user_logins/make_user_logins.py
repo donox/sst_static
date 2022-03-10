@@ -6,6 +6,7 @@ import importlib
 from nikola.utils import get_logger, STDERR_HANDLER
 import csv
 from hashlib import md5
+import os
 
 import platform
 from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH
@@ -22,26 +23,25 @@ class MakeUserLogins(object):
         pass
 
     def make_logins(self):
-        with open(self.file_in, 'r') as fd_in:
-            reader = csv.reader(fd_in)
-            with open(self.file_out, 'w+') as fd_out:
-                password_table = 'var user_logins = {\n'
-                for line in reader:
-                    if len(line) == 1:
-                        pass_out = self.default_md5_password
-                    else:
-                        pass_out = md5(line[1].encode('utf-8')).hexdigest()
-                    user_out = md5(line[0].encode('utf-8')).hexdigest()
-                    password_table += '"' + user_out + '": "' + pass_out + '",\n'
-                password_table = password_table[:-2] + '}\n'
-                fd_out.write(password_table)
-            fd_out.close()
-            fd_in.close()
+        if not os.path.isfile(self.file_in):
+            print(f"Users.csv input file not found.  Need to build from Google Drive masters.")
+        else:
+            with open(self.file_in, 'r') as fd_in:
+                reader = csv.reader(fd_in)
+                with open(self.file_out, 'w+') as fd_out:
+                    password_table = 'var user_logins = {\n'
+                    for line in reader:
+                        if len(line) == 1:
+                            pass_out = self.default_md5_password
+                        else:
+                            pass_out = md5(line[1].encode('utf-8')).hexdigest()
+                        user_out = md5(line[0].encode('utf-8')).hexdigest()
+                        password_table += '"' + user_out + '": "' + pass_out + '",\n'
+                    password_table = password_table[:-2] + '}\n'
+                    fd_out.write(password_table)
+                fd_out.close()
+                fd_in.close()
 
-
-    def file_reader(self):
-        for line in self.content_dict['fixes']:
-            yield line
 
 converter = MakeUserLogins()
 
