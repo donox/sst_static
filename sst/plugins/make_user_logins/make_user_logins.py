@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import nikola.plugin_categories
-# this is a reference to another package at the same level
-import importlib
 from nikola.utils import get_logger, STDERR_HANDLER
 import csv
 from hashlib import md5
 import os
 
-import platform
-from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH
+from conf import PROJECT_PATH, WEBSITE_PATH
 
 class MakeUserLogins(object):
     def __init__(self):
