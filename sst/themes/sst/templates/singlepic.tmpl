@@ -15,10 +15,14 @@
         {% if has_borders %}
             sst_border
         {% endif %}" style="width:{{border_width}}; height:{{border_height}}; margin:auto">
+        {% if image_path %}
             <img class="{{ image_class }} figure-img img-fluid rounded"
              src="{{ image_path }}" style="height: {{ height }}; width: {{ width }};"/>
              {% if caption %}
                 <div class="caption_class">{{ caption }} </div>
               {% endif %}
+        {% else %}
+        <h3>No path given for image</h3>
+        {% endif %}
         </div>
 </div>
