@@ -14,6 +14,7 @@ class DocxProcessor(object):
     def __init__(self):
         self.web_source = WEBSITE_PATH + 'pages'
         self.files_to_process = PROJECT_PATH + 'support/docx_pages'
+        self.transl_table = dict([(ord(x), ord(y)) for x, y in zip(u"‘’´“”–-", u"'''\"\"--")])
 
     def close(self):
         pass
@@ -59,9 +60,8 @@ class DocxProcessor(object):
 
                         with open(in_md, 'r') as created_md:
                             md_content = created_md.read()
-                            # TODO:  create generator returning just shortcodes and do replace within
-                            md_content = md_content.replace("\\_", "_").replace('\\"', '"').replace("\\$", "$").\
-                                replace('“', '"').replace('”', '"')
+                            # Replace non-ASCII chars (smart quotes, long dash, ..)
+                            md_content = ''.join(md_content).translate(self.transl_table)
                             created_md.close()
 
                             flex = SupportFlexbox()

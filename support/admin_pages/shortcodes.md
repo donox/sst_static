@@ -15,7 +15,7 @@ identified.
 
 Note the space *before* the forward slash terminating the shortcode.
 
-The **info_type** specifies what is to be added.  The choices are:
+The **info_type** specifies what is to be added.  The choices are: 
 
 1. **title** which adds a title to the story/page.
 2. **byline** which adds the list of writers to the page.  The result is a line starting with **Written by:** 
@@ -116,7 +116,8 @@ location used by Wordpress at the time of importing.
 #####**"width=", "height=", "alignment="**
 Width and height of the image are set as was done in Wordpress.  The default value in 
 each case is 300px. Alignment is the same as in Wordpress (left, right, center).  The 
-default will generally be left as set by the browser when placing the image. 
+default will generally be left as set by the browser when placing the image.  The "px" size indicator
+may be omitted as it will be supplied by the system.
 
 #####**"title=", "caption="**
 Title and caption are optional, but the intent will be to take them from the photo
