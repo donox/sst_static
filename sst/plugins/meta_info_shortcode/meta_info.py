@@ -48,7 +48,7 @@ class MetaInfo(ShortcodePlugin):
         context.update(self.site.GLOBAL_CONTEXT)
         context.update(kw)
         output = self.site.template_system.render_template(
-            'disposition.tmpl',
+            'meta_info.tmpl',
             None,
             context
         )
