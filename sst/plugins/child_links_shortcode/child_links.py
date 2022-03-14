@@ -71,7 +71,7 @@ class BuildLinksToChildFiles(ShortcodePlugin):
                     try:
                         res = parser.parse(meta_data['date'])
                     except Exception as e:
-                        res = dt.datetime.today()
+                        res = dt.datetime.today().date()
                     meta_data['date'] = res
                     files_to_display.append(meta_data)
 
