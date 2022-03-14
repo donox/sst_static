@@ -142,7 +142,7 @@ NAVIGATION_LINKS = {
                 ("/pages/admin/template_pages/", "Template-based Pages"),
                 ("", "----------------"),
                 ("/pages/admin/commands/", "System Commands"),
-                ("/pages/admin/import_wp/", "WP Import"),
+                ("/pages/admin/sst_utils/", "Sst_utils"),
                 ("/pages/admin/user_login/", "Managing User Logins"),
             ),
             'Sys_Admin'
