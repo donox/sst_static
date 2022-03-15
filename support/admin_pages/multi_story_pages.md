@@ -39,6 +39,10 @@ nice summary of the Gotchas [here](
 https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html#gotchas).  In particular, a colon (:)
 followed by a space or newline must be enclosed in quotes (generally use double quotes).
 
+####Error Log
+When the multi_pages command is run, it creates a file in the support directory named multi-pages.txt.  This
+file has any errors or other notices that occurred during the creation of the pages.
+
 ####Story Snippets
 <a id="#story-snippet"/>
 A story snippet is a short entry that can be placed on a multi-story page.  It may either be an entire
