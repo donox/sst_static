@@ -29,6 +29,7 @@ def run_jinja_template(template, context):
 
 
 class Reporter(object):
+    """Create log of processing in support directory."""
     def __init__(self, out_file):
         self.outfile = out_file
         self.outpath = PROJECT_PATH + 'support/' + out_file
@@ -68,6 +69,7 @@ class MultiPage(object):
     name = 'multi_pages'
 
     def __init__(self):
+        self.date_string = dt.datetime.today().date().isoformat()
         self.web_source = WEBSITE_PATH + '/pages'
         self.yaml_dir = WEBSITE_PATH + 'plugins/multi_story_pages/pages'
         self.content_dict = {}
@@ -76,9 +78,10 @@ class MultiPage(object):
         search_path = WEBSITE_PATH + '/plugins/multi_story_pages/templates'
         template_loader = FileSystemLoader(searchpath=search_path)
         self.template_environment = Environment(loader=template_loader)
-        self.reporter = Reporter('multi_page.txt')
+        self.reporter = Reporter(f'multi_page-{self.date_string}.txt')
 
     def _make_column_width_classes(self, width):
+        """Make bootstrap witdh classes (e.g., col-sm-4) for specified width"""
         sizes = ['col-', 'col-sm-', 'col-md-', 'col-lg-', 'col-xl-']
         width_str = str(width)
         return ' '.join([x + width_str for x in sizes])
@@ -96,7 +99,8 @@ class MultiPage(object):
                 row_context = {}
                 context['rows'].append(row_context)
                 row_context['cols'] = []
-                if row['Row']:
+                key = 'Row'             # Track key used in case of error
+                if row[key]:
                     for colnum, col in enumerate(row['Row']):
                         col_context = {}
                         col_keys = list(col.keys())
@@ -107,13 +111,15 @@ class MultiPage(object):
                         else:
                             wd = 4
                         col_context['col_width'] = self._make_column_width_classes(wd)
-                        if col['Entries']:
+                        key = 'Entries'
+                        if col[key]:
                             for entrynum, entry in enumerate(col['Entries']):
                                 entry_context = {}
                                 col_context['entries'].append(entry_context)
-                                yield rownum, colnum, entrynum, entry_context, entry['Entry']
+                                key = 'Entry'
+                                yield rownum, colnum, entrynum, entry_context, entry[key]
         except Exception as e:
-            raise ValueError(f"Invalid key in yaml page {yaml_page}")
+            self.reporter.record_err(f"Invalid key {key} in yaml page {yaml_page}")
 
     def _yaml_entry(self, yaml_page):
         with open(yaml_page, 'r', encoding='utf-8') as fd:
@@ -122,9 +128,12 @@ class MultiPage(object):
                 yml = YAML(typ='safe')
                 return yml.load(fd)
             except Exception as e:
-                raise ValueError(f"Failure loading yaml entry: {yaml_page} with error: {e}")
+                self.reporter.record_err(f"Failure loading yaml entry: {yaml_page} with error: {e}")
 
     def get_pages_to_build_yaml(self):
+        """Iterator for yaml files for each multi_page to be built."""
+        # Note - the first path tested is for the yaml_dir itself which will not have
+        #        an associated yaml file, to the loop skips before processing a specific page directory.
         for dirpath, _, fileList in os.walk(self.yaml_dir):
             dir_control_file = dirpath.split('/')[-1]
             dir_yaml = dirpath + '/' + dir_control_file + '.yaml'
@@ -135,7 +144,9 @@ class MultiPage(object):
                         yml = YAML(typ='safe')
                         yield dirpath, yml.load(fd)
                     except Exception as e:
-                        raise ValueError(f"Failure loading {dir_yaml} with error: {e}")
+                        self.reporter.record_err(f"Failure loading {dir_yaml} with error: {e.args}")
+            else:
+                self.reporter.record_note(f"Attempted to find {dir_yaml} which does not exist - skipping.")
 
     def _process_entry(self, entry_type, local_context, entry, position):
         if "target" in entry.keys():
@@ -174,6 +185,7 @@ class MultiPage(object):
         for page_dir, special_page in self.get_pages_to_build_yaml():
             context = {}  # Each file is a separately built page
             for row_num, col_num, entry_num, local_context, entry in self._yaml_iterator(special_page, context):
+                entry_type = None  # defend against undefined variable
                 position = (row_num, col_num, entry_num)
                 if type(entry) == str:
                     entry_descriptor = entry + '.yaml'
@@ -185,11 +197,15 @@ class MultiPage(object):
                         entry = self._yaml_entry(entry_page_path)['Entry']
                         entry_type = entry['entry_type']
                     except Exception as e:
-                        if entry_type.find('-') != -1:
-                            err_string = f"Do you have a '-' instead of a '_' in the entry {entry}?"
+                        if entry_type:
+                            if entry_type.find('-') != -1:
+                                err_string = f"Do you have a '-' instead of a '_' in the entry {entry}?"
+                            else:
+                                err_string = f"Invalid YAML - missing expected key in {entry.keys()}"
                         else:
-                            err_string = f"Invalid YAML - missing expected key in {entry.keys()}"
+                            err_string = f"YAML entry {entry} has no defined 'entry_type"
                         self.reporter.record_err(err_string)
+
                 elif type(entry) == dict:
                     entry_type = entry['entry_type']
                 else:
