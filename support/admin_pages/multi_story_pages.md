@@ -72,14 +72,16 @@ Similarly, the system searches for the stopping_text.  This is the first text th
 in the snippet.  Again, if it is left blank, the snippet continues to the end of the document.
 
 There are a couple of issues that you need to be careful about. 
+
 1. Be careful not to select text (starting_text is particularly bad) that happens to break an HTML 
-   expression.  For example, if there is a "<div>Now is the time...</div>" and you want the text
-   to begin with the "Now is...", be sure to include the initial "<div>" or the resulting page
+   expression.  For example, if there is a **"&lt;div>Now is the time...&lt;/div>"** and you want the text
+   to begin with the **"Now is..."**, be sure to include the initial **"&lt;div>"** or the resulting page
    will have unbalanced structure.
 2. Be careful with initial shortcodes.  It is often the case that the story includes a picture
    as the initial element which would imply that the starting text would begin "\{\{%singlepic...".
    This will fail as that creates invalid markdown.  The easiest way to avoid this is to insert
-   a "<span/>" (an empty "span") element in the document before the shortcode and use that
+   a **"&lt;span/>"** (an empty "span", *note the forward slash*) element in the document before 
+   the shortcode and use that
    as the starting_text.  It generates nothing visible in the final document thus leaving the
    picture as the first thing as intended.
    
@@ -87,7 +89,7 @@ There are a couple of issues that you need to be careful about.
 If the snippet is the entire content, use this to prevent the creation of a "Read More" button.
 
 #####...
-End the file with "..." on the beginning of a line.
+End the file with **"..."** on the beginning of a line.
 
 ####Intra-page Navigation
 <a id="#story-snippet"/>
