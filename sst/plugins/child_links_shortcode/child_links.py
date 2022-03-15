@@ -69,9 +69,7 @@ class BuildLinksToChildFiles(ShortcodePlugin):
                     # Note: we have to defend against an invalid/incomplete date time format.  We'll assume
                     #       either a valid date or just make today a default.
                     try:
-                        res = parser.parse(meta_data['date'])
-                        # Need to remove time from string
-                        re.sub(r' \d\d-\d\d-\d\d', '', res)
+                        res = parser.parse(meta_data['date']).date()
                         foo = 3
                     except Exception as e:
                         res = dt.datetime.today().date()
