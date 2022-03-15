@@ -57,6 +57,16 @@ p {
     margin-bottom: 1.5rem;
 }
 
+/* Navbar - set background color */
+.bg-light {
+    background-color: #ffffcc !important;
+}
+.navbar-light .navbar-nav .nav-link, a.nav-link {
+    color: rgba(0,0,0,.9);  !important;
+    font-weight: 600;       !important;
+    font-size: 95%;         !important;
+}
+
 /* Make navbar remain at top of page when scrolling */
 .navbar-fixed-top {
     position: fixed;

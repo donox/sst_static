@@ -70,6 +70,9 @@ class BuildLinksToChildFiles(ShortcodePlugin):
                     #       either a valid date or just make today a default.
                     try:
                         res = parser.parse(meta_data['date'])
+                        # Need to remove time from string
+                        re.sub(r' \d\d-\d\d-\d\d', '', res)
+                        foo = 3
                     except Exception as e:
                         res = dt.datetime.today().date()
                     meta_data['date'] = res
