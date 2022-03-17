@@ -122,7 +122,7 @@ NAVIGATION_LINKS = {
         ("/pages/activities-index/resident-council-and-committees/resident-council-index/sunnyside-residents-maps/",
          "Maps"),
         ("/pages/quick-access/", "Quick Links"),
-        ("/pages/help/", "Help"),
+ #       ("/pages/help/", "Help"),
         (
             (
                 ("/pages/admin/overview/", "Documentation Overview"),

@@ -1,13 +1,13 @@
 {#  -*- coding: utf-8 -*- #}
 
 {% if alignment == 'float-left' %}
-    {% set mgn = '; margin-left: 10px; margin-right: 5px;' %}
+    {% set margin = '; margin-left: 10px; margin-right: 5px;' %}
 {% elif alignment == 'float-right' %}
-    {% set mgn = '; margin-right: 10px; margin-left: 5px;' %}
+    {% set margin = '; margin-right: 10px; margin-left: 5px;' %}
     {% else %}
-    {% set mgn = '' %}
+    {% set margin = '' %}
 {%  endif %}
-<div class="{{ css_class }} {{ mgn }}">
+<div class="{{ css_class }} {{ margin }}">
     {% if title %}
         <div class="figure-caption has-text-black {{ title_class }}">{{ title }}</div>
     {% endif %}

@@ -13,6 +13,7 @@ from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH
 from plugins.multi_story_pages.process_story_snippet import process_story_snippet
 from plugins.multi_story_pages.process_quote import process_quote
 from plugins.multi_story_pages.process_html_snippet import process_html_snippet
+from plugins.multi_story_pages.process_eye_catcher import process_eye_catcher
 
 
 def run_jinja_template(template, context):
@@ -81,7 +82,7 @@ class MultiPage(object):
         self.reporter = Reporter(f'multi_page-{self.date_string}.txt')
 
     def _make_column_width_classes(self, width):
-        """Make bootstrap witdh classes (e.g., col-sm-4) for specified width"""
+        """Make bootstrap width classes (e.g., col-sm-4) for specified width"""
         sizes = ['col-', 'col-sm-', 'col-md-', 'col-lg-', 'col-xl-']
         width_str = str(width)
         return ' '.join([x + width_str for x in sizes])
@@ -111,10 +112,14 @@ class MultiPage(object):
                         else:
                             wd = 4
                         col_context['col_width'] = self._make_column_width_classes(wd)
+                        col_context['col_count'] = wd            # pass $ columns to support calculations within entry
                         key = 'Entries'
                         if col[key]:
                             for entrynum, entry in enumerate(col['Entries']):
-                                entry_context = {}
+                                entry_context = dict()
+                                entry_context['parent_col'] = col_context
+                                entry_context['col_num'] = colnum
+                                entry_context['parent_row'] = row_context
                                 col_context['entries'].append(entry_context)
                                 key = 'Entry'
                                 yield rownum, colnum, entrynum, entry_context, entry[key]
@@ -154,13 +159,14 @@ class MultiPage(object):
             target_address = "#target_" + str(len(self.preamble) + 1)
             target_html = f'<a href="{target_address}"> {target} </a>'
             self.preamble.append(target_html)
+        entry['parent_context'] = local_context        # to allow entry to determine surroundings (esp. width as # cols)
         if entry_type == 'story_snippet':
             res = process_story_snippet(entry, position, self.site, self.template_environment,
                                         self.reporter)
+        if entry_type == 'eye_catcher':
+            res = process_eye_catcher(entry, position, self.site, self.template_environment, self.reporter)
         elif entry_type == 'quote':
             res = process_quote(entry, position, self.site, self.template_environment)
-        elif entry_type == 'story_snippet':
-            foo = 3
         elif entry_type == 'html_snippet':
             res = process_html_snippet(entry, position, self.site, self.template_environment,
                                        self.reporter)
