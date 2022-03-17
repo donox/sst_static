@@ -39,6 +39,12 @@
                                 </div>
                             {% endif %}
 
+                            {% if entrytype == 'eye_catcher' %}
+                                <div class="{{ story.display_classes }}">
+                                    {{ story }}
+                                </div>
+                            {% endif %}
+
                             {% if entrytype == 'simple_storyXXXX' %}
                                 <div class="col-sm-7">
                                     <div id="rotatingTopStories" class="src-flex-container">
