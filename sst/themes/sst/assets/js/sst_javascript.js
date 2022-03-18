@@ -130,16 +130,13 @@ function updateStatus(a) {
 updateStatus(0);
 
 /* Create copy to clipboard capability to move page usage pathnames
-* which have extra spaces fore readability into correct pathnames */
+* which have extra spaces fore readability into correct pathnames.
+* This assumes a structure with a table row containing the buttion in the
+* first  column and the text in the second column.  */
 $(".pageusagebttn").each(function (){
     var this_el = this;
-    this_el.addEventListener("click", clipboard_copier)
+    this_el.addEventListener("click", copyToClipboard)
 })
-
-
-function clipboard_copier(e) {
-    copyToClipboard(e);
-}
 
 function copyToClipboard(e) {
     let target = e.target;
