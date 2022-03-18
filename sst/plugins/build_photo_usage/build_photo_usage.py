@@ -153,7 +153,7 @@ class PhotoUsage(object):
             html_fd.writelines(results)
             html_fd.close()
 
-        template = env.get_template('build_terminal_folders.jinja2')
+        template = env.get_template('build_terminal_folders.tmpl')
         results = template.render(context).replace('\n', '')
         results = re.sub(" None", " ", results)  # remove occurrences of 'None'
         results = re.sub(" +", " ", results)  # remove excess whitespace

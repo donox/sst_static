@@ -6,15 +6,22 @@
     </thead>
     <tbody>
     {% set page_done = {"last": "", "current": "", "gal_last": "", "gal_current":""} %}
+    {% set btn_index = namespace(value=0) %}
     {% for page in page_list %}
         {# page is a list element which is itself a tuple.  page[0] is the name of the .md file and
             page[1] is a dict with keys: path, file, path_key, galleries (a list) and images (a list) #}
         {{ page_done.update({"current": page[0]}) }}
         {% set path = page[1]['path_key'] %}
-        <tr class="adminPage">
-           <td>
-                {{ path | replace("/", "\t/\t")}}
+        <tr class="adminPage copyclip">
+            <td>
+                {% set bid = ["bttn", btn_index.value | string] | join('') %}
+                {% set btn_index.value = btn_index.value + 1 %}
+                <button id="{{ bid }}" class="pageusagebttn">copy</button>
             </td>
+            <td>
+                {{ path | replace("/", "\t/\t") }}
+            </td>
+        </tr>
         </tr>
     {% endfor %}
     </tbody>
