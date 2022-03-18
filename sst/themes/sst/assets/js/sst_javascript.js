@@ -100,18 +100,18 @@ var button_state = (function () {
 })();
 
 /* Rotation based on Next/Prev button */
-    var $divs = $(".newRes"),
-        index = 0;
-    $("#prevRes").hide()
+var $divs = $(".newRes"),
+    index = 0;
+$("#prevRes").hide()
 
-    $("#nextRes").click(function () {
-        updateStatus(1);
-    });
+$("#nextRes").click(function () {
+    updateStatus(1);
+});
 
-    $("#prevRes").click(function () {
-        updateStatus(-1);
-    });
-    $(".newRes").hide()
+$("#prevRes").click(function () {
+    updateStatus(-1);
+});
+$(".newRes").hide()
 
 function updateStatus(a) {
 
@@ -129,5 +129,25 @@ function updateStatus(a) {
 
 updateStatus(0);
 
+/* Create copy to clipboard capability to move page usage pathnames
+* which have extra spaces fore readability into correct pathnames */
+$(".pageusagebttn").each(function (){
+    var this_el = this;
+    this_el.addEventListener("click", clipboard_copier)
+})
+
+
+function clipboard_copier(e) {
+    copyToClipboard(e);
+}
+
+function copyToClipboard(e) {
+    let target = e.target;
+
+    let copyText = target.parentElement.parentElement.children[1].textContent;
+    /* Copy the text inside the text field */
+    navigator.clipboard.writeText(copyText.replace(/\s+/g, ''));
+    target.style.backgroundColor = 'Green';
+}
 
 //# sourceURL=sst_javascript.js
