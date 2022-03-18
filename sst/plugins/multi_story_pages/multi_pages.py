@@ -178,7 +178,7 @@ class MultiPage(object):
             local_context['entry_type'] = entry_type
             local_context['width_class'] = ''
             local_context['title_class'] = ''
-            local_context['caption_class'] = ''
+            local_context['caption_class'] = 'caption'
             local_context['image_class'] = ''
             # post = kwargs['post']             # Not valid unless shortcode???
             # folder = post.folder

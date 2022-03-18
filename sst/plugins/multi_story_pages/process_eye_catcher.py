@@ -44,7 +44,7 @@ def process_eye_catcher(entry, position, site, env, reporter):
             context['as_background'] = False
         context['css_class'] = 'unused'
         context['title_class'] = 'unused'
-        context['caption_class'] = 'unused'
+        context['caption_class'] = 'caption'
         context['image_class'] = 'unused'
         context['entry_type'] = entry['entry_type']
         template = env.get_template('eye_catcher.jinja2')

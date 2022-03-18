@@ -18,6 +18,7 @@ body {
 .sst_border {
     border: #86cfda solid 10px;
     border-style: ridge;
+    padding: 0px;
 }
 .sst_byline{
     font-weight: bolder;

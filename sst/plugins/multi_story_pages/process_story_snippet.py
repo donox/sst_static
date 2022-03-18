@@ -59,7 +59,7 @@ def process_story_snippet(entry, position, site, env, err_reporter):
                 context['photos'] = story['photos'] + '\n'
         context['css_class'] = 'unused'
         context['title_class'] = 'unused'
-        context['caption_class'] = 'unused'
+        context['caption_class'] = 'caption'
         context['image_class'] = 'unused'
         context['entry_type'] = entry['entry_type']
         context['content'] = snippet_content
