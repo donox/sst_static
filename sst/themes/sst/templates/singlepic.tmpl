@@ -14,7 +14,8 @@
         <div class="figure {{ alignment }}
         {% if has_borders %}
             sst_border
-        {% endif %}" style="width:{{border_width}}; height:{{border_height}}; margin:auto">
+        {% endif %}" style="width:{{border_width}}; height:{{border_height}}; margin:auto;
+        {% if not has_borders %}padding: 10px;{% endif %}">
         {% if image_path %}
             <img class="{{ image_class }} figure-img img-fluid rounded"
              src="{{ image_path }}" style="height: {{ height }}; width: {{ width }};"/>
