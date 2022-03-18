@@ -1,10 +1,22 @@
 {#  -*- coding: utf-8 -*- #}
+{% if style is defined %}
+    {% set estyle = style %}
+{% else %}
+    {% set estyle = "color: black" %}
+{% endif %}
+{% if position-right is defined %}
+    {% set estyle = estyle ~ "width:" ~ position-right ~ "%"  %}  {# '~' is concat with conversion to str if needed #}
+{% endif %}
+{% if position-down is defined %}
+    {% set estyle = estyle ~ "height:" ~ position-down ~ "%"  %}
+{% endif %}
 {%  if as_background %}
 <div class="container" style="background-image: url('{{ photo_path }}'); background-size: cover; width:100%;
-        min-height:{{ height }}; background-position: center center; margin-bottom: 15px">
+        min-height:{{ height }}; background-position: center center; margin-bottom: 15px;
+        position: relative;">
     {% if entry_type == 'eye_catcher' %}
         {% if phrase is defined %}
-            <h2 class="blog-title" style="color: black"> {{ phrase }}</h2>
+            <h2 style="{{ estyle }}"> {{ phrase }}</h2>
         {% endif %}
         <div class="{{ col_width }}">
             {% if story_link is defined %}
@@ -17,7 +29,7 @@
 <div class="container" style="min-height:{{ height }}; margin-bottom: 15px">
     {% if entry_type == 'eye_catcher' %}
         {% if phrase is defined %}
-            <h2 class="blog-title" style="color: black"> {{ phrase }}</h2>
+            <h2  style="{{ estyle }}"> {{ phrase }}</h2>
         {% endif %}
         {% if photo_path is defined %}
             <img class="{{ image_class }} img-responsive figure-img img-fluid rounded"
