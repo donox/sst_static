@@ -163,7 +163,7 @@ class MultiPage(object):
         if entry_type == 'story_snippet':
             res = process_story_snippet(entry, position, self.site, self.template_environment,
                                         self.reporter)
-        if entry_type == 'eye_catcher':
+        elif entry_type == 'eye_catcher':
             res = process_eye_catcher(entry, position, self.site, self.template_environment, self.reporter)
         elif entry_type == 'quote':
             res = process_quote(entry, position, self.site, self.template_environment)

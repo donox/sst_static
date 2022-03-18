@@ -22,9 +22,22 @@ def process_eye_catcher(entry, position, site, env, reporter):
         if 'story_link' in keys and story['story_link']:
             context['story_link'] = story['story_link']
         if 'minimum_height' in keys:
-            context['height'] = str(story['minimum_height']) + 'px'
+            ht = str(story['minimum_height'])
+            if not ht.endswith('px'):
+                ht += 'px'
+            context['height'] = ht
         else:
             context['height'] = str(col_width * 70) + 'px'
+        if 'style' in keys:             # allow any css style attributes
+            context['style'] = story['style']
+        if 'position' in keys:
+            pos = str(story['position']).split(',')
+            if len(pos) < 2:
+                context['position-down'] = pos.strip()
+            else:
+                context['position-right'] = pos[0].strip()
+                context['position-down'] = pos[1].strip()
+
         if 'as_background' in keys:
             context['as_background'] = story['as_background']
         else:
