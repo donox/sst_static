@@ -1,5 +1,5 @@
 #User Guide to Building Pages Using Templates
-This user guide the process and mechanics for creating pages that are rendered by a pre-defined template.
+This user guide defines the process and mechanics for creating pages that are rendered by a pre-defined template.
 The creation of the template requires a developer, but is not a significant barrier when a new template
 is useful for creating/defining a new type of page.
 
