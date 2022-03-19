@@ -1,0 +1,11 @@
+---
+Entry:
+  entry_type: eye_catcher
+  story:
+    phrase: Eastern Bluebirds at Sunnyside
+    photo_path: /images/cool-stories/Bluebird.jpg
+    story_link: /pages/activities-index/resident-council-and-committees/committees/green-committee/birds-and-bees-at-sunnyside/
+    as_background: True
+    position: 50
+    style: "color:white;"
+...
