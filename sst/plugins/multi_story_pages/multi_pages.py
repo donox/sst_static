@@ -227,7 +227,7 @@ class MultiPage(object):
             context["preamble"] = self.preamble
             template = self.template_environment.get_template('page_layout.jinja2')
             output = template.render(**context)
-            output = [x + '\n' for x in output.split('\n') if x.strip()]        # kill excess blank space
+            output = [x.strip() + '\n' for x in output.split('\n') if x.strip()]        # kill excess blank space
             page_slug = page_dir.split('/pages/')[-1]
             # ToDo: page_loc does not deal with non-top-level pages
             page_loc = WEBSITE_PATH + 'pages/' + page_slug

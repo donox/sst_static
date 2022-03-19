@@ -4,11 +4,9 @@
 {% else %}
     {% set estyle = "color: black" %}
 {% endif %}
-{% if position-right is defined %}
-    {% set estyle = estyle ~ "width:" ~ position-right ~ "%"  %}  {# '~' is concat with conversion to str if needed #}
-{% endif %}
-{% if position-down is defined %}
-    {% set estyle = estyle ~ "height:" ~ position-down ~ "%"  %}
+{% if position_right is defined %}
+    {# '~' is concat with conversion to str if needed #}
+    {% set estyle = estyle ~ "; width:" ~ position_right ~ "%; text-align:right;"  %}
 {% endif %}
 {%  if as_background %}
 <div class="container" style="background-image: url('{{ photo_path }}'); background-size: cover; width:100%;
@@ -16,9 +14,13 @@
         position: relative;">
     {% if entry_type == 'eye_catcher' %}
         {% if phrase is defined %}
+            {% if position_down is defined %}
+            <div style="min-height: {{position_down}};">&nbsp;</div>
+            {% endif %}
             <h2 style="{{ estyle }}"> {{ phrase }}</h2>
         {% endif %}
-        <div class="{{ col_width }}">
+        {# text-align:left overrides possible align right - still need ability to position from left edge #}
+        <div class="{{ col_width }}"  style="{{ estyle }} text-align:left">
             {% if story_link is defined %}
                 <a class="btn btn-primary" href="{{ story_link }}" role="button">To Story</a>
             {% endif %}
