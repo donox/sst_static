@@ -2,6 +2,7 @@
 <a id="#top"/>
 
 ####Index
+[Eye-catcher](#eye-catcher)
 [Story Snippet](#story-snippet)
 [Intra-Page Navigation](#intra-page)
 
@@ -42,6 +43,49 @@ followed by a space or newline must be enclosed in quotes (generally use double 
 ####Error Log
 When the multi_pages command is run, it creates a file in the support directory named multi-pages.txt.  This
 file has any errors or other notices that occurred during the creation of the pages.
+
+####Eye-catchers
+<a id="#eye-catcher"/>
+Eye-catchers are elements intended to display a picture, a title (or short text) and a link to a 
+story.  The objective is to support attractive pages with a minimum of text.  The eye-catcher structure
+takes one of two forms.  First, it is almost like a story snippet (below) except that there is no text, 
+thus it has a title followed by a picture followed by a link.  Second, instead of the picture being
+a separate part of the element, it is used as a **background image** with the text and story link
+positioned *within* the boundaries of the picture.
+
+Because of the need to control the positioning of the text and to ensure that it stands out in the
+picture, there are a number of additional controls needed. Use [this example](/admin/example_eye-catcher.yaml)
+to follow the explanation. 
+
+#####phrase
+A phrase is either a title or some short description to give the reader a sense of what the story 
+might be about.
+
+#####photo-path
+This is the fully specified path to the image to be used.
+
+#####story_link
+This is the fully specified url for the associated story.
+
+#####as_background
+This True or False value specifies whether the picture is to be used as a background image.  The
+default is False.
+
+#####position
+This is either a single integer specifying the distance from the top of the image to the text or two 
+integers separated with a comma giving the distance from the left and the distance from the top (in 
+that order).  The numbers are between 1 and 100 representing the **percentage** of the picture
+height or width to the text.  Unfortunately, for technical reasons, the percentage of *width* 
+represents the *right edge* of the text meaning that text ending in the middle (left to right)
+of the picture would have a value of 50.  For height, it represents the distance above the
+text which corresponds to your intuition.  
+
+#####style
+Because of the wide variety of possible additional specifications (font color, weight, family, 
+margins, padding, ..........) the *style* specifier is a means of providing any valid
+css which is inserted directly in the element. The content is inserted exactly as entered as
+the value of the style attribute.  Again, for technical reasons, the value must be enclosed
+in quotation marks (else the existence of a ':' causes an error).
 
 ####Story Snippets
 <a id="#story-snippet"/>
