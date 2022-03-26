@@ -8,6 +8,7 @@ import re
 from PIL import Image
 from conf import WEBSITE_PATH
 
+
 # NEED TO INSTALL PYTHON SUPPORT FOR IPTC and pull caption, etc from pics
 # Also need to do it for gallery - Can we push WP data into pics in prepass?
 
@@ -35,7 +36,7 @@ class Singlepic(ShortcodePlugin):
         image_width = image_height = None
         if 'image' in keys:
             image_path = kwargs['image']
-            if image_path:                      # Defending against missing image_path
+            if image_path:  # Defending against missing image_path
                 context['image_path'] = image_path
                 tmp = WEBSITE_PATH + image_path[1:]
                 im = Image.open(tmp)
@@ -54,7 +55,7 @@ class Singlepic(ShortcodePlugin):
             if possible_width.endswith('px'):
                 possible_width = possible_width[:-2]
             if possible_width.isnumeric():
-                possible_width = int(possible_width)        # defend against improper width spec
+                possible_width = int(possible_width)  # defend against improper width spec
         if not possible_width:
             possible_width = 300
 
@@ -70,17 +71,17 @@ class Singlepic(ShortcodePlugin):
                 possible_height = int(possible_height)
         if not possible_height:
             possible_height = 300
-        if image_width and image_height:            # Defending against missing image_path
-            image_aspect_ratio = image_height/image_width
-            possible_aspect_ratio = possible_height/possible_width
+        if image_width and image_height:  # Defending against missing image_path
+            image_aspect_ratio = image_height / image_width
+            possible_aspect_ratio = possible_height / possible_width
             if image_aspect_ratio > possible_aspect_ratio:
                 possible_width = possible_height / image_aspect_ratio
             elif image_aspect_ratio < possible_aspect_ratio:
                 possible_height = possible_width * image_aspect_ratio
             else:
                 pass
-        context['width'] = int(possible_width)
-        context['height'] = int(possible_height)
+        context['width'] = str(int(possible_width)) + 'px'
+        context['height'] = str(int(possible_height)) + 'px'
 
         try:
             context['border_width'] = str(context['width'] + 20) + 'px'  # size of left/right borders
@@ -100,15 +101,19 @@ class Singlepic(ShortcodePlugin):
         else:
             direct = None
         if direct == 'right':
-            context['alignment'] = 'float-right'
+            context['alignment'] = 'right'
         elif direct == 'left':
-            context['alignment'] = 'float-left'
+            context['alignment'] = 'left'
         elif direct == 'center':
-            context['alignment'] = 'center_image'
+            context['alignment'] = 'center'
+        elif direct == 'float-right':
+            context['alignment'] = 'float-right'
+        elif direct == 'float-left':
+            context['alignment'] = 'float-left'
         else:
             context['alignment'] = 'float-none'
 
-        context['caption'] = ''         # TODO: Need to pick up title and caption
+        context['caption'] = ''  # TODO: Need to pick up title and caption
         if 'caption' in keys:
             context['caption'] = kwargs['caption']
 
@@ -135,7 +140,7 @@ class Singlepic(ShortcodePlugin):
         context.update(self.site.GLOBAL_CONTEXT)
         context.update(kw)
         output = self.site.template_system.render_template(
-            'singlepic.tmpl',
+            'singlepic.jinja2',
             None,
             context
         )
