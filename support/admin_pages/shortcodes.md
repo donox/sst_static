@@ -113,11 +113,19 @@ Image provides the path to the image. All images are stored in a local directory
 by whatever layout you use for images.  The initial structure reflects the storage
 location used by Wordpress at the time of importing.
 
-#####**"width=", "height=", "alignment="**
+#####**"width=", "height="**
 Width and height of the image are set as was done in Wordpress.  The default value in 
-each case is 300px. Alignment is the same as in Wordpress (left, right, center).  The 
-default will generally be left as set by the browser when placing the image.  The "px" size indicator
-may be omitted as it will be supplied by the system.
+each case is 300px. 
+
+####**"alignment"**
+Alignment is a bit tricky as there are five (5) separate possible values depending on
+whether you want text to flow around an image or not.  The values **left, center, right**
+will position the image within its containing structure, but text will not flow around it.
+The values **float-left, float-right** will cause text to flow around the image.
+
+Note that when trying to flow text around an image, the singlepic shortcode needs to be 
+placed in the stream of text that will flow around it.  If there are paragraph separators 
+(line breaks) around the singlepic, then it will end up defaulting to a left side placement. 
 
 #####**"title=", "caption="**
 Title and caption are optional, but the intent will be to take them from the photo

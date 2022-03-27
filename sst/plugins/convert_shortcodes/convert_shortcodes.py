@@ -71,7 +71,7 @@ class ReplaceShortcodes(object):
                 if ln.startswith('???'):
                     file = bads.readline().split('/')[-1]
                     self.dead_files.add(file[:-1])  # Remove trailing \n
-                elif ln.startswith('DONE'):
+                elif not ln or ln.startswith('DONE'):
                     not_done = False
         self._build_inverse()
         self.title_dict = self._make_title_dict(WEBSITE_PATH + 'files/posts.csv')
