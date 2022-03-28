@@ -16,6 +16,8 @@ PATTERSON_PATH = '/home/sam/'
 # PythonAnywhere
 PA_PATH = '/home/doxley/'
 
+BOLLEN_PATH = '/home/mikebollen/'
+
 os.environ['OPENBLAS_NUM_THREADS'] = '1'  # SOME ISSUE SPAWNING PROCESSES - Bad fix????
 
 node = platform.node()
@@ -23,6 +25,8 @@ if node == 'Descartes':
     PARENT_PATH = OXLEY_PATH + 'PycharmProjects/'
 elif node == 'rudi2':
     PARENT_PATH = PATTERSON_PATH + 'PycharmProjects/'
+elif node == 'TechZone':
+    PARENT_PATH = BOLLEN_PATH + 'PycharmProjects/'
 elif 'live' in node:
     PARENT_PATH = PA_PATH
 # In a Docker container, we have sst_static immediately in /home
