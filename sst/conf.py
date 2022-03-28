@@ -53,7 +53,7 @@ BLOG_TITLE = "Sunnyside Times"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link. Don't forget the protocol (http/https)!
 if ev == "sscgurus":
-    SITE_URL = "https://sscgurus.com/"
+    SITE_URL = "https://sunnyside-times.com/"
 elif ev == "pa":
     SITE_URL = "https://www.sunnyside-times.org/"
 elif ev == "local":
