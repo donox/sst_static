@@ -13,13 +13,19 @@ body {
     text-align: left;
     background-color: #fff;
 }
+
+.btn .btn-primary{
+    background-color: #79a736;
+}
+
 a {
-    color: mediumblue;
+    color: #1d95c6;
     text-decoration: none;
-    background-color: transparent;
+    background-color:transparent;
 }
 a:visited {
-    color: purple;
+    color: lightcoral;
+    font-size: large;
 }
 a:active {
     color: white;
