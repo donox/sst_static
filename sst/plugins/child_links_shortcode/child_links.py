@@ -57,20 +57,24 @@ class BuildLinksToChildFiles(ShortcodePlugin):
         for dirpath, dirnames, filenames in os.walk(dir_to_process):
             for file in filenames:
                 if file.endswith('.meta'):
-                    meta_data = self.read_meta_file(dirpath + '/' + file)
-                    if "path" in meta_data.keys():
-                        temp = meta_data['path']
-                    else:
-                        temp = dirpath
-                    if temp.startswith('/'):
-                        temp = temp[1:]
-                    if temp.endswith('/'):
-                        temp = temp[:-1]
+                    file_ref = dirpath + '/' + file
+                    meta_data = self.read_meta_file(file_ref)
+                    new_slug = file_ref[:-5]    # remove .meta
+                    if new_slug.startswith(dir_to_process):  # remove redundant
+                        new_slug = new_slug[len(dir_to_process)+1:]
+                    meta_data['slug'] = new_slug        # not written out, so does not change actual slug
+                    # if "path" in meta_data.keys():
+                    #     temp = meta_data['path']
+                    # else:
+                    #     temp = dirpath
+                    # if temp.startswith('/'):
+                    #     temp = temp[1:]
+                    # if temp.endswith('/'):
+                    #     temp = temp[:-1]
                     # Note: we have to defend against an invalid/incomplete date time format.  We'll assume
                     #       either a valid date or just make today a default.
                     try:
                         res = parser.parse(meta_data['date']).date()
-                        foo = 3
                     except Exception as e:
                         res = dt.datetime.today().date()
                     meta_data['date'] = res
