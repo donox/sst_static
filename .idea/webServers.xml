@@ -23,15 +23,15 @@
           </advancedOptions>
         </fileTransfer>
       </webServer>
-      <webServer id="c87f864a-fa48-4ff5-84f8-9e37e69a125e" name="sscgurus.com (project level)" url="http://sscgurus.com">
-        <fileTransfer rootFolder="/httpdocs" host="sscgurus.com" port="21">
+      <webServer id="2ece48b5-b404-4e93-a036-72de8ef975c5" name="sunnyside-times.com" url="http://sunnyside-times.com">
+        <fileTransfer rootFolder="/httpdocs" host="sunnyside-times.com" port="21">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
         </fileTransfer>
       </webServer>
-      <webServer id="2ece48b5-b404-4e93-a036-72de8ef975c5" name="sunnyside-times.com" url="http://sunnyside-times.com">
-        <fileTransfer rootFolder="/httpdocs" host="sunnyside-times.com" port="21">
+      <webServer id="d00fba3e-3953-424d-9c4c-23ebcbc1ff15" name="sstbuilder">
+        <fileTransfer rootFolder="/home/sst-admin" accessType="SFTP" host="198.251.77.47" port="22" sshConfigId="f9c7c3d2-4356-4ab6-a072-9e5970aeec60" sshConfig="sst-admin@198.251.77.47:22 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

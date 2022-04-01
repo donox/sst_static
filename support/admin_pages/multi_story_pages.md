@@ -2,8 +2,8 @@
 <a id="#top"/>
 
 ####Index
-[Eye-catcher](#eye-catcher)
-[Story Snippet](#story-snippet)
+[Eye-catcher](#eye-catcher)<br>
+[Story Snippet](#story-snippet)<br>
 [Intra-Page Navigation](#intra-page)
 
 ####Introduction
