@@ -4,7 +4,7 @@ import time
 import os
 import sys
 import platform
-from support import config_private
+import config_private
 
 try:
     ev = os.environ['TargetHost']
