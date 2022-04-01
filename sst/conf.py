@@ -4,6 +4,7 @@ import time
 import os
 import sys
 import platform
+import config_private
 
 try:
     ev = os.environ['TargetHost']
@@ -29,6 +30,8 @@ elif node == 'TechZone':
     PARENT_PATH = BOLLEN_PATH + 'PycharmProjects/'
 elif 'live' in node:
     PARENT_PATH = PA_PATH
+elif 'localhost' in node:
+    PARENT_PATH = '/home/sst-admin/'
 # In a Docker container, we have sst_static immediately in /home
 else:
     PARENT_PATH = '/home/'
@@ -36,7 +39,6 @@ else:
 # PARENT_PATH = PA_PATH
 PROJECT_PATH = PARENT_PATH + 'sst_static/'
 WEBSITE_PATH = PARENT_PATH + 'sst_static/sst/'
-
 # ! Some settings can be different in different languages.
 # ! A comment stating (translatable) is used to denote those.
 # ! There are two ways to specify a translatable setting:
