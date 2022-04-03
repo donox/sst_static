@@ -335,7 +335,7 @@ COMPILERS = {
     # The resulting files have .php extensions, making it possible to run
     # them without reconfiguring your server to recognize them.
     # "php": ['.php'],
-    "wordpress": ['.wp'],
+    # "wordpress": ['.wp'],
     # Pandoc detects the input from the source filename
     # but is disabled by default as it would conflict
     # with many of the others.
