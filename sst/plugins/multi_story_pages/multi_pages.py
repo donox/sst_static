@@ -71,8 +71,7 @@ class MultiPage(object):
 
     def __init__(self):
         self.date_string = dt.datetime.today().date().isoformat()
-        self.web_source = WEBSITE_PATH + '/pages'
-        self.yaml_dir = WEBSITE_PATH + 'plugins/multi_story_pages/pages'
+        self.yaml_dir = PROJECT_PATH + 'support/multi_story_pages/pages/'
         self.content_dict = {}
         self.site = None
         self.preamble = []    # Will contain list of tags at top of page to link to places within page
