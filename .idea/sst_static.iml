@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/sst" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/sst/cache" />
       <excludeFolder url="file://$MODULE_DIR$/sst/files" />
+      <excludeFolder url="file://$MODULE_DIR$/sst/galleries" />
       <excludeFolder url="file://$MODULE_DIR$/sst/images" />
       <excludeFolder url="file://$MODULE_DIR$/sst/migrating_pages" />
       <excludeFolder url="file://$MODULE_DIR$/sst/output" />

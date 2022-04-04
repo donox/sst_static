@@ -39,6 +39,46 @@ class MakeUserLogins(object):
                 fd_out.close()
                 fd_in.close()
 
+    def add_user(self, user, pswd):
+        user_md5 = md5(user.encode('utf-8')).hexdigest()
+        pswd_md5 = md5(pswd.encode('utf-8')).hexdigest()
+        with open(self.file_out, 'r') as fd_in:
+            file_content = fd_in.readlines()
+            fd_in.close()
+        if 'user_logins' in file_content[0]:   # remove javascript code
+            file_content = file_content[1:]
+        out_content = []
+        for line in file_content:
+            if len(line) > 10 and user_md5 not in line:
+                out_content.append(line)
+        out_content[-1] = out_content[-1].replace("}", ",")
+        out_content.append('"' + user_md5 + '": "' + pswd_md5 + '"}')
+        with open(self.file_out, 'w') as fd_out:
+            fd_out.write("var user_logins = {")
+            for line in out_content:
+                fd_out.write(line )
+            fd_out.close()
+
+
+    def remove_user(self, user):
+        user_md5 = md5(user.encode('utf-8')).hexdigest()
+        with open(self.file_out, 'r') as fd_in:
+            file_content = fd_in.readlines()
+            fd_in.close()
+        if 'user_logins' in file_content[0]:   # remove javascript code
+            file_content = file_content[1:]
+        out_content = []
+        for line in file_content:
+            if len(line) > 10 and user_md5 not in line:
+                out_content.append(line)
+        if out_content[-1].endswith(',\n'):
+            out_content[-1] = out_content[-1].replace(",", "}")
+        with open(self.file_out, 'w') as fd_out:
+            fd_out.write("var user_logins = {")
+            for line in out_content:
+                fd_out.write(line )
+            fd_out.close()
+
 
 converter = MakeUserLogins()
 
@@ -46,10 +86,49 @@ converter = MakeUserLogins()
 class MakeLogins(nikola.plugin_categories.Command):
     name = 'make_user_logins'
     logger = None
+    doc_usage = "[options]"
+    doc_purpose = "Make login credential file of users."
+    cmd_options = (
+        {
+            'name': 'function',
+            'short': 'f',
+            'long': 'function',
+            'default': "none",
+        },
+        {
+            'name': 'user',
+            'short': 'u',
+            'long': 'user',
+            'default': "",
+            'type': str,
+        },
+        {
+            'name': 'password',
+            'short': 'p',
+            'long': 'password',
+            'default': "Sunny",
+            'type': str,
+        },
+    )
 
     def __init__(self):
         super(MakeLogins, self).__init__()
 
-    def _execute(self, command, args):
+    def _execute(self, options, args):
         self.logger = get_logger('ping', STDERR_HANDLER)
-        converter.make_logins()
+        if 'function' in options.keys():
+            opt = options['function']
+            if 'user' not in options.keys():
+                print(f"No user given to add user (or option misspelled).")
+                return
+            user = options['user']
+            if opt in ['a', 'add', 'add_user']:
+                if 'password' in options.keys():
+                    pswd = options['password']
+                else:
+                    pswd = converter.default_password
+                converter.add_user(user, pswd)
+            elif opt in ['r', 'remove', 'delete']:
+                converter.remove_user(user)
+            else:
+                converter.make_logins()
