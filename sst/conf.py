@@ -31,7 +31,7 @@ elif node == 'TechZone':
 elif 'live' in node:
     PARENT_PATH = PA_PATH
 elif 'localhost' in node:
-    PARENT_PATH = '/home/sst-admin/'
+    PARENT_PATH = '/home/manage-sst/'
 # In a Docker container, we have sst_static immediately in /home
 else:
     PARENT_PATH = '/home/'
