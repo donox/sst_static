@@ -87,7 +87,7 @@ class MakeLogins(nikola.plugin_categories.Command):
     name = 'make_user_logins'
     logger = None
     doc_usage = "[options]"
-    doc_purpose = "Make login credential file of users."
+    doc_purpose = "Make login credential file of users.  Allow add/remove of individual user"
     cmd_options = (
         {
             'name': 'function',

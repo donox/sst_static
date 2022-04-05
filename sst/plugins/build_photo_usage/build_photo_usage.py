@@ -8,6 +8,8 @@ import nikola.plugin_categories
 from conf import PROJECT_PATH, WEBSITE_PATH
 from jinja2 import Environment, FileSystemLoader
 from utilities.meta_files import make_meta_file_content
+import config_private as pvt
+import shutil
 
 
 class PhotoUsage(object):
@@ -95,6 +97,14 @@ class PhotoUsage(object):
                     page_ref["path"] = short_path  # Remove clutter directories for publishing
                     page_ref["path_key"] = self._make_path_key(page_ref)
         self.unused_images = self.image_list - self.images_in_a_page
+        try:
+            if pvt.remove_unused_photos:
+                for image in self.unused_images:
+                    os.remove(WEBSITE_PATH + image)
+                for gallery in self.unused_galleries:
+                    shutil.rmtree(WEBSITE_PATH + gallery)
+        except Exception as e:
+            foo = 3
         self.unused_galleries = self.gallery_list - self.galleries_in_a_page
         all_pages_to_sort = sorted(list(self.pages.items()), key=lambda x: x[1]['path_key'])
         context['page_list'] = all_pages_to_sort
