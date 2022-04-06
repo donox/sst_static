@@ -43,7 +43,7 @@ class Singlepic(ShortcodePlugin):
                     im = Image.open(tmp)
                 except FileNotFoundError as e:
                     self.logger.error(f"File: {tmp} (a photo) not found", e.args)
-                    return None, []
+                    return '', []
                 image_width, image_height = im.size
 
         context['has_borders'] = True
