@@ -39,7 +39,11 @@ class Singlepic(ShortcodePlugin):
             if image_path:  # Defending against missing image_path
                 context['image_path'] = image_path
                 tmp = WEBSITE_PATH + image_path[1:]
-                im = Image.open(tmp)
+                try:
+                    im = Image.open(tmp)
+                except FileNotFoundError as e:
+                    self.logger.error(f"File: {tmp} (a photo) not found", e.args)
+                    return '', []
                 image_width, image_height = im.size
 
         context['has_borders'] = True

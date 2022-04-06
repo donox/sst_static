@@ -1,0 +1,18 @@
+{#  -*- coding: utf-8 -*- #}
+<h2>Display all photos in {{ folder }} directory</h2>
+{% for key, elem in display_list | dictsort %}
+    <hr>
+    <hr>
+    <h3>{{ display_list[key][0]['folder'] }}</h3>
+    <div class="container" style="display:flex; flex-wrap: wrap">
+        {% for image in display_list[key] %}
+            <div style="vertical-align: top">
+                <div style="font-size: small; max-width: 140px;">{{ image.file }}</div>
+                <a href="{{ image.path }}" target="_blank">
+                    <img src="{{ image.path }}" class="img-thumbnail" style="width: 150px;
+                margin-bottom: 20px;"></a><br>
+            </div>
+        {% endfor %}
+    </div>
+{% endfor %}
+
