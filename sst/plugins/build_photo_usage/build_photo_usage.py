@@ -13,7 +13,7 @@ import shutil
 
 
 class PhotoUsage(object):
-    # This shortcode creates admin pages showing photos in use and where they are used
+    # This command creates admin pages showing photos in use and where they are used
     # along with photos (or galleries) no longer in use.
 
     gal_re = r'{{% +(gallery) +([a-zA-Z0-9\-_]+) +?%}}'
@@ -98,9 +98,14 @@ class PhotoUsage(object):
                     page_ref["path_key"] = self._make_path_key(page_ref)
         self.unused_images = self.image_list - self.images_in_a_page
         try:
+            # Check and clean up ununsed photos and galleries
             if pvt.remove_unused_photos:
                 for image in self.unused_images:
                     os.remove(WEBSITE_PATH + image)
+                for dire in os.scandir(WEBSITE_PATH + "images"):
+                    if os.path.isdir(dire):
+                        if not os.listdir(dire):
+                            os.rmdir(dire)
                 for gallery in self.unused_galleries:
                     shutil.rmtree(WEBSITE_PATH + gallery)
         except Exception as e:
@@ -137,7 +142,7 @@ class PhotoUsage(object):
             html_fd.writelines(results)
             html_fd.close()
 
-        template = env.get_template('build_photo_usage_summary.tmpl')
+        template = env.get_template('build_photo_usage_summary.jinja2')
         results = template.render(context).replace('\n', '')
         results = re.sub(" None", " ", results)  # remove occurrences of 'None'
         results = re.sub(" +", " ", results)  # remove excess whitespace
@@ -175,7 +180,51 @@ class PhotoUsage(object):
         with open(self.outfiles_dir + '/terminal_folders.html', 'w') as html_fd:
             html_fd.writelines(results)
             html_fd.close()
-        foo = 3
+        self.make_photo_display('/images/')
+        self.make_photo_display('/galleries/')
+
+    def make_photo_display(self, folder):
+        """Build display of photos organized by folder or gallery."""
+        # folder is a string of form /images/ or /galleries/
+        display_list = {}
+        context = {'display_list': display_list}
+        for dirpath, dirnames, filenames in os.walk(WEBSITE_PATH + folder[1:]):
+            if filenames:
+                web_path = dirpath.split(folder)[1]
+                file_list = []
+                for file in filenames:
+                    if not file.endswith('ml'):         # yml or yaml
+                        file_list.append({'path': folder + web_path + '/' + file,
+                                          'folder': web_path,
+                                          'file': file })
+                display_list[dirpath] = file_list
+        if 'image' in folder:
+            title = 'Display All Photos In Images Directory'
+            slug = 'all_images_photos'
+            desc = 'Display all photos in /images'
+            filename = '/images_photos'
+        else:
+            title = 'Display All Photos in Galleries Directory'
+            slug = 'all_galleries_photos'
+            desc = 'Display all photos in /galleries'
+            filename = '/galleries_photos'
+        context['folder'] = folder[1:-1]
+        context['title'] = title
+        env = Environment(
+            loader=FileSystemLoader(WEBSITE_PATH + 'plugins/build_photo_usage/templates'),
+            autoescape=(['html']))
+        template = env.get_template('build_photo_display.jinja2')
+        results = template.render(context).replace('\n', '')
+        results = re.sub(" None", " ", results)  # remove occurrences of 'None'
+        results = re.sub(" +", " ", results)  # remove excess whitespace
+
+        meta_file = make_meta_file_content(title, slug,  description=desc)
+        with open(self.outfiles_dir + filename + '.meta', 'w') as meta_fd:
+            meta_fd.writelines(meta_file)
+            meta_fd.close()
+        with open(self.outfiles_dir + filename + '.html', 'w') as html_fd:
+            html_fd.writelines(results)
+            html_fd.close()
 
     def find_terminal_folders(self):
         """Build list of folders that directly contain pages."""

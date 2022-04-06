@@ -8,7 +8,6 @@
     <th>Folder</th>
     <th>Gallery</th>
     <th>Image</th>
-    <th>Thumb</th>
     </thead>
     <tbody>
     {% set page_done = {"last": "", "current": "", "gal_last": "", "gal_current":""} %}
@@ -38,11 +37,6 @@
                     <td>. . .</td>
                     <td>
                         {{ image }}
-                    </td>
-                    <td>
-                    <a target="_blank" href="{{ image }}">
-                      <img src="{{ image }}" class="img-thumbnail">
-                    </a>
                     </td>
                 </tr>
             {% endfor %}
