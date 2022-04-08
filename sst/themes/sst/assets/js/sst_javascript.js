@@ -129,8 +129,10 @@ function updateStatus(a) {
 
 updateStatus(0);
 
+/* ****Need to generalize copy to clipboard to accept template specified location to copy.**** */
+
 /* Create copy to clipboard capability to move page usage pathnames
-* which have extra spaces fore readability into correct pathnames.
+* which have extra spaces for readability into correct pathnames.
 * This assumes a structure with a table row containing the buttion in the
 * first  column and the text in the second column.  */
 $(".pageusagebttn").each(function (){
@@ -142,6 +144,22 @@ function copyToClipboard(e) {
     let target = e.target;
 
     let copyText = target.parentElement.parentElement.children[1].textContent;
+    /* Copy the text inside the text field */
+    navigator.clipboard.writeText(copyText.replace(/\s+/g, ''));
+    target.style.backgroundColor = 'Green';
+}
+
+/* Create copy to clipboard capability for photo filenames in sys_admin photo thumbnails.
+*  This assumes the filename is in the immediately preceding element.  */
+$(".photofilebttn").each(function (){
+    var this_el = this;
+    this_el.addEventListener("click", copyToClipboard2)
+})
+
+function copyToClipboard2(e) {
+    let target = e.target;
+
+    let copyText = target.parentElement.children[0].textContent;
     /* Copy the text inside the text field */
     navigator.clipboard.writeText(copyText.replace(/\s+/g, ''));
     target.style.backgroundColor = 'Green';
