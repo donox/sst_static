@@ -1,7 +1,7 @@
 #!/bin/bash
 export TargetHost=sscgurus
 
-cd /home/manage_sst/sst_static/sst
+cd /home/manage-sst/sst_static/sst
 workon sst_venv
 nikola build_photo_usage
 nikola multi_pages
