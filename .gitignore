@@ -12,3 +12,4 @@
 /sst/listings/
 /sst/.doit.db
 /support/bash_files/.netrc
+/sst/config_private.py

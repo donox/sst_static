@@ -69,6 +69,10 @@ class DocxProcessor(object):
                             flex.process_box_shortcodes(md_content, result)
                             revised_content = ''.join(result)
 
+                            # Note: flexbox processing must be completed before removing tags or nikola has a
+                            # shortcode error on the /box shortcode.
+                            revised_content = self.remove_p_tags(revised_content)
+
                         with open(in_md, 'w') as created_md:
                             created_md.write(revised_content)
                             created_md.close()
@@ -96,6 +100,21 @@ class DocxProcessor(object):
                                 shutil.copyfile(in_meta, out_meta)
                             except Exception as e:
                                 print(f'Error moving file: {file[:-5]} with error: {e}')
+
+    def remove_p_tags(self, content):
+        """Find html p tags immediately surrounding a shortcode and remove them."""
+        split_content = content.split('<p>{{%')
+        res = []
+        for segment in split_content:
+            end_code = segment.find('%}}')
+            if end_code > -1:
+                if segment[end_code:end_code+7] == '%}}</p>':
+                    res.append('{{%' + segment[:end_code + 3])
+                    if len(segment) > end_code + 8:
+                        res.append(segment[end_code+8:])
+                else:
+                    res.append('<p>{{%' + segment)
+        return ''.join(res)
 
 
 converter = DocxProcessor()
