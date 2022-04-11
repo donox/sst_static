@@ -3,25 +3,20 @@
 {% if alignment == 'float-left' %}
     {% set margin = '; margin-left: 10px; margin-right: 5px;' %}
     {% set image_align = '; float:left' %}
-    {% set div_align = '' %}
 {% elif alignment == 'float-right' %}
     {% set margin = '; margin-right: 10px; margin-left: 5px;' %}
     {% set image_align = '; float:right' %}
-    {% set div_align = '' %}
 {% elif alignment == 'left' %}
     {% set margin = '; margin-left: 10px; margin-left: 5px;' %}
-    {% set image_align = '' %}
-    {% set div_align = 'text-align: left' %}
+    {% set image_align = 'left' %}
 {% elif alignment == 'right' %}
     {% set margin = '; margin-right: 10px; margin-left: 5px;' %}
-    {% set image_align = '' %}
-    {% set div_align = 'text-align: right' %}
+    {% set image_align = 'right' %}
 {% elif alignment == 'center' %}
     {% set margin = '' %}
-    {% set image_align = '' %}
-    {% set div_align = 'text-align: center' %}
+    {% set image_align = 'center' %}
 {% endif %}
-<div class="{{ css_class }}" style="display:table; clear:both; {{ margin }} {{ div_align }}">
+<figure class="{{ css_class }}" style="display:table; clear:both; {{ margin }} {{ image_align }}">
     {% if title %}
         <div class="figure-caption has-text-black {{ title_class }}" style="font-weight:bold">{{ title }}</div>
     {% endif %}
@@ -32,9 +27,9 @@
                     border-radius: 4px;{% endif %}
                 {% if not has_borders %}padding: 10px;{% endif %}"/>
         {% if caption %}
-            <div class="{{ caption_class }}" style="font-weight:bolder; font-size:smaller">{{ caption }} </div>
+            <figcaption class="{{ caption_class }}" style="font-weight:bolder; font-size:smaller">{{ caption }} </figcaption>
         {% endif %}
     {% else %}
         <h3>No path given for image</h3>
     {% endif %}
-</div>
+</figure>
