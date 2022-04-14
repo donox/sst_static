@@ -7,6 +7,8 @@ from conf import PROJECT_PATH, WEBSITE_PATH
 from ruyaml import YAML
 from jinja2 import Environment, FileSystemLoader
 from utilities.meta_files import make_meta_file_content
+import datetime as dt
+from dateutil.parser import parse
 
 
 class BuildNewResidents(object):
@@ -17,33 +19,56 @@ class BuildNewResidents(object):
     def __init__(self):
         self.site = None
         self.source_data = PROJECT_PATH + 'support/work_files/new_residents.yaml'
-        self.outfiles = WEBSITE_PATH + 'pages/new-residents'
-        self.profile_directory = '/pages/cool-stories-index/new-resident-profiles/'
         with open(self.source_data, 'r', encoding='utf-8') as fd:
             yml = YAML(typ='safe')
             self.yml_data = yml.load(fd)
             fd.close()
+        self.control = self.yml_data['Processing']
+        self.outfiles = None
+        self.min_date = None
+        self.meta_path = None
+
 
     def handler(self, *args, **kwargs):
-        context = {'residents': self.yml_data['Residents']}
-        context['res_count'] = str(len(context['residents'])-1)
-        for resident in context['residents']:
-            if 'Profile' in resident['Resident'].keys() and resident['Resident']['Profile']:
-                full_path = self.profile_directory + resident['Resident']['Profile'] + '/'
-                resident['Resident']['Profile'] = full_path
+        if self.control['Do_All']:
+            self.outfiles = WEBSITE_PATH + self.control['Full_Path']
+            self.min_date = dt.datetime.strptime("Jan 1, 2000", '%b %d, %Y')
+            self.meta_path = self.control['Full_Path']
+            self.page_builder(*args, **kwargs)
+
+        if self.control['Do_Snippet']:
+            self.outfiles = WEBSITE_PATH + self.control['Snippet_Path']
+            self.min_date = dt.datetime.strptime(self.control['Min_Date'], '%b %d, %Y')
+            self.meta_path = self.control['Snippet_Path']
+            self.page_builder(*args, **kwargs)
+
+    def page_builder(self, *args, **kwargs):
+        context = {'residents': []}
+        for resident in self.yml_data['Residents']:
+            resid_short = resident['Resident']
+            if 'Arrived' in resid_short.keys():           # ##############################
+                try:
+                    date_string = resid_short['Arrived']
+                    arrival_dt = parse(date_string)
+                    arrival_date = arrival_dt.strftime('%b %d, %Y')
+                    resid_short['Arrived_date'] = arrival_date
+                    if self.min_date < arrival_dt:
+                        context['residents'].append(resident)
+                except ValueError as e:
+                    foo = 3
+        context['res_count'] = str(len(context['residents']) - 1)
         env = Environment(
             loader=FileSystemLoader(WEBSITE_PATH + 'plugins/new_residents/templates'),
             autoescape=(['html']))
-        template = env.get_template('new_residents.tmpl')
-        results = template.render(context).replace('\n','')
-        meta_file = make_meta_file_content('New Residents', 'new-residents',
-                                           description='New Resident links content for Page One')
-        with open(self.outfiles+'page-one.meta', 'w') as meta_fd:
+        template = env.get_template('new_residents.jinja2')
+        results = template.render(context).replace('\n', '')
+        meta_file = make_meta_file_content('New Residents', self.meta_path,
+                                           description='New Resident Summary')
+        with open(self.outfiles+'.meta', 'w') as meta_fd:
             meta_fd.writelines(meta_file)
             meta_fd.close()
         with open(self.outfiles+'.html', 'w') as html_fd:
             html_fd.write("<span></span>")
-            html_fd.write('<a id="newRes"></a>')
             html_fd.writelines(results)
             html_fd.close()
 

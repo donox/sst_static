@@ -1,0 +1,44 @@
+{#  -*- coding: utf-8 -*- #}
+<style>
+    table {
+        margin-top: 1rem;
+    }
+    thead {
+        background-color: #c6c5d5;
+    }
+    th {
+        text-decoration: underline;
+        font-weight: bolder;
+    }
+    tr td:nth-child(1) {
+        font-weight: bolder;
+    }
+    td {
+        margin-right: 1rem;
+    }
+</style>
+<h3>New Residents</h3>
+<h4>Sunnyside's Newest Residents</h4>
+<div>Say “Hi” to our most recent new neighbors!</div>
+
+<table>
+    <thead>
+    <th>Resident(s)</th>
+    <th>Arrived</th>
+    <th>Address</th>
+    <th>Phone</th>
+    </thead>
+    <tbody>
+    {% for resident_dict in residents %}
+        {% set resident = resident_dict.Resident %}
+        {% if resident.Name %}
+            <tr>
+                <td> {{ resident.Name }} </td>
+                <td> {{ resident.Arrived_date }} </td>
+                <td> {{ resident.Address }} </td>
+                <td> {{ resident.Phone }} </td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
