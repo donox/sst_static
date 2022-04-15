@@ -3,28 +3,28 @@ from conf import WEBSITE_PATH
 from jinja2 import Environment, PackageLoader, FileSystemLoader
 import os
 
-def process_story_snippet(entry, position, site, env, err_reporter):
+def process_story_snippet(entry, position, site, env, logger):
     """Process JSON defined story snippet and return jinja2 context entry.
     """
     try:
         story = entry['story']
         if not story:
-            err_reporter.record_err(f'process_story_snippet called, but entry did not contain a story')
+            logger.error(f'process_story_snippet called, but entry did not contain a story')
             return
         file_path = story['file_path']
         if not file_path:
-            err_reporter.record_err(f'process_story_snippet called, but story had null file path')
+            logger.error(f'process_story_snippet called, but story had null file path')
         else:
             tmp = file_path.split('/')[-1]
-            err_reporter.record_note(f'Story File: {tmp}')
-            err_reporter.record_note(f'Story Path: {file_path}')
+            logger.info(f'Snippet Processing Story File: {tmp}')
+            logger.info(f'   in Story Path: {file_path}')
         with open(WEBSITE_PATH + '/' + file_path) as fd:
             story_content = ' '.join(fd.readlines())
             fd.close()
         keys = story.keys()
         if 'make_snippet' not in keys:
             err_string = f'No make_snippet directive - required directive for a story-snippet.'
-            err_reporter.record_err(err_string)
+            logger.error(err_string)
             return
         if story['make_snippet']:
             # Need to create snippet that is not specified in the file itself
@@ -33,7 +33,7 @@ def process_story_snippet(entry, position, site, env, err_reporter):
                 snippet_start = story_content.find(story['starting_text'])
                 if snippet_start == -1:
                     err_string = f"Snippet starting text [{story['starting_text']}] not found in story."
-                    err_reporter.record_err(err_string)
+                    logger.error(err_string)
                     return
             else:
                 snippet_start = 0       # This does not exclude any bylines!!!!!
@@ -41,14 +41,14 @@ def process_story_snippet(entry, position, site, env, err_reporter):
                 snippet_end = story_content.find(story['stopping_text'])
                 if snippet_end == -1:
                     err_string = f"Snippet stopping text [{story['stopping_text']}] not found in story."
-                    err_reporter.record_err(err_string)
+                    logger.error(err_string)
                     return
             else:
                 snippet_end = len(story_content)
             snippet_content = story_content[snippet_start:snippet_end]
         else:
             err_string = f"Not implemented - story['make_snippet']=False"
-            err_reporter.record_err(err_string)
+            logger.error(err_string)
             return
         context = {}
         if 'title' in keys and story['title']:
@@ -72,4 +72,4 @@ def process_story_snippet(entry, position, site, env, err_reporter):
         return output
     except Exception as e:
         err_string = f"Error in handling process_story_snippet: {e}"
-        err_reporter.record_err(err_string)
+        logger.error(err_string)

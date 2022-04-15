@@ -4,7 +4,7 @@ import os
 from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH
 
 
-def process_html_snippet(entry, position, site, env, reporter):
+def process_html_snippet(entry, position, site, env, logger):
     """HTML Snippet to be inserted as is.
     """
     try:
@@ -19,5 +19,5 @@ def process_html_snippet(entry, position, site, env, reporter):
         return output
     except Exception as e:
         err_string = f"Error in handling process_html_snippet: {e}"
-        reporter.record_err(err_string)
+        logger.error(err_string)
         return None
