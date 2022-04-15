@@ -38,7 +38,10 @@ class Singlepic(ShortcodePlugin):
             image_path = kwargs['image']
             if image_path:  # Defending against missing image_path
                 context['image_path'] = image_path
-                tmp = WEBSITE_PATH + image_path[1:]
+                if image_path[0] == '/':
+                    tmp = WEBSITE_PATH + image_path[1:]
+                else:
+                    tmp = WEBSITE_PATH + image_path
                 try:
                     im = Image.open(tmp)
                 except FileNotFoundError as e:
