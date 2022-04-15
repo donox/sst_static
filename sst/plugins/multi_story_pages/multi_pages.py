@@ -29,47 +29,12 @@ def run_jinja_template(template, context):
         raise e
 
 
-class Reporter(object):
-    """Create log of processing in support directory."""
-    def __init__(self, out_file):
-        self.outfile = out_file
-        self.outpath = PROJECT_PATH + 'support/' + out_file
-        self.out_fd = open(self.outpath, 'w')
-        self.directory = None
-        self.file_in_process = None
-
-    def close(self):
-        self.out_fd.close()
-        # This is bizarrely needed as the next nikola command clears self.outpath
-        shutil.copyfile(self.outpath, self.outpath[:-4] + '_backup.txt')
-
-    def set_directory(self, directory):
-        self.directory = directory
-        tmp = directory.split('/')[-1]
-        self.out_fd.write(f'\n\nFile Directory being processed: {tmp}')
-        self.out_fd.write(f'\n   Full path: {directory}')
-
-    def set_file(self, file):
-        self.file_in_process = file
-        tmp = file.split('/')[-1]
-        self.out_fd.write(f'\n\tFile  being processed: {tmp}')
-        self.out_fd.write(f'\n\t   Full path: {file}')
-
-    def record_err(self, err_string):
-        self.out_fd.write(f'\n\t\tERROR: {err_string}')
-
-    def record_success(self, success_string):
-        self.out_fd.write(f'\n\t\tSUCCEED: {success_string}')
-
-    def record_note(self, note):
-        self.out_fd.write(f'\n\t\tNOTE: {note}')
-
-
 class MultiPage(object):
     '''Process pages consisting of multiple stories with configuration specified in yaml file.'''
     name = 'multi_pages'
 
-    def __init__(self):
+    def __init__(self, logger):
+        self.logger = logger
         self.date_string = dt.datetime.today().date().isoformat()
         self.yaml_dir = PROJECT_PATH + 'support/multi_story_pages/pages/'
         self.content_dict = {}
@@ -78,7 +43,6 @@ class MultiPage(object):
         search_path = WEBSITE_PATH + '/plugins/multi_story_pages/templates'
         template_loader = FileSystemLoader(searchpath=search_path)
         self.template_environment = Environment(loader=template_loader)
-        self.reporter = Reporter(f'multi_page-{self.date_string}.txt')
 
     def _make_column_width_classes(self, width):
         """Make bootstrap width classes (e.g., col-sm-4) for specified width"""
@@ -123,16 +87,15 @@ class MultiPage(object):
                                 key = 'Entry'
                                 yield rownum, colnum, entrynum, entry_context, entry[key]
         except Exception as e:
-            self.reporter.record_err(f"Invalid key {key} in yaml page {yaml_page}")
+            self.logger.error(f"Invalid key {key} in yaml page {yaml_page}")
 
     def _yaml_entry(self, yaml_page):
         with open(yaml_page, 'r', encoding='utf-8') as fd:
             try:
-                self.reporter.set_file(yaml_page)
                 yml = YAML(typ='safe')
                 return yml.load(fd)
             except Exception as e:
-                self.reporter.record_err(f"Failure loading yaml entry: {yaml_page} with error: {e}")
+                self.logger.error(f"Failure loading yaml entry: {yaml_page} with error: {e}")
 
     def get_pages_to_build_yaml(self):
         """Iterator for yaml files for each multi_page to be built."""
@@ -144,13 +107,12 @@ class MultiPage(object):
             if os.path.exists(dir_yaml):
                 with open(dir_yaml, 'r', encoding='utf-8') as fd:
                     try:
-                        self.reporter.set_directory(dirpath)
                         yml = YAML(typ='safe')
                         yield dirpath, yml.load(fd)
                     except Exception as e:
-                        self.reporter.record_err(f"Failure loading {dir_yaml} with error: {e.args}")
+                        self.logger.error(f"Failure loading {dir_yaml} with error: {e.args}")
             else:
-                self.reporter.record_note(f"Attempted to find {dir_yaml} which does not exist - skipping.")
+                self.logger.info(f"Attempted to find {dir_yaml} which does not exist - skipping.")
 
     def _process_entry(self, entry_type, local_context, entry, position):
         if "target" in entry.keys():
@@ -161,17 +123,17 @@ class MultiPage(object):
         entry['parent_context'] = local_context        # to allow entry to determine surroundings (esp. width as # cols)
         if entry_type == 'story_snippet':
             res = process_story_snippet(entry, position, self.site, self.template_environment,
-                                        self.reporter)
+                                        self.logger)
         elif entry_type == 'eye_catcher':
-            res = process_eye_catcher(entry, position, self.site, self.template_environment, self.reporter)
+            res = process_eye_catcher(entry, position, self.site, self.template_environment, self.logger)
         elif entry_type == 'quote':
             res = process_quote(entry, position, self.site, self.template_environment)
         elif entry_type == 'html_snippet':
             res = process_html_snippet(entry, position, self.site, self.template_environment,
-                                       self.reporter)
+                                       self.logger)
         else:
             err_string = "Unrecognized YAML entry_type: {entry_type}"
-            self.reporter.record_err(err_string)
+            self.logger.error(err_string)
         if res:
             local_context['content'] = res
             local_context['entry_type'] = entry_type
@@ -197,7 +159,7 @@ class MultiPage(object):
                     entry_page_path = page_dir + '/' + entry_descriptor
                     if not os.path.exists(entry_page_path):
                         err_string = f"File missing in {page_dir} for file: {entry_descriptor}"
-                        self.reporter.record_err(err_string)
+                        self.logger.error(err_string)
                     try:
                         entry = self._yaml_entry(entry_page_path)['Entry']
                         entry_type = entry['entry_type']
@@ -209,20 +171,20 @@ class MultiPage(object):
                                 err_string = f"Invalid YAML - missing expected key in {entry.keys()}"
                         else:
                             err_string = f"YAML entry {entry} has no defined 'entry_type"
-                        self.reporter.record_err(err_string)
+                        self.logger.error(err_string)
 
                 elif type(entry) == dict:
                     entry_type = entry['entry_type']
                 else:
                     err_string = 'Unrecognized Entry Type: {type(entry)} for entry: {entry}'
-                    self.reporter.record_err(err_string)
+                    self.logger.error(err_string)
                     entry_type = None
                 if entry_type:
                     try:
                         self._process_entry(entry_type, local_context, entry, position)
                     except Exception as e:
                         err_string = f'Error from element processing: {e}'
-                        self.reporter.record_err(err_string)
+                        self.logger.error(err_string)
             context["preamble"] = self.preamble
             template = self.template_environment.get_template('page_layout.jinja2')
             output = template.render(**context)
@@ -234,7 +196,7 @@ class MultiPage(object):
             with open(page_loc + '.md', 'w+') as fd_out:
                 fd_out.writelines(output)
                 fd_out.close
-                self.reporter.record_success(f'{page_slug} md file written')
+                self.logger.info(f'{page_slug} md file written')
             with open(page_loc + 'page-one.meta', 'w+') as fd_out:
                 fd_out.writelines(f"..title: yyy\n")
                 fd_out.writelines(f"..slug: {page_slug}\n")
@@ -242,13 +204,12 @@ class MultiPage(object):
                 fd_out.writelines(f"..date: {tmp}\n")
                 fd_out.writelines(f"..description: yyy\n")
                 fd_out.close()
-                self.reporter.record_success(f'{page_slug} meta file written')
+                self.logger.info(f'{page_slug} meta file written')
             # Save output to file with meta file
-        self.reporter.close()
         return
 
 
-converter = MultiPage()
+
 
 
 class MultiStoryPages(nikola.plugin_categories.Command):
@@ -259,5 +220,7 @@ class MultiStoryPages(nikola.plugin_categories.Command):
         super(MultiStoryPages, self).__init__()
 
     def _execute(self, command, args):
-        self.logger = get_logger('ping', STDERR_HANDLER)
+        self.logger = get_logger('multi-page', STDERR_HANDLER)
+        converter = MultiPage(self.logger)
         converter.handler()
+

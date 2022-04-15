@@ -16,7 +16,8 @@ class BuildNewResidents(object):
     # suitable for including in a parent page as a story snippet.  The result output is a page
     # ("new-residents.html") and meta file in the pages directory.
 
-    def __init__(self):
+    def __init__(self, logger):
+        self.logger = logger
         self.site = None
         self.source_data = PROJECT_PATH + 'support/work_files/new_residents.yaml'
         with open(self.source_data, 'r', encoding='utf-8') as fd:
@@ -27,7 +28,6 @@ class BuildNewResidents(object):
         self.outfiles = None
         self.min_date = None
         self.meta_path = None
-
 
     def handler(self, *args, **kwargs):
         if self.control['Do_All']:
@@ -52,11 +52,14 @@ class BuildNewResidents(object):
                     arrival_dt = parse(date_string)
                     arrival_date = arrival_dt.strftime('%b %d, %Y')
                     resid_short['Arrived_date'] = arrival_date
+                    resid_short['Arrive_dt'] = arrival_dt
                     if self.min_date < arrival_dt:
                         context['residents'].append(resident)
                 except ValueError as e:
-                    foo = 3
+                    self.logger.error(f"Missing or invalid date format for resident: {resid_short['Name']}")
         context['res_count'] = str(len(context['residents']) - 1)
+        sorted_residents = sorted(context['residents'], key=lambda x: x['Resident']['Arrive_dt'])
+        context['residents'] = sorted_residents
         env = Environment(
             loader=FileSystemLoader(WEBSITE_PATH + 'plugins/new_residents/templates'),
             autoescape=(['html']))
@@ -73,7 +76,7 @@ class BuildNewResidents(object):
             html_fd.close()
 
 
-converter = BuildNewResidents()
+
 
 
 class NewResidents(nikola.plugin_categories.Command):
@@ -85,4 +88,5 @@ class NewResidents(nikola.plugin_categories.Command):
 
     def _execute(self, command, args):
         self.logger = get_logger('ping', STDERR_HANDLER)
+        converter = BuildNewResidents(self.logger)
         converter.handler()
