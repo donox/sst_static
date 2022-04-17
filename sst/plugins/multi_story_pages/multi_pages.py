@@ -59,6 +59,11 @@ class MultiPage(object):
     def _yaml_iterator(self, yaml_page, context):
         try:
             context['rows'] = []
+            try:
+                back_color = yaml_page['Background']
+                context['background_color'] = back_color
+            except KeyError:
+                context['background_color'] = "#fff"
             for rownum, row in enumerate(yaml_page['Rows']):
                 row_context = {}
                 context['rows'].append(row_context)
@@ -103,16 +108,17 @@ class MultiPage(object):
         #        an associated yaml file, to the loop skips before processing a specific page directory.
         for dirpath, _, fileList in os.walk(self.yaml_dir):
             dir_control_file = dirpath.split('/')[-1]
-            dir_yaml = dirpath + '/' + dir_control_file + '.yaml'
-            if os.path.exists(dir_yaml):
-                with open(dir_yaml, 'r', encoding='utf-8') as fd:
-                    try:
-                        yml = YAML(typ='safe')
-                        yield dirpath, yml.load(fd)
-                    except Exception as e:
-                        self.logger.error(f"Failure loading {dir_yaml} with error: {e.args}")
-            else:
-                self.logger.info(f"Attempted to find {dir_yaml} which does not exist - skipping.")
+            if dir_control_file != '':
+                dir_yaml = dirpath + '/' + dir_control_file + '.yaml'
+                if os.path.exists(dir_yaml):
+                    with open(dir_yaml, 'r', encoding='utf-8') as fd:
+                        try:
+                            yml = YAML(typ='safe')
+                            yield dirpath, yml.load(fd)
+                        except Exception as e:
+                            self.logger.error(f"Failure loading {dir_yaml} with error: {e.args}")
+                else:
+                    self.logger.info(f"Attempted to find {dir_yaml} which does not exist - skipping.")
 
     def _process_entry(self, entry_type, local_context, entry, position):
         if "target" in entry.keys():
