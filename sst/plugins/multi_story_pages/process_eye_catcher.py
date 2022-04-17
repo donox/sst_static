@@ -28,9 +28,15 @@ def process_eye_catcher(entry, position, site, env, logger):
             context['height'] = ht
 
         else:
-            context['height'] = str(col_width * 70) + 'px'
-        if 'style' in keys:             # allow any css style attributes
-            context['style'] = story['style']
+            context['height'] = str(col_width * 60) + 'px'
+        if 'text_style' in keys:             # allow any css style attributes
+            context['text_style'] = story['text_style']
+        if 'image_style' in keys and story['image_style'] == 'gradient':             # allow any css style attributes
+            base = "background-image: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('"
+            base += story['photo_path'] + "');"
+            context['image_style'] = base
+        else:
+            context['image_style'] = "background-image: url('" + story['photo_path'] + "');"
         if 'position' in keys:
             pos = str(story['position']).split(',')
             ht = int(context['height'][:-2])  # convert to a percent

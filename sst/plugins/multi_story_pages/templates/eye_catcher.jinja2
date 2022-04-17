@@ -1,48 +1,42 @@
 {#  -*- coding: utf-8 -*- #}
-{% if style is defined %}
-    {% set estyle = style %}
+
+{% if as_background %}
+    <div class="container" style="{{ image_style }}; background-size: cover; width:100%;
+            min-height:{{ height }}; background-position: center center; margin-bottom: 15px;
+            position: relative;">
+        {% if entry_type == 'eye_catcher' %}
+            {% if phrase is defined %}
+                {% if position_down is defined %}
+                    <div style="min-height: {{ position_down }};">&nbsp;</div>
+                {% endif %}
+                <div class="blur">
+                    <h2 class="blur_text" style="{{ text_style }}"> {{ phrase }}</h2>
+                </div>
+            {% endif %}
+            {# text-align:left overrides possible align right - still need ability to position from left edge #}
+            <div class="{{ col_width }}" style="text-align:left">
+                {% if story_link is defined %}
+                    <a class="btn btn-primary" href="{{ story_link }}" role="button">To Story</a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
 {% else %}
-    {% set estyle = "color: black" %}
-{% endif %}
-{% if position_right is defined %}
-    {# '~' is concat with conversion to str if needed #}
-    {% set estyle = estyle ~ "; width:" ~ position_right ~ "%; text-align:right;"  %}
-{% endif %}
-{%  if as_background %}
-<div class="container" style="background-image: url('{{ photo_path }}'); background-size: cover; width:100%;
-        min-height:{{ height }}; background-position: center center; margin-bottom: 15px;
-        position: relative;">
-    {% if entry_type == 'eye_catcher' %}
-        {% if phrase is defined %}
-            {% if position_down is defined %}
-            <div style="min-height: {{position_down}};">&nbsp;</div>
+    <div class="container" style="min-height:{{ height }}; margin-bottom: 15px">
+        {% if entry_type == 'eye_catcher' %}
+            {% if phrase is defined %}
+                <h2 style="{{ estyle }}"> {{ phrase }}</h2>
             {% endif %}
-            <h2 style="{{ estyle }}"> {{ phrase }}</h2>
-        {% endif %}
-        {# text-align:left overrides possible align right - still need ability to position from left edge #}
-        <div class="{{ col_width }}"  style="{{ estyle }} text-align:left">
-            {% if story_link is defined %}
-                <a class="btn btn-primary" href="{{ story_link }}" role="button">To Story</a>
+            {% if photo_path is defined %}
+                <img class="{{ image_class }} img-responsive figure-img img-fluid rounded"
+                     src="{{ photo_path }}" style="height: 100%; width: 100%;"/>
             {% endif %}
-        </div>
-    {% endif %}
-</div>
-{% else %}
-<div class="container" style="min-height:{{ height }}; margin-bottom: 15px">
-    {% if entry_type == 'eye_catcher' %}
-        {% if phrase is defined %}
-            <h2  style="{{ estyle }}"> {{ phrase }}</h2>
+            <div class="{{ col_width }}">
+                {% if story_link is defined %}
+                    <a class="btn btn-primary" href="{{ story_link }}" role="button">To Story</a>
+                {% endif %}
+            </div>
         {% endif %}
-        {% if photo_path is defined %}
-            <img class="{{ image_class }} img-responsive figure-img img-fluid rounded"
-             src="{{ photo_path }}" style="height: 100%; width: 100%;"/>
-        {% endif %}
-        <div class="{{ col_width }}">
-            {% if story_link is defined %}
-                <a class="btn btn-primary" href="{{ story_link }}" role="button">To Story</a>
-            {% endif %}
-        </div>
-    {% endif %}
-</div>
+    </div>
 {% endif %}
 
