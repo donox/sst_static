@@ -1,173 +1,24 @@
 ---
+Processing:
+  Do_All: True
+  Do_Snippet: True
+  Min_Date: Jan 12, 2022
+  Snippet_Path: pages/new-residents
+  Full_Path: pages/all-new-residents
 Residents:
   - Resident:
       Name: Ross "Whit" and Joan Krumm
       Address: 1025 Aberdeen Loop
       Phone: 437-8765
-      Email:
-      Move_in: January 2020
-      From:
-      Profile: meet-ross-whit-and-joan-krumm
-      Data_added: 9/13/21
-      Display_until:
+      Arrived: Nov 5, 2021
   - Resident:
       Name: Russ and Sherrill Stevenson
       Address: Highlands 324
       Phone: 568-8327
-      Email:
-      Move_in: January 2021
-      From: Gonzales, LA
-      Profile:
-      Data_added:
-      Display_until:
+      Arrived: October 5, 2021
   - Resident:
       Name: Jody Humphreys
       Address: Highlands 221
       Phone: 568-8630
-      Email:
-      Move_in: January 2021
-      From: Eastville, VA
-      Profile:
-      Data_added:
-      Display_until:
-  - Resident:
-      Name: Tom Poe and Judy Anderson
-      Address: 4169 Woodside Drive
-      Phone: 437-8733
-      Email:
-      Move_in: January 2021
-      From: Richmond, VA
-      Profile:
-      Data_added:
-      Display_until:
-  - Resident:
-      Name: Dick and Martha Kleckner
-      Address: 1335 Glenside Dr
-      Phone: 568-8264
-      Email:
-      Move_in: February 2021
-      From: Moneta, VA
-      Profile: meet-dick-and-martha-kleckner
-      Data_added:
-      Display_until:
-  - Resident:
-      Name: Bob and Phyllis Phillips
-      Address: 1080 Glenmoor Dr
-      Phone: 8745
-      Email:
-      Move_in: March 2021
-      From: Clemson, SC
-      Profile:
-      Data_added: 5/11/21
-      Display_until:
-  - Resident:
-      Name: Tom and Maureen Francis
-      Address: Highlands 401
-      Phone: 8312
-      Email:
-      Move_in: March 2021
-      From: Locust Grove, VA
-      Profile:
-      Data_added: 5/11/21
-      Display_until:
-  - Resident:
-      Name: Nat and Mary Jane Kirkland
-      Address: 4162 Grattan Price
-      Phone: 8679
-      Email:
-      Move_in: May 2021
-      From: Harrisonburg, VA
-      Profile:
-      Data_added: 6/9/21
-      Display_until:
-  - Resident:
-      Name: Mary McNally
-      Address: Village Court 20
-      Phone: Village Court 20
-      Email:
-      Move_in: May 2021
-      From: Charlotte, NC
-      Profile:
-      Data_added: 6/9/21
-      Display_until:
-  - Resident:
-      Name: Ed and Elizabeth Streun
-      Address: 1620 Glenside Drive
-      Phone: 8743
-      Email:
-      Move_in: May 2021
-      From: Middletown, VA
-      Profile:
-      Data_added: 6/9/21
-      Display_until:
-  - Resident:
-      Name: Ericka Maynard
-      Address: 4485 Grattan Price Drive #1
-      Phone: 8648
-      Email:
-      Move_in: May 2021
-      From: Hendersonville, NC
-      Profile:
-      Data_added: 6/9/21
-      Display_until:
-  - Resident:
-      Name: Tom and Daile Petit
-      Address: 4315 Locust Cir
-      Phone: 8526
-      Email:
-      Move_in: June 2021
-      From: Rockingham, VA
-      Profile:
-      Data_added: 6/9/21
-      Display_until:
-  - Resident:
-      Name: Robbie and Pat Roberts
-      Address: 4339 Locust Circle
-      Phone: 8528
-      Email:
-      Move_in: June 2021
-      From: McGaheysville, VA
-      Profile:
-      Data_added: 6/9/21
-      Display_until:
-  - Resident:
-      Name: Ed Bender
-      Address: HL 307
-      Phone: 8439
-      Email:
-      Move_in: July 2021
-      From:
-      Profile:
-      Data_added: 9/12/21
-      Display_until:
-  - Resident:
-      Name: Jim and Gail Fisher
-      Address: Village Court 27
-      Phone: 8616
-      Email:
-      Move_in: June 2021
-      From:
-      Profile:
-      Data_added: 9/12/21
-      Display_until:
-  - Resident:
-      Name: Richard "Dick" and Jenny Lyons
-      Address: 1029 Aberdeen Loop
-      Phone: 437-8937
-      Email:
-      Move_in:
-      From:
-      Profile: jenny-b-lyons-and-richard-dick-lyons-bio
-      Data_added:
-      Display_until:
-  - Resident:
-      Name:
-      Address:
-      Phone:
-      Email:
-      Move_in:
-      From:
-      Profile:
-      Data_added:
-      Display_until:
+      Arrived: June 5, 2022
 ...

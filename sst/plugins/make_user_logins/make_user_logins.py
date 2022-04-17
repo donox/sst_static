@@ -131,4 +131,6 @@ class MakeLogins(nikola.plugin_categories.Command):
             elif opt in ['r', 'remove', 'delete']:
                 converter.remove_user(user)
             else:
-                converter.make_logins()
+                print(f"Neither add nor remove option specified. ")
+        else:
+            converter.make_logins()

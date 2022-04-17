@@ -3,7 +3,7 @@
 {% if as_background %}
     <div class="container" style="{{ image_style }}; background-size: cover; width:100%;
             min-height:{{ height }}; background-position: center center; margin-bottom: 15px;
-            position: relative;">
+            position: relative;"onclick="window.location='{{ story_link }}'">
         {% if entry_type == 'eye_catcher' %}
             {% if phrase is defined %}
                 {% if position_down is defined %}
