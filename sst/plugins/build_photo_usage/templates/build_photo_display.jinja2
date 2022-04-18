@@ -7,13 +7,16 @@
     <h3>{{ display_list[key][0]['folder'] }}</h3>
     <div class="container" style="display:flex; flex-wrap: wrap">
         {% for image in display_list[key] %}
-            <div style="vertical-align: top; margin-bottom: 20px;" class="copyclip">
+            <div style="vertical-align: top; margin-bottom: 20px;">
                 <div style="font-size: small; max-width: 140px;">{{ image.file }}</div>
                 <a href="{{ image.path }}" target="_blank">
                     <img src="{{ image.path }}" class="img-thumbnail" style="width: 150px;"></a><br>
                 {% set bid = ["bttn", btn_index.value | string] | join('') %}
                 {% set btn_index.value = btn_index.value + 1 %}
-                <button id="{{ bid }}" class="photofilebttn">copy</button>
+                <div class="copyclip">
+                    <scan style="display:none">{{ image.path }}</scan>
+                    <button id="{{ bid }}" class="photofilebttn">copy</button>
+                </div>
             </div>
         {% endfor %}
     </div>
