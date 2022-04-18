@@ -50,6 +50,10 @@ def process_eye_catcher(entry, position, site, env, logger):
             context['as_background'] = story['as_background']
         else:
             context['as_background'] = False
+        if 'no_button' in keys and story['no_button'] is True:
+            context['no_button'] = True
+        else:
+            context['no_button'] = False
         context['css_class'] = 'unused'
         context['title_class'] = 'unused'
         context['caption_class'] = 'caption'
