@@ -1,24 +1,484 @@
 ---
-Processing:
-  Do_All: True
-  Do_Snippet: True
-  Min_Date: Jan 12, 2022
-  Snippet_Path: pages/new-residents
-  Full_Path: pages/all-new-residents
 Residents:
   - Resident:
       Name: Ross "Whit" and Joan Krumm
       Address: 1025 Aberdeen Loop
       Phone: 437-8765
-      Arrived: Nov 5, 2021
+      Email:
+      Move_in: January 2020
+      From:
+      Profile: meet-ross-whit-and-joan-krumm
+      Data_added: 9/13/21
+      Display_until:
   - Resident:
       Name: Russ and Sherrill Stevenson
       Address: Highlands 324
       Phone: 568-8327
-      Arrived: October 5, 2021
+      Email:
+      Move_in: January 2021
+      From: Gonzales, LA
+      Profile:
+      Data_added:
+      Display_until:
   - Resident:
       Name: Jody Humphreys
       Address: Highlands 221
       Phone: 568-8630
-      Arrived: June 5, 2022
+      Email:
+      Move_in: January 2021
+      From: Eastville, VA
+      Profile:
+      Data_added:
+      Display_until:
+  - Resident:
+      Name: Tom Poe and Judy Anderson
+      Address: 4169 Woodside Drive
+      Phone: 437-8733
+      Email:
+      Move_in: January 2021
+      From: Richmond, VA
+      Profile:
+      Data_added:
+      Display_until:
+  - Resident:
+      Name: Dick and Martha Kleckner
+      Address: 1335 Glenside Dr
+      Phone: 568-8264
+      Email:
+      Move_in: February 2021
+      From: Moneta, VA
+      Profile: meet-dick-and-martha-kleckner
+      Data_added:
+      Display_until:
+  - Resident:
+      Name: Bob and Phyllis Phillips
+      Address: 1080 Glenmoor Dr
+      Phone: 8745
+      Email:
+      Move_in: March 2021
+      From: Clemson, SC
+      Profile:
+      Data_added: 5/11/21
+      Display_until:
+  - Resident:
+      Name: Tom and Maureen Francis
+      Address: Highlands 401
+      Phone: 8312
+      Email:
+      Move_in: March 2021
+      From: Locust Grove, VA
+      Profile:
+      Data_added: 5/11/21
+      Display_until:
+  - Resident:
+      Name: Nat and Mary Jane Kirkland
+      Address: 4162 Grattan Price
+      Phone: 8679
+      Email:
+      Move_in: May 2021
+      From: Harrisonburg, VA
+      Profile:
+      Data_added: 6/9/21
+      Display_until:
+  - Resident:
+      Name: Mary McNally
+      Address: Village Court 20
+      Phone: Village Court 20
+      Email:
+      Move_in: May 2021
+      From: Charlotte, NC
+      Profile:
+      Data_added: 6/9/21
+      Display_until:
+  - Resident:
+      Name: Ed and Elizabeth Streun
+      Address: 1620 Glenside Drive
+      Phone: 8743
+      Email:
+      Move_in: May 2021
+      From: Middletown, VA
+      Profile:
+      Data_added: 6/9/21
+      Display_until:
+  - Resident:
+      Name: Ericka Maynard
+      Address: 4485 Grattan Price Drive #1
+      Phone: 8648
+      Email:
+      Move_in: May 2021
+      From: Hendersonville, NC
+      Profile:
+      Data_added: 6/9/21
+      Display_until:
+  - Resident:
+      Name: Tom and Daile Petit
+      Address: 4315 Locust Cir
+      Phone: 8526
+      Email:
+      Move_in: September 2021
+      From: Rockingham, VA
+      Profile:
+      Data_added: 6/9/21
+      Display_until:
+  - Resident:
+      Name: Robbie and Pat Roberts
+      Address: 4339 Locust Circle
+      Phone: 8528
+      Email:
+      Move_in: June 2021
+      From: McGaheysville, VA
+      Profile:
+      Data_added: 6/9/21
+      Display_until:
+  - Resident:
+      Name: Ed Bender
+      Address: HL 307
+      Phone: 8439
+      Email:
+      Move_in: July 2021
+      From:
+      Profile:
+      Data_added: 9/12/21
+      Display_until:
+  - Resident:
+      Name: Jim and Gail Fisher
+      Address: Village Court 27
+      Phone: 8616
+      Email:
+      Move_in: June 2021
+      From:
+      Profile:
+      Data_added: 9/12/21
+      Display_until:
+  - Resident:
+      Name: Richard "Dick" and Jenny Lyons
+      Address: 1029 Aberdeen Loop
+      Phone: 437-8937
+      Email:
+      Move_in: August 2021
+      From: Harrisonburg, VA
+      Profile: jenny-b-lyons-and-richard-dick-lyons-bio
+      Data_added:
+      Display_until:
+  - Resident:
+      Name: Elizabeth Wise
+      Address: Highlands 316
+      Phone: 8469
+      Email:
+      Move_in: August 2021
+      From: Roanoke, VA
+      Profile:
+      Data_added:
+      Display_until:
+  - Resident:
+        Name: Judy Mone
+        Address: Highlands 318
+        Phone: 8660
+        Email:
+        Move_in: August 2021
+        From: Williamsburg, VA
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name: Nancy Andrews
+        Address: Highlands 423
+        Phone: 8556
+        Email:
+        Move_in: August 2021
+        From: Blacksburg, VA
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name: Chuck Seiger
+        Address: Highlands 207
+        Phone: 8485
+        Email:
+        Move_in: September 2021
+        From: McCormick, SC
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name: Guy and Linda Combs
+        Address: 4362 Grattan Price Dr.
+        Phone:
+        Email:
+        Move_in: September 2021
+        From: Rockingham, VA
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name: James Veater
+        Address: Highlands 107
+        Phone: 8452
+        Email:
+        Move_in: September 2021
+        From: Beaufort, SC
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+      Name: John Weir
+      Address: Village Court 14
+      Phone: 8546
+      Email:
+      Move_in: September 2021
+      From: Broadway, VA
+      Profile:
+      Data_added:
+      Display_until:
+  - Resident:
+        Name: Minnie Grigg
+        Address: Highlands 321
+        Phone: 8779
+        Email:
+        Move_in: October 2021
+        From: Culpeper, VA
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name: Ron  and Vickie Whetzel
+        Address: 1255 Glenside Dr.
+        Phone: 8878
+        Email:
+        Move_in: October 2021
+        From: Harrisonburg, VA
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name: Tom and Linda Lee DiVecchia
+        Address: 1264 Glenside Dr.
+        Phone: 8749
+        Email:
+        Move_in: November 2021
+        From: Elkton, VA
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name: Ron and Becky Gheen
+        Address: 1089 Hickory Cove
+        Phone: 8602
+        Email:
+        Move_in: November 2021
+        From:
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name: Ian and Mary Jo Chapman
+        Address: Highlands 101
+        Phone: 8451
+        Email:
+        Move_in: December 2021
+        From: Edinburg, VA
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name: Shelia Moorman
+        Address: 1151 Vista Glen 2
+        Phone: 8837
+        Email:
+        Move_in: December 2021
+        From: Rockingham, VA
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name: Helen Moore
+        Address: 1151 Vista Glen 2
+        Phone: 8837
+        Email:
+        Move_in: December 2021
+        From: Rockingham, VA
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name: Wayne and Libby Taylor
+        Address: Village Court 24
+        Phone: 8652
+        Email:
+        Move_in: December 2021
+        From: Jackson, MS
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name: Patricia Taylor
+        Address: Highlands 419
+        Phone: 8512
+        Email:
+        Move_in: December 2021
+        From: Grottoes, VA
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name: Elana Churchill
+        Address: 4200 Grattan Price Nr. 9
+        Phone: 8640
+        Email:
+        Move_in: December 2021
+        From: Malvern, PA
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name: James Hairston
+        Address: Highlands 109
+        Phone: 8772
+        Email:
+        Move_in: January 2022
+        From: Orlando, FL
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name: Roy Wallace
+        Address: Highlands 304
+        Phone: 8593
+        Email:
+        Move_in: January 2022
+        From: Grottoes, VA
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name: Barbara Puzanskas
+        Address: Highlands 325
+        Phone: 8631
+        Email:
+        Move_in: January 2022
+        From: Staunton, VA
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name: Diane Guzzi
+        Address: Highlands 205
+        Phone: 8582
+        Email:
+        Move_in: January 2022
+        From: Rockingham, VA
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name: Wolfgang and Erdmute "Uta" Drueen
+        Address: 4290 Grattan Price Dr.
+        Phone: 8618
+        Email:
+        Move_in: February 2022
+        From: Mill Creek, WA
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name: Bill and Rebecca "Becky" Russell
+        Address: 1010 Balantrae Ln
+        Phone: 8710
+        Email:
+        Move_in: March 2022
+        From: Midlothian, VA
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name: Corinne Blasius
+        Address: 1146 Hickory Cove
+        Phone: 8823
+        Email:
+        Move_in: April 2022
+        From: Staunton, VA
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name: Ellen Anderson
+        Address: Highlands 116
+        Phone: 8349
+        Email:
+        Move_in: April 2022
+        From:
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name: Harry and Elizabeth "Libby" Jarrett
+        Address: Highlands 121
+        Phone: 8802
+        Email:
+        Move_in: May 2022
+        From:
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name:
+        Address:
+        Phone:
+        Email:
+        Move_in:
+        From:
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name:
+        Address:
+        Phone:
+        Email:
+        Move_in:
+        From:
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name:
+        Address:
+        Phone:
+        Email:
+        Move_in:
+        From:
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name:
+        Address:
+        Phone:
+        Email:
+        Move_in:
+        From:
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name:
+        Address:
+        Phone:
+        Email:
+        Move_in:
+        From:
+        Profile:
+        Data_added:
+        Display_until:
+  - Resident:
+        Name:
+        Address:
+        Phone:
+        Email:
+        Move_in:
+        From:
+        Profile:
+        Data_added:
+        Display_until:
+
 ...
