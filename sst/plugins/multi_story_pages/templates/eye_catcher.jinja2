@@ -3,7 +3,7 @@
 {% if as_background %}
     <div class="container" style="{{ image_style }}; background-size: cover; width:100%;
             min-height:{{ height }}; background-position: center center; margin-bottom: 15px;
-            position: relative;">
+            position: relative;" onclick="window.location='{{ story_link }}'">
         {% if entry_type == 'eye_catcher' %}
             {% if phrase is defined %}
                 {% if position_down is defined %}
@@ -14,18 +14,18 @@
                 </div>
             {% endif %}
             {# text-align:left overrides possible align right - still need ability to position from left edge #}
-            <div class="{{ col_width }}" style="text-align:left">
-                {% if story_link is defined %}
-                    <a class="btn btn-primary" href="{{ story_link }}" role="button">To Story</a>
-                {% endif %}
-            </div>
+            {% if no_button == False %}
+                <div class="{{ col_width }}" style="text-align:left">
+                    <a class="btn btn-primary" href="" role="button">To Story</a>
+                </div>
+            {% endif %}
         {% endif %}
     </div>
 {% else %}
     <div class="container" style="min-height:{{ height }}; margin-bottom: 15px">
         {% if entry_type == 'eye_catcher' %}
             {% if phrase is defined %}
-                <h2 style="{{ estyle }}"> {{ phrase }}</h2>
+                <h2 style="{{ text_style }}"> {{ phrase }}</h2>
             {% endif %}
             {% if photo_path is defined %}
                 <img class="{{ image_class }} img-responsive figure-img img-fluid rounded"
