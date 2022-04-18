@@ -15,9 +15,7 @@
             {% endif %}
             {# text-align:left overrides possible align right - still need ability to position from left edge #}
             <div class="{{ col_width }}" style="text-align:left">
-                {% if story_link is defined %}
-                    <a class="btn btn-primary" href="{{ story_link }}" role="button">To Story</a>
-                {% endif %}
+                    <a class="btn btn-primary" href="" role="button">To Story</a>
             </div>
         {% endif %}
     </div>
@@ -25,7 +23,7 @@
     <div class="container" style="min-height:{{ height }}; margin-bottom: 15px">
         {% if entry_type == 'eye_catcher' %}
             {% if phrase is defined %}
-                <h2 style="{{ estyle }}"> {{ phrase }}</h2>
+                <h2 style="{{ text_style }}"> {{ phrase }}</h2>
             {% endif %}
             {% if photo_path is defined %}
                 <img class="{{ image_class }} img-responsive figure-img img-fluid rounded"

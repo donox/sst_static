@@ -1389,7 +1389,7 @@ DISABLED_PLUGINS = ["render_taxonomies"]
 # past.  Useful especially if your post titles are in <h1> tags too, for
 # example.
 # (defaults to 1.)
-# DEMOTE_HEADERS = 1
+# DEMOTE_HEADERS = 0
 
 # If you don’t like slugified file names ([a-z0-9] and a literal dash),
 # and would prefer to use all the characters your file system allows.
