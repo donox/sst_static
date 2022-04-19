@@ -19,7 +19,7 @@
         <div class="row">
             {% set cols = row.cols %}
             {% for col in cols %}
-                <div class="col {{ col.col_width }}">
+                <div class="col {{ col.col_width }}" style="justify-content: space-between">
                     {% set entries = col.entries %}
                     {% for entry in entries %}
                         <div class="ENTRY">

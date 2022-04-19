@@ -114,6 +114,9 @@ class SupportFlexbox(object):
                 cls = 'src-flex-container-col-rev'
             else:
                 cls = f'src-flex-container UNRECOGNIZED BOX DIRECTION {val}'
+        if 'class' in dict_keys:
+            val = attr_dict['class']
+            cls += ' ' + val
         other_attrs = []
         for key in dict_keys:
             other_attrs.append(f' {key}="{attr_dict[key]}"')

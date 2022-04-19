@@ -203,7 +203,7 @@ class MultiPage(object):
                 fd_out.writelines(output)
                 fd_out.close
                 self.logger.info(f'{page_slug} md file written')
-            with open(page_loc + 'page-one.meta', 'w+') as fd_out:
+            with open(page_loc + '.meta', 'w+') as fd_out:
                 fd_out.writelines(f"..title: yyy\n")
                 fd_out.writelines(f"..slug: {page_slug}\n")
                 tmp = dt.datetime.now().strftime("%Y-%m-%d")
