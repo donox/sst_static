@@ -8,7 +8,7 @@ def process_quote(entry, position, site, env):
     """
     try:
         context = {}
-        context['quote_whole'] = "border rounded-sm border-dark  mx-auto m-2 p-2 "
+        context['quote_whole'] = "rounded-sm mx-auto m-2 p-2 "
         context['quote'] = entry['quote']
         try:
             context['author'] = entry['author']
@@ -23,10 +23,10 @@ def process_quote(entry, position, site, env):
         except KeyError:
             context['quote_text_style'] = 'color: white; font-size: larger;'
         try:
-            context['quote_style'] = entry['quote_style']
+            temp = 'color: white; background-color: #ab1818; text-align: center;'
+            temp += 'padding-top: 15px; padding-bottom: 15px;'
+            context['quote_style'] = temp + entry['quote_style']
         except KeyError:
-            temp = 'color: white; background-color: red; text-align: center;'
-            temp += 'padding-top: 15px; padding-bottom: 15px'
             context['quote_style'] = temp
         template = env.get_template('add_quote.jinja2')
         output = template.render(**context)
