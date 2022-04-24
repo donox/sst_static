@@ -1,0 +1,11 @@
+[Core]
+Name = build_page_usage
+Module = build_page_usage
+
+[Nikola]
+PluginCategory = Command
+
+[Documentation]
+Author = Don Oxley
+Version = 0.1
+Description = Build Admin Pages Showing Pages and their uses

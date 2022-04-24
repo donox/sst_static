@@ -128,7 +128,7 @@ NAVIGATION_LINKS = {
         ("/pages/activities-index/resident-council-and-committees/resident-council-index/sunnyside-residents-maps/",
          "Maps"),
         ("/pages/quick-access/", "Quick Links"),
- #       ("/pages/help/", "Help"),
+        #       ("/pages/help/", "Help"),
         (
             (
                 ("/pages/admin/overview/", "Documentation Overview"),
@@ -140,6 +140,7 @@ NAVIGATION_LINKS = {
                 ("/pages/admin/photo_usage_data/", "All Things Photos"),
                 ("/pages/admin/pages_directory/", "Sorted Page List"),
                 ("/pages/admin/terminal_folders/", "Sorted Terminal Folders"),
+                ("/pages/admin/pages_references/", "Pages References"),
                 ("", "----------------"),
                 ("/pages/admin/shortcodes/", "Shortcodes"),
                 ("/pages/admin/editor_commands/", "Editor Commands"),

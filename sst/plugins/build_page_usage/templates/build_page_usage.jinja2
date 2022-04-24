@@ -1,0 +1,37 @@
+{#  -*- coding: utf-8 -*- #}
+<h2>Page Usage</h2>
+
+{% set btn_index = namespace(value=0) %}
+{% for page in page_list %}
+    {% set referenced_by = page[1]['referenced_by'] %}
+    {% set references_to = page[1]['references_to'] %}
+    {% set in_menu = page[1]['in_menu'] %}
+    <h4 style="margin-bottom: 3px">{{ page[0] }}</h4>
+    {% if in_menu %}
+        <div>&nbsp;&nbsp;Referenced from Menubar</div>
+    {%  endif %}
+    {% if  referenced_by|length > 0 %}
+        <div>&nbsp;&nbsp;Referenced by</div>
+        {% for rpage in referenced_by %}
+            <div><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{{ rpage }}</div>
+        {% endfor %}
+    {% endif %}
+    {% if  references_to|length > 0 %}
+        <div>&nbsp;&nbsp;References To</div>
+        {% for rpage in references_to %}
+            <div><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{{ rpage }}</div>
+        {% endfor %}
+    {% endif %}
+{% endfor %}
+
+
+
+
+  {#        <div class="adminPage copyclip">
+              <td>
+                {% set bid = ["bttn", btn_index.value | string] | join('') %}
+                {% set btn_index.value = btn_index.value + 1 %}
+                <button id="{{ bid }}" class="pageusagebttn">copy</button>
+            </td>
+
+        </div>   #}
