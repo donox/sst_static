@@ -12,6 +12,7 @@ import config_private as pvt
 import shutil
 
 
+
 class PhotoUsage(object):
     # This command creates admin pages showing photos in use and where they are used
     # along with photos (or galleries) no longer in use.
@@ -82,7 +83,7 @@ class PhotoUsage(object):
                         pass
                     else:
                         print(f'Found non-jpg file in gallery: {gal_path}, file: {file}')
-        # Create page list with a dictionary giving the pages it references
+        # Create page list with a dictionary giving the images it references
         for root, dirs, files in os.walk(self.pages_dir):
             short_path = root.split('/sst/')[1]
             for file in files:
@@ -98,7 +99,7 @@ class PhotoUsage(object):
                     page_ref["path_key"] = self._make_path_key(page_ref)
         self.unused_images = self.image_list - self.images_in_a_page
         try:
-            # Check and clean up ununsed photos and galleries
+            # Check and clean up unused photos and galleries
             if pvt.remove_unused_photos:
                 for image in self.unused_images:
                     os.remove(WEBSITE_PATH + image)
