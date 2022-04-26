@@ -11,12 +11,12 @@ class SupportFlexbox(object):
     # Box start shortcode:  {{% box name="xxx" direction="row" %}}
     # Pandoc has surrounded the shortcode with <p> elements which results in broken emitted html; remove them
     box_start = r'<p>(?P<start>\{\{% +box\s+name="(?P<name_s>\w+)"'
-    box_start += r'(\s+(?P<attrs>((((\w+)="((\w|:|\-|;|_| )+)")\s+))*))%\}\})</p>'
+    box_start += r'(\s+(?P<attrs>((((\w+)="((\w|:|\-|;|_| |%)+)")\s+))*))%\}\})</p>'
     box_end = r'<p>(?P<end>\{\{% +/box\s+name="(?P<name_e>\w+)"\s+%\}(?P<last_char>\}))</p>'
     # Note: DOTALL makes '.' include newlines
     box_comp_start = re.compile(box_start)
     box_comp_end = re.compile(box_end)
-    box_attr = re.compile(r'(?P<attribute>\w+)="(?P<value>(\w|_|\-|:|;| )+)"')
+    box_attr = re.compile(r'(?P<attribute>\w+)="(?P<value>(\w|_|\-|:|;| |%)+)"')
 
     def __init__(self):
         self.stack = deque()
