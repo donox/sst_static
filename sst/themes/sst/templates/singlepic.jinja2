@@ -22,7 +22,7 @@
     {% endif %}
     {% if image_path %}
         <img class="{{ image_class }} figure-img img-fluid rounded"
-             src="{{ image_path }}" style="height: {{ height }}; width: {{ width }}; {{ image_align }};
+             src="{{ image_path }}" alt="{{ alt }}" style="height: {{ height }}; width: {{ width }}; {{ image_align }};
                 {% if has_borders %} border-style: solid; border-width: medium; border-color: #1b8dbb;
                     border-radius: 4px;{% endif %}
                 {% if not has_borders %}padding: 10px;{% endif %}"/>

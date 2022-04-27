@@ -120,9 +120,17 @@ class Singlepic(ShortcodePlugin):
         else:
             context['alignment'] = 'float-none'
 
-        context['caption'] = ''  # TODO: Need to pick up title and caption
+        context['alt'] = ''
+        if 'alt' in keys:
+            context['alt'] = kwargs['alt']
+
+        context['caption'] = ''
         if 'caption' in keys:
             context['caption'] = kwargs['caption']
+
+        if 'altcap' in keys:
+            context['alt'] = kwargs['altcap']
+            context['caption'] = kwargs['altcap']
 
         context['title'] = ''
         if 'title' in keys:
