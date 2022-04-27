@@ -45,6 +45,8 @@ class BuildNewResidents(object):
     def page_builder(self, *args, **kwargs):
         context = {'residents': []}
         for resident in self.yml_data['Residents']:
+            if not resident or resident == '':
+                break
             resid_short = resident['Resident']
             if 'Arrived' in resid_short.keys():           # ##############################
                 try:
