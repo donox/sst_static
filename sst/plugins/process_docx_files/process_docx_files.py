@@ -72,6 +72,7 @@ class DocxProcessor(object):
                             # Note: flexbox processing must be completed before removing tags or nikola has a
                             # shortcode error on the /box shortcode.
                             revised_content = self.remove_p_tags(revised_content)
+                            revised_content = self.fix_list_items(revised_content)
 
                         with open(in_md, 'w') as created_md:
                             created_md.write(revised_content)
@@ -114,6 +115,18 @@ class DocxProcessor(object):
                         res.append(segment[end_code+8:])
                 else:
                     res.append('<p>{{%' + segment)
+        return ''.join(res)
+
+    def fix_list_items(self, content):
+        """Remove p tag from inside a list item inserted by Pandoc"""
+        split_content = content.split('<li><p>')
+        res = []
+        for segment in split_content:
+            end_code = segment.find('</p></li>')
+            if end_code > -1:
+                res.append('<li>' + segment[:end_code] + '</li>' + segment[end_code+9:])
+            else:
+                res.append(segment)
         return ''.join(res)
 
 
