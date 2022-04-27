@@ -77,6 +77,13 @@ class PageUsage(object):
         all_pages_to_sort = sorted(list(self.pages.items()), key=lambda x: x[0])
         context['page_list'] = all_pages_to_sort
 
+        unreachable_pages = []
+        for page_name in self.pages.keys():
+            page = self.pages[page_name]
+            if not (page['referenced_by'] or page['in_menu']):
+                unreachable_pages.append(page_name)
+        context['unused'] = sorted(unreachable_pages)
+
         env = Environment(
             loader=FileSystemLoader(WEBSITE_PATH + 'plugins/build_page_usage/templates'),
             autoescape=(['html']))

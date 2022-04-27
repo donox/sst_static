@@ -1,5 +1,9 @@
 {#  -*- coding: utf-8 -*- #}
-<h2>Page Usage</h2>
+<h2>Unreachable Pages</h2>
+{% for page in unused %}
+    <div style="margin-left: 10px;">{{ page }}</div>
+{% endfor %}
+<h2>Pages In Use</h2>
 
 {% set btn_index = namespace(value=0) %}
 {% for page in page_list %}
