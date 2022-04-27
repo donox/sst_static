@@ -9,6 +9,8 @@ import os
 import platform
 import datetime as dt
 from dateutil import parser
+
+
 from conf import PARENT_PATH, PROJECT_PATH, WEBSITE_PATH, SITE_URL
 
 
@@ -20,6 +22,7 @@ class BuildLinksToChildFiles(ShortcodePlugin):
 
     def __init__(self):
         self.site = None
+        self.logger = get_logger('child_links', STDERR_HANDLER)
 
     def set_site(self, site):
         self.site = site
@@ -51,8 +54,10 @@ class BuildLinksToChildFiles(ShortcodePlugin):
         if source_path.endswith('.md'):
             dir_to_process = source_path[:-3]
             if not os.path.isdir(dir_to_process):
+                self.logger.error(f'Attempt to build children of non-directory {dir_to_process}')
                 raise ValueError(f'Attempt to build children of non-directory {dir_to_process}')
         else:
+            self.logger.error(f'Attempt to expand non-md file: {source_path}')
             raise ValueError(f'Attempt to expand non-md file: {source_path}')
         for dirpath, dirnames, filenames in os.walk(dir_to_process):
             for file in filenames:
@@ -75,7 +80,8 @@ class BuildLinksToChildFiles(ShortcodePlugin):
                     #       either a valid date or just make today a default.
                     try:
                         res = parser.parse(meta_data['date']).date()
-                    except Exception as e:
+                    except ValueError as e:
+                        #This really raises ParserError which is in a private module of datautil.parser
                         res = dt.datetime.today().date()
                     meta_data['date'] = res
                     files_to_display.append(meta_data)
