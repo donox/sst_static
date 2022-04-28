@@ -63,7 +63,7 @@ class SupportFlexbox(object):
             box_match = search_start.groupdict()
             box_match_keys = box_match.keys()
             if 'name_s' in box_match_keys:
-                print(f"Matched start: {box_match['name_s']}")
+                # print(f"Matched start: {box_match['name_s']}")
                 self.stack.append(box_match)
                 a_tmp = box_match['attrs']
                 begin_text = self._build_flex_container_start(box_match['attrs'])
@@ -77,7 +77,7 @@ class SupportFlexbox(object):
             box_match_keys = box_match.keys()
             if 'name_e' in box_match_keys:
                 end_name = box_match['name_e']
-                print(f"Matched end: {box_match['name_e']}")
+                # print(f"Matched end: {box_match['name_e']}")
                 if not self.stack:
                     raise ValueError(f'Closing box found with no matching start')
                 start_dict = self.stack[-1]
