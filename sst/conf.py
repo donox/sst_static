@@ -121,7 +121,13 @@ NAVIGATION_LINKS = {
     DEFAULT_LANG: (
         ("/pages/page-one/", "Page One"),
         ("/pages/page-two/", "Page Two"),
-        ("/pages/activities-index/", "Activities"),
+        ((
+             ("/pages/resident-activities-index/sunnyside-clubs-index/", "Campus Clubs"),
+             ("/pages/resident-activities-index/sunnyside-on-campus-index/", "On Campus Opportunities"),
+             ("/pages/activities-index/off-campus-opportunities/", "Off Campus Opportunities"),
+             ("/pages/activities-index/resident-council-and-committees/", "Resident Council"),
+         ),
+         'Activities'),
         ("/pages/cool-stories-index/", "Cool Stories"),
         ("/pages/senior-life-information/", "Living at Sunnyside"),
         ("/pages/administration-index/", "Admin"),

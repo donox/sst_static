@@ -115,6 +115,8 @@ class DocxProcessor(object):
                         res.append(segment[end_code+8:])
                 else:
                     res.append('<p>{{%' + segment)
+            else:
+                res.append(segment)
         return ''.join(res)
 
     def fix_list_items(self, content):
