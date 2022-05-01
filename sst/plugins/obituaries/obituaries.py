@@ -51,7 +51,7 @@ class BuildObituaries(object):
             if not decedent or not decedent['Decedent']['Name']:
                 break
             died_short = decedent['Decedent']
-            died_short['image'] = '/images/obituraries/inmemoriam-' + str(image_no) + '.jpg'
+            died_short['image'] = '/images/obituaries/inmemoriam-' + str(image_no) + '.jpg'
             image_no += 1
             if image_no > 9:
                 image_no = 1
