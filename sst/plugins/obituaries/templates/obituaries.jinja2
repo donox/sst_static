@@ -1,0 +1,49 @@
+{#  -*- coding: utf-8 -*- #}
+<style>
+</style>
+<h3>In Memoriam</h3>
+<h4>We Remember Our Sunnyside Friends</h4>
+{% for obit in obits %}
+    <div class="container row" style="margin-bottom: 2rem;">
+        <div class="container" style="max-width: 20%; width: 20%">
+            <img src="{{ obit.image }}">
+        </div>
+        <div class="container col" style="max-width: 20%; min-width: 20%">
+            <div style="font-size: larger; font-weight: bolder; margin-right: 1rem;">{{ obit.Name }} </div>
+            <div> {{ obit.Death_date }}</div>
+            <div><a href="{{ obit.Obit }}">Full Obituary Here</a></div>
+        </div>
+        <div class="container col" style="width: 60%; margin-top: 1rem">
+            {{ obit.Text }}
+            {% if obit.Contributions != None %}
+                <hr>
+                {{ obit.Contributions }}
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}
+
+{% if earlier != [] %}
+    <div style="font-size: larger; font-weight: bolder">
+        Others who have passed in the last year
+    </div>
+    <table>
+        <thead>
+        <th>Decedent</th>
+        <th>Passed Away</th>
+        <th><span style="margin-left: 2rem;">Obituary</span></th>
+        </thead>
+        <tbody>
+        {% for obit in earlier %}
+            {% set deceased = obit.Name %}
+            {% if obit.Name %}
+                <tr>
+                    <td> {{ obit.Name }} </td>
+                    <td> {{ obit.Death_date }} </td>
+                    <td><a href="{{ obit.Obit }}" style="margin-left: 2rem;">Full Obituary Here</a></td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
