@@ -124,7 +124,7 @@ NAVIGATION_LINKS = {
         ((
              ("/pages/resident-activities-index/sunnyside-clubs-index/", "Campus Clubs"),
              ("/pages/resident-activities-index/sunnyside-on-campus-index/", "On Campus Opportunities"),
-             ("/pages/resident-activities-index/off-campus-opportunities/", "Off Campus Opportunities"),
+             ("/pages/pages/resident-activities-index/sunnyside-off-campus-index/", "Off Campus Opportunities"),
              ("/pages/activities-index/resident-council-and-committees/", "Resident Council"),
          ),
          'Activities'),
