@@ -14,6 +14,11 @@ body {
     background-color: #fff;
 }
 
+/* styles to support selection/display of content - supports src_picker code in sst_javascript */
+.src_select_content_el { display: none; }
+.src_select_content_el.active { display: block; }
+
+/* styles to control color of links and visited links */
 .btn .btn-primary{
     background-color: #79a736;
 }

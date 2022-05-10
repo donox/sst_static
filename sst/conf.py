@@ -59,7 +59,7 @@ if ev == "sscgurus":
 elif ev == "pa":
     SITE_URL = "https://www.sunnyside-times.org/"
 elif ev == "local":
-    SITE_URL = "http://localhost:8000/"
+    SITE_URL = "http://localhost:8200/"
 elif PARENT_PATH == PA_PATH:
     SITE_URL = "https://www.sunnyside-times.org/"
 else:

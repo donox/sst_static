@@ -26,6 +26,23 @@ $(document).ready(function () {
     run_slideshow();
 });
 
+/* Code to create a set of buttons that can be clicked to display/hide a group of elements.
+This presumes that there is only one collection of such content on a single page.
+
+Each element to be managed must be in the class src_select_content_el.  The "buttons" to
+perform the selection must be in the class src_picker and be clickable.
+
+This depends on css in my_styles to display/hide the content.
+ */
+
+$('.src_picker').on('click', function() {
+    $('.src_select_content_el').removeClass('active');
+    let class_to_see = $(this).attr('data-group');
+    $('.src_select_content_el').each(function (index){
+        if ($(this).attr('data-group') == class_to_see) {
+            $(this).addClass('active')}
+    });
+});
 
 
 /* ****Need to generalize copy to clipboard to accept template specified location to copy.**** */
