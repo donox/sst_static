@@ -28,10 +28,15 @@ a {
     text-decoration: none;
     background-color:transparent;
 }
+.dropdown-item {
+    color: #000000;
+}
 a:visited {
-    color: #c957f1;
+    color: #0000cc; /* c957f1 */
     font-size: large;
 }
+
+
 a:active {
     color: white;
     background-color: red;
