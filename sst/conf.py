@@ -59,7 +59,7 @@ if ev == "sscgurus":
 elif ev == "pa":
     SITE_URL = "https://www.sunnyside-times.org/"
 elif ev == "local":
-    SITE_URL = "http://localhost:8200/"
+    SITE_URL = "http://localhost:8000/"
 elif PARENT_PATH == PA_PATH:
     SITE_URL = "https://www.sunnyside-times.org/"
 else:
@@ -119,8 +119,8 @@ TRANSLATIONS_PATTERN = '{path}.{lang}.{ext}'
 
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
-        ("/pages/page-one/", "Page One"),
-        ("/pages/page-two/", "Page Two"),
+        ("/pages/homer/", "Page One"),
+        ("/pages/features/", "Page Two"),
         ((
              ("/pages/resident-activities-index/sunnyside-clubs-index/", "Campus Clubs"),
              ("/pages/resident-activities-index/sunnyside-on-campus-index/", "On Campus Opportunities"),
