@@ -119,8 +119,8 @@ TRANSLATIONS_PATTERN = '{path}.{lang}.{ext}'
 
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
-        ("/pages/homer/", "Page One"),
-        ("/pages/features/", "Page Two"),
+        ("/pages/homer/", "Home"),
+        ("/pages/features/", "Features"),
         ((
              ("/pages/resident-activities-index/sunnyside-clubs-index/", "Campus Clubs"),
              ("/pages/resident-activities-index/sunnyside-on-campus-index/", "On Campus Opportunities"),
@@ -671,7 +671,7 @@ ATOM_FILENAME_BASE = "feed"
 # relative URL.
 #
 # If you don't need any of these, just set to []
-REDIRECTIONS = [("index.html", "/pages/page-one")]
+REDIRECTIONS = [("index.html", "/pages/homer")]
 # REDIRECTIONS = []
 # Presets of commands to execute to deploy. Can be anything, for
 # example, you may use rsync:
