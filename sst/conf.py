@@ -130,7 +130,7 @@ NAVIGATION_LINKS = {
          'Activities'),
         ("/pages/cool-stories-index/", "Cool Stories"),
         ("/pages/senior-life-information/", "Living at Sunnyside"),
-        ("/pages/administration-index/", "Admin"),
+#        ("/pages/administration-index/", "Admin"),
         ("/pages/activities-index/resident-council-and-committees/resident-council-index/sunnyside-residents-maps/",
          "Maps"),
         ("/pages/quick-access/", "Quick Links"),
