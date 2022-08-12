@@ -51,7 +51,7 @@ WEBSITE_PATH = PARENT_PATH + 'sst_static/sst/'
 #      THAT SHOULD BE AUTO GENERATED.
 # Data about this site
 BLOG_AUTHOR = "The Sunnyside Times team"  # (translatable)
-BLOG_TITLE = "Sunnyside Times"  # (translatable)
+BLOG_TITLE = "Sunnyside Times Lite"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link. Don't forget the protocol (http/https)!
 if ev == "sscgurus":
@@ -120,20 +120,23 @@ TRANSLATIONS_PATTERN = '{path}.{lang}.{ext}'
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
         ("/pages/homer/", "Home"),
-        ("/pages/features/", "Features"),
         ((
              ("/pages/resident-activities-index/sunnyside-clubs-index/", "Campus Clubs"),
              ("/pages/resident-activities-index/sunnyside-on-campus-index/", "On Campus Opportunities"),
              ("/pages/resident-activities-index/sunnyside-off-campus-index/", "Off Campus Opportunities"),
-             ("/pages/activities-index/resident-council-and-committees/", "Resident Council"),
-         ),
+        ),
          'Activities'),
-        ("/pages/cool-stories-index/", "Cool Stories"),
+        ((
+            ("/pages/cool-stories-index/resident-profiles-index/", "Resident Profiles"),
+            ("/pages/cool-stories-index/resident-told-stories/", "Stories by Residents"),
+            ("/pages/cool-stories-index/tips-and-tales/", "Tips and Tales"),
+            ("/pages/cool-stories-index/veterans-book/", "Veterans at Sunnyside"),
+        ),
+        "Cool Stories"),
         ("/pages/senior-life-information/", "Living at Sunnyside"),
 #        ("/pages/administration-index/", "Admin"),
         ("/pages/activities-index/resident-council-and-committees/resident-council-index/sunnyside-residents-maps/",
          "Maps"),
-        ("/pages/quick-access/", "Quick Links"),
         #       ("/pages/help/", "Help"),
         (
             (
