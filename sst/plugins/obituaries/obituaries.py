@@ -70,8 +70,10 @@ class BuildObituaries(object):
                     self.logger.error(f"Missing or invalid date format for decedent: {died_short['Name']}")
 
         context['res_count'] = str(len(context['obits']) - 1)
-        sorted_deaths = sorted(context['obits'], key=lambda x: x['Death_dt'], reverse=True)
-        context['obits'] = sorted_deaths
+        sorted_deaths_new = sorted(context['obits'], key=lambda x: x['Death_dt'], reverse=True)
+        context['obits'] = sorted_deaths_new
+        sorted_deaths_old = sorted(context['earlier'], key=lambda x: x['Death_dt'], reverse=True)
+        context['earlier'] = sorted_deaths_old
         env = Environment(
             loader=FileSystemLoader(WEBSITE_PATH + 'plugins/obituaries/templates'),
             autoescape=(['html']))
